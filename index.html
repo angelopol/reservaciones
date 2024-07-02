@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+    <title>Simulación de reservación de vuelos</title>
+</head>
+<body>
+    <div id="launcher">
+        <h1>Simulación de reservación de vuelos</h1>
+        <button id="InitButton">Iniciar</button>
+    </div>
+    <div id="app">
+        <div id="message">
+            Simulador de reservación de vuelos
+        </div>
+        <div id="simulador">
+            <div id="registrar">
+                <div>
+                    <label for="IdReservacion">ID</label>
+                    <input type="text" id="IdReservacion">
+                </div>
+                <div>
+                    <label for="pasaporte">Pasaporte</label>
+                    <input type="text" id="pasaporte">
+                </div>
+                <div>
+                    <label for="cedula">Cedula</label>
+                    <input type="number" id="cedula">
+                </div>
+                <div>
+                    <label for="nombres">Nombres</label>
+                    <input type="text" id="nombres">
+                </div>
+                <div>
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos">
+                </div>
+                <div>
+                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="FechaNacimiento">
+                </div>
+                <div>
+                    <label for="telefono">Telefono</label>
+                    <input type="number" id="telefono">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                </div>
+                <div>
+                    <label for="mascotas">Cantidad de mascotas</label>
+                    <input type="number" value="0" id="mascotas" min="0">
+                </div>
+                <div>
+                    <label for="maleta">Peso de la maleta (si posee)</label>
+                    <input type="number" id="maleta" min="0">
+                </div>
+                <div>
+                    <label for="MaletaMano">Peso de la maleta de mano (si posee)</label>
+                    <input type="number" id="MaletaMano" min="0">
+                </div>
+                <label for="MaletaExtra1">Peso de maletas extras (si posee)</label>
+                <div id="MaletasExtras"></div>
+                <div>
+                    <label for="asiento">Asiento</label>
+                    <input type="text" id="asiento">
+                </div>
+                <div>
+                    <button id="RegistrarButton">Registrar</button>
+                    <button class="ReservacionesButton">Reservaciones</button>
+                </div>
+                <div>
+                    <button class="ParametrosButton">Parametros generales</button>
+                    <button class="VuelosModalButton">Vuelos</button>
+                </div>
+            </div>
+            <div id="asientos">
+                <div>
+                    <label for="vuelo">Selecciona el vuelo</label>
+                    <select id="vuelo"></select>
+                </div>
+                <div class="fila">
+                    30
+                    <button id="C30" class="asiento disponible">C</button>
+                    <button id="D30" class="asiento disponible">D</button>
+                    <button id="E30" class="asiento disponible">E</button>
+                    <button id="F30" class="asiento disponible">F</button>
+                    <button id="G30" class="asiento disponible">G</button>
+                </div>
+                <div class="fila">
+                    31
+                    <button id="A31" class="asiento disponible">A</button>
+                    <button id="B31" class="asiento disponible">B</button>
+                    <button id="C31" class="asiento disponible">C</button>
+                    <button id="D31" class="asiento disponible">D</button>
+                    <button id="E31" class="asiento disponible">E</button>
+                    <button id="F31" class="asiento disponible">F</button>
+                    <button id="G31" class="asiento disponible">G</button>
+                    <button id="H31" class="asiento disponible">H</button>
+                    <button id="J31" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    32
+                    <button id="A32" class="asiento disponible">A</button>
+                    <button id="B32" class="asiento disponible">B</button>
+                    <button id="C32" class="asiento disponible">C</button>
+                    <button id="D32" class="asiento disponible">D</button>
+                    <button id="E32" class="asiento disponible">E</button>
+                    <button id="F32" class="asiento disponible">F</button>
+                    <button id="G32" class="asiento disponible">G</button>
+                    <button id="H32" class="asiento disponible">H</button>
+                    <button id="J32" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    33
+                    <button id="A33" class="asiento disponible">A</button>
+                    <button id="B33" class="asiento disponible">B</button>
+                    <button id="C33" class="asiento disponible">C</button>
+                    <button id="D33" class="asiento disponible">D</button>
+                    <button id="E33" class="asiento disponible">E</button>
+                    <button id="F33" class="asiento disponible">F</button>
+                    <button id="G33" class="asiento disponible">G</button>
+                    <button id="H33" class="asiento disponible">H</button>
+                    <button id="J33" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    34
+                    <button id="A34" class="asiento disponible">A</button>
+                    <button id="B34" class="asiento disponible">B</button>
+                    <button id="C34" class="asiento disponible">C</button>
+                    <button id="D34" class="asiento disponible">D</button>
+                    <button id="E34" class="asiento disponible">E</button>
+                    <button id="F34" class="asiento disponible">F</button>
+                    <button id="G34" class="asiento disponible">G</button>
+                    <button id="H34" class="asiento disponible">H</button>
+                    <button id="J34" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    35
+                    <button id="A35" class="asiento disponible">A</button>
+                    <button id="B35" class="asiento disponible">B</button>
+                    <button id="C35" class="asiento disponible">C</button>
+                    <button id="D35" class="asiento disponible">D</button>
+                    <button id="E35" class="asiento disponible">E</button>
+                    <button id="F35" class="asiento disponible">F</button>
+                    <button id="G35" class="asiento disponible">G</button>
+                    <button id="H35" class="asiento disponible">H</button>
+                    <button id="J35" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    36
+                    <button id="A36" class="asiento disponible">A</button>
+                    <button id="B36" class="asiento disponible">B</button>
+                    <button id="C36" class="asiento disponible">C</button>
+                    <button id="D36" class="asiento disponible">D</button>
+                    <button id="E36" class="asiento disponible">E</button>
+                    <button id="F36" class="asiento disponible">F</button>
+                    <button id="G36" class="asiento disponible">G</button>
+                    <button id="H36" class="asiento disponible">H</button>
+                    <button id="J36" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    37
+                    <button id="A37" class="asiento disponible">A</button>
+                    <button id="B37" class="asiento disponible">B</button>
+                    <button id="C37" class="asiento disponible">C</button>
+                    <button id="D37" class="asiento disponible">D</button>
+                    <button id="E37" class="asiento disponible">E</button>
+                    <button id="F37" class="asiento disponible">F</button>
+                    <button id="G37" class="asiento disponible">G</button>
+                    <button id="H37" class="asiento disponible">H</button>
+                    <button id="J37" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    38
+                    <button id="A38" class="asiento disponible">A</button>
+                    <button id="B38" class="asiento disponible">B</button>
+                    <button id="C38" class="asiento disponible">C</button>
+                    <button id="D38" class="asiento disponible">D</button>
+                    <button id="E38" class="asiento disponible">E</button>
+                    <button id="F38" class="asiento disponible">F</button>
+                    <button id="G38" class="asiento disponible">G</button>
+                    <button id="H38" class="asiento disponible">H</button>
+                    <button id="J38" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    39
+                    <button id="A39" class="asiento disponible">A</button>
+                    <button id="B39" class="asiento disponible">B</button>
+                    <button id="C39" class="asiento disponible">C</button>
+                    <button id="D39" class="asiento disponible">D</button>
+                    <button id="E39" class="asiento disponible">E</button>
+                    <button id="F39" class="asiento disponible">F</button>
+                    <button id="G39" class="asiento disponible">G</button>
+                    <button id="H39" class="asiento disponible">H</button>
+                    <button id="J39" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    40
+                    <button id="A40" class="asiento disponible">A</button>
+                    <button id="B40" class="asiento disponible">B</button>
+                    <button id="C40" class="asiento disponible">C</button>
+                    <button id="D40" class="asiento disponible">D</button>
+                    <button id="E40" class="asiento disponible">E</button>
+                    <button id="F40" class="asiento disponible">F</button>
+                    <button id="G40" class="asiento disponible">G</button>
+                    <button id="H40" class="asiento disponible">H</button>
+                    <button id="J40" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    41
+                    <button id="A41" class="asiento disponible">A</button>
+                    <button id="B41" class="asiento disponible">B</button>
+                    <button id="C41" class="asiento disponible">C</button>
+                    <button id="D41" class="asiento disponible">D</button>
+                    <button id="F41" class="asiento disponible">F</button>
+                    <button id="G41" class="asiento disponible">G</button>
+                    <button id="H41" class="asiento disponible">H</button>
+                    <button id="J41" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    42
+                    <button id="A42" class="asiento disponible">A</button>
+                    <button id="B42" class="asiento disponible">B</button>
+                    <button id="C42" class="asiento disponible">C</button>
+                    <button id="D42" class="asiento disponible">D</button>
+                    <button id="F42" class="asiento disponible">F</button>
+                    <button id="G42" class="asiento disponible">G</button>
+                    <button id="H42" class="asiento disponible">H</button>
+                    <button id="J42" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    43
+                    <button id="A43" class="asiento disponible">A</button>
+                    <button id="B43" class="asiento disponible">B</button>
+                    <button id="C43" class="asiento disponible">C</button>
+                    <button id="D43" class="asiento disponible">D</button>
+                    <button id="F43" class="asiento disponible">F</button>
+                    <button id="G43" class="asiento disponible">G</button>
+                    <button id="H43" class="asiento disponible">H</button>
+                    <button id="J43" class="asiento disponible">J</button>
+                </div>
+                <div class="fila">
+                    44
+                    <button id="C44" class="asiento disponible">C</button>
+                    <button id="D44" class="asiento disponible">D</button>
+                    <button id="F44" class="asiento disponible">F</button>
+                    <button id="G44" class="asiento disponible">G</button>
+                </div>
+                <div class="fila">
+                    45
+                    <button id="C45" class="asiento disponible">C</button>
+                    <button id="D45" class="asiento disponible">D</button>
+                    <button id="F45" class="asiento disponible">F</button>
+                    <button id="G45" class="asiento disponible">G</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Parametros" class="modal-backdrop">
+        <div class="modal-content">
+            <div>
+                <label for="TarifaGeneral">Tarifa general</label>
+                <input type="number" id="TarifaGeneral" value="10" min="0">
+            </div>
+            <div>
+                <label for="TarifaMaleta">Tarifa maleta</label>
+                <input type="number" id="TarifaMaleta" value="2" min="0">
+            </div>
+            <div>
+                <label for="PesoMaximoMaleta">Peso máximo de la maleta</label>
+                <input type="number" id="PesoMaximoMaleta" value="23" min="1">
+            </div>
+            <div>
+                <label for="TarifaMaletaMano">Tarifa maleta de mano</label>
+                <input type="number" id="TarifaMaletaMano" value="0" min="0">
+            </div>
+            <div>
+                <label for="PesoMaximoMaletaMano">Peso máximo de la maleta de mano</label>
+                <input type="number" id="PesoMaximoMaletaMano" value="8" min="1">
+            </div>
+            <div>
+                <label for="TarifaMaletaExtra">Tarifa por maleta extra</label>
+                <input type="number" id="TarifaMaletaExtra" value="5" min="0">
+            </div>
+            <div>
+                <label for="TarifaSobrepeso">Tarifa por sobrepeso de las maletas (por unidad)</label>
+                <input type="number" id="TarifaSobrepeso" value="1" min="0">
+            </div>
+            <div>
+                <label for="CantidadMaletas">Cantidad de maletas extras</label>
+                <input type="number" id="CantidadMaletas" value="3" min="1">
+            </div>
+            <div>
+                <label for="TarifaMascotas">Tarifa por mascotas</label>
+                <input type="number" id="TarifaMascotas" value="5" min="0">
+            </div>
+            <br>
+            <button class="ParametrosButton">Cerrar</button>
+        </div>
+    </div>
+    <div id="Reservaciones" class="modal-backdrop">
+        <div class="modal-content">
+            <table id="ReservacionesTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Pasaporte</th>
+                    <th>Cedula</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Fecha de nacimiento</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Peso maleta</th>
+                    <th>Peso maleta de mano</th>
+                    <th>Peso maletas extras</th>
+                    <th>Vuelo</th>
+                    <th>Monto total</th>
+                    <th>Asiento</th>
+                    <th>Mascotas</th>
+                </tr>
+            </table>
+            <br>
+            <div>
+                Totales:
+                <ul>
+                    <li>Tarifa general: <span id="TotalTarifaGeneral">0</span></li>
+                    <li>Tarifa del vuelo: <span id="TotalTarifaVuelo">0</span></li>
+                    <li>Tarifa por maleta: <span id="TotalTarifaMaleta">0</span></li>
+                    <li>Tarifa por maleta de mano: <span id="TotalTarifaMaletaMano">0</span></li>
+                    <li>Tarifa por maletas extras: <span id="TotalTarifaMaletasExtras">0</span></li>
+                    <li>Tarifa por sobrepeso de maletas: <span id="TotalTarifaSobrepesoMaletas">0</span></li>
+                    <li>Tarifa por mascotas: <span id="TotalTarifaMascotas">0</span></li>
+                    <li>Total: <span id="total">0</span></li>
+                </ul>
+            </div>
+            <button class="ReservacionesButton">Cerrar</button>
+        </div>
+    </div> 
+    <div id="VuelosModal" class="modal-backdrop">
+        <div class="modal-content" id="VuelosModalContent">
+            <div id="CrearVuelos">
+                <div>
+                    <label for="IdVuelo">ID</label>
+                    <input type="text" id="IdVuelo">
+                </div>
+                <div>
+                    <label for="TarifaVuelo">Tarifa del vuelo</label>
+                    <input type="number" id="TarifaVuelo" min="0">
+                </div>
+                <div>
+                    <label for="DestinoVuelo">Destino del vuelo</label>
+                    <input type="text" id="DestinoVuelo">
+                </div>
+                <div>
+                    <label for="OrigenVuelo">Origen del vuelo</label>
+                    <input type="text" id="OrigenVuelo">
+                </div>
+                <div>
+                    <label for="FechaHoraVuelo">Fecha y hora de salida</label>
+                    <input type="datetime-local" id="FechaHoraVuelo">
+                </div>
+                <div>
+                    <button id="RegistrarVueloButton">Registrar</button>
+                    <button class="VuelosModalButton">Cerrar</button>
+                </div>
+            </div>
+            <div id="VerVuelos">
+                <table id="VuelosTable">
+                    <tr>
+                      <th>ID</th>
+                      <th>Tarifa</th>
+                      <th>Destino</th>
+                      <th>Origen</th>
+                      <th>Fecha y hora</th>
+                    </tr>
+                    <tr>
+                      <td>default</td>
+                      <td>10</td>
+                      <td>Albania</td>
+                      <td>Polonia</td>
+                      <td>2024-07-01T12:30</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>        
+</body>
+</html>

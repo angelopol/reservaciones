@@ -1,0 +1,60 @@
+#app {
+    display: none;
+}
+
+#simulador {
+    display: flex;
+    justify-content: space-around; /* Espacia los elementos hijos uniformemente */
+    align-items: flex-start; /* Alinea los elementos hijos al inicio de su contenedor en el eje transversal */
+}
+
+#VuelosModalContent {
+    display: flex;
+    justify-content: space-around; /* Ajusta esto según sea necesario */
+}
+
+#registrar, #asientos, #CrearVuelos, #VerVuelos {
+    flex: 1; /* Hace que cada elemento hijo ocupe un espacio igual dentro del contenedor */
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo del contenido del modal */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    /* Ajustes adicionales para el contenido pueden ir aquí */
+}
+
+/* Hacer visible el modal */
+.modal-backdrop.show {
+    display: flex;
+}
+
+.fila { 
+    display: flex; 
+}
+.asiento { 
+    width: 20px; height: 20px; margin: 2px; 
+}
+.disponible { 
+    background-color: grey; 
+}
+.seleccionado { 
+    background-color: green; 
+}
+.ocupado { 
+    background-color: red; 
+}
