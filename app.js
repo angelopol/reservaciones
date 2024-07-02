@@ -155,7 +155,7 @@ function UpdateSpan(element, suma){
 }
 
 function VerifyDisponible(id){
-    var asiento = document.getElementsById(id);
+    var asiento = document.getElementById(id);
     if (asiento.classList.contains('disponible')){
         return true;
     }
@@ -163,7 +163,7 @@ function VerifyDisponible(id){
 }
 
 function VerifyAsientoExistente(id){
-    var asiento = document.getElementsById(id);
+    var asiento = document.getElementById(id);
     if (asiento != null){
         return true;
     }

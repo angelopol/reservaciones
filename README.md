@@ -3,10 +3,12 @@
 - Index de las reservaciones
 - Creacion de diferentes vuelos con diferentes asientos
 - Vista de los asientos disponibles o no disponibles por vuelo
+- Creacion de descuentos personalizados para las reservaciones
 
 ## Funciones de la aplicación ##
 - Añadir, cancelar, modificar una reservación
 - Añadir, eliminar, modificar un vuelo
+- Añadir, eliminar, modificar un descuento
 - Modificación de parametros generales de las reservaciones
 - Posibilidad de ver el monto total del costo de las reservaciones desglosado por tarifas
 
@@ -14,9 +16,25 @@
 - Cuando se añade una resevación el asiento seleccionado comienza a estar no disponible
 - Cuando se cancela una reservación el asiento comienza a estar disponible y los montos totales se deben actualizar restando el monto de la reservación
 - Si se modifica el asiento de una reservación el asiento anterior pasa a estar disponible y el nuevo asiento a estar no disponible
-- Datos del cliente: número de pasaporte o cédula si el pasaporte esta vencido, nombres y apellidos, fecha de nacimiento, teléfono, email
+- Datos del cliente:
+    * Número de pasaporte o cédula si el pasaporte esta vencido
+    * Nombres y apellidos
+    * Fecha de nacimiento
+    * Teléfono
+    * Email
 - Cada reservación tendra en cuenta el identicador del vuelo
-- Datos del vuelo: ID, Tarifa del vuelo, destino del vuelo, lugar de salida, Fecha y hora de salida, tiempo de vuelo
+- Datos del vuelo:
+    * ID
+    * Tarifa del vuelo
+    * Destino del vuelo
+    * Lugar de salida
+    * Fecha y hora de salida
+    * Tiempo de vuelo
+- Datos del descuento:
+    * ID
+    * Porcentaje
+    * Valor
+    * Descripcion
 
 ## Validaciones ##
 - No pueden haber mas de un vuelo con el mismo ID y el ID es requerido
