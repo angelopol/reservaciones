@@ -8,12 +8,12 @@
     align-items: flex-start; /* Alinea los elementos hijos al inicio de su contenedor en el eje transversal */
 }
 
-#VuelosModalContent {
+#VuelosModalContent, #DescuentosContent {
     display: flex;
     justify-content: space-around; /* Ajusta esto según sea necesario */
 }
 
-#registrar, #asientos, #CrearVuelos, #VerVuelos {
+#registrar, #asientos, #CrearVuelos, #VerVuelos, #CrearDescuentos, #VerDescuentos {
     flex: 1; /* Hace que cada elemento hijo ocupe un espacio igual dentro del contenedor */
 }
 

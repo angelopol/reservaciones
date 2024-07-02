@@ -63,17 +63,16 @@ function InitMaletasExtras(){
     count.addEventListener('change', InitMaletasExtras);
 }
 
-function LoadSelectVuelo(SelectVuelo){
-    while (SelectVuelo.firstChild) {
-        SelectVuelo.removeChild(SelectVuelo.firstChild);
+function LoadSelect(select, table){
+    while (select.firstChild) {
+        select.removeChild(select.firstChild);
     }
-    var VuelosTable = document.getElementById('VuelosTable');
-    var rows = VuelosTable.rows;
+    var rows = table.rows;
     for (var i = 1; i < rows.length; i++) {
         var option = document.createElement('option');
         option.value = rows[i].cells[0].innerHTML;
         option.text = rows[i].cells[0].innerHTML;
-        SelectVuelo.appendChild(option);
+        select.appendChild(option);
     }
 }
 
@@ -117,7 +116,50 @@ function RegistrarVuelos(){
         destino.value = '';
         origen.value = '';
         FechaHora.value = '';
-        LoadSelectVuelo(document.getElementById('vuelo'));
+        LoadSelect(document.getElementById('vuelo'), VuelosTable);
+    });
+}
+
+function RegistrarDescuentos(){
+    var RegistrarDescuentosButton = document.getElementById('RegistrarDescuentoButton');
+    RegistrarDescuentosButton.addEventListener('click', function() {
+        var id = document.getElementById('IdDescuento');
+        var DescuentosTable = document.getElementById('DescuentosTable');
+        if (!VerifyId(id.value, DescuentosTable.rows)){
+            alert('ID ya existente');
+            return;
+        }
+        if (id.value == ''){
+            alert('ID es requerido');
+            return;
+        }
+
+        var PorcentajeDescuento = document.getElementById('PorcentajeDescuento');
+        if (PorcentajeDescuento.value == ''){
+            PorcentajeDescuento.value = "0";
+        }
+
+        var ValorDescuento = document.getElementById('ValorDescuento');
+        if (ValorDescuento.value == ''){
+            ValorDescuento.value = "0";
+        }
+
+        var DescripcionDescuento = document.getElementById('DescripcionDescuento');
+
+        var row = DescuentosTable.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = id.value;
+        cell2.innerHTML = PorcentajeDescuento.value;
+        cell3.innerHTML = ValorDescuento.value;
+        cell4.innerHTML = DescripcionDescuento.value;
+        id.value = '';
+        PorcentajeDescuento.value = '0';
+        ValorDescuento.value = '0';
+        DescripcionDescuento.value = '';
+        LoadSelect(document.getElementById('DescuentosSelect'), DescuentosTable);
     });
 }
 
@@ -155,11 +197,14 @@ function UpdateSpan(element, suma){
 }
 
 function VerifyDisponible(id){
-    var asiento = document.getElementById(id);
-    if (asiento.classList.contains('disponible')){
-        return true;
+    var ReservacionesTable = document.getElementById('ReservacionesTable');
+    var rows = ReservacionesTable.rows;
+    for (var i = 1; i < rows.length; i++) {
+        if (rows[i].cells[13].innerHTML === id) {
+            return false;
+        }
     }
-    return false;
+    return true;
 }
 
 function VerifyAsientoExistente(id){
@@ -176,6 +221,120 @@ function VerifyId(id, rows){
         }
     }
     return true;
+}
+
+function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelo, CantidadMascotas, descuento, substraer = false){
+    var tarifa = 0.0;
+    var TarifaSobrepeso = parseFloat(document.getElementById('TarifaSobrepeso').value);
+    var PesoMaximoMaleta = parseFloat(document.getElementById('PesoMaximoMaleta').value);
+
+    var VuelosTable = document.getElementById('VuelosTable');
+    var rows = VuelosTable.rows;
+    var ValorVuelos = 0.0;
+    for (var i = 1; i < rows.length; i++) {
+        if (rows[i].cells[0].innerHTML === vuelo) {
+            ValorVuelos += parseFloat(rows[i].cells[1].innerHTML);
+            break;
+        }
+    }
+    tarifa += ValorVuelos;
+    if (substraer){
+        ValorVuelos *= -1;
+    }
+    UpdateSpan(document.getElementById('TotalTarifaVuelo'), ValorVuelos);
+
+    var ValorMaleta = 0.0;
+    if (maleta != ''){
+        ValorMaleta += parseFloat(document.getElementById('TarifaMaleta').value);
+        if (parseFloat(maleta) > PesoMaximoMaleta){
+            ValorMaleta += (parseFloat(maleta)-PesoMaximoMaleta) * TarifaSobrepeso;
+        }
+    }
+    tarifa += ValorMaleta;
+    if (substraer){
+        ValorMaleta *= -1;
+    }
+    UpdateSpan(document.getElementById('TotalTarifaMaleta'), ValorMaleta);
+
+    if (MaletaMano != ''){
+        var ValorMaletaMano = parseFloat(document.getElementById('TarifaMaletaMano').value);
+        tarifa += ValorMaletaMano;
+        if (substraer){
+            ValorMaletaMano *= -1;
+        }
+        UpdateSpan(document.getElementById('TotalTarifaMaletaMano'), ValorMaletaMano);
+    }
+
+    var ValorGeneral = parseFloat(document.getElementById('TarifaGeneral').value);
+    tarifa += ValorGeneral;
+    if (substraer){
+        ValorGeneral *= -1;
+    }
+    UpdateSpan(document.getElementById('TotalTarifaGeneral'), ValorGeneral);
+
+    var MaletasExtras = "";
+    var ValorMaletasExtras = 0.0;
+    var TarifaMaletaExtra = parseFloat(document.getElementById('TarifaMaletaExtra').value);
+
+    if (substraer){
+        var PesosMaletasExtras = (MaletaExtrasTable).split(' ');
+        for (var i = 0; i < PesosMaletasExtras.length; i++){
+            if (PesosMaletasExtras[i] != ''){
+                ValorMaletasExtras += TarifaMaletaExtra;
+                if (parseFloat(PesosMaletasExtras[i]) > PesoMaximoMaleta){
+                    ValorMaletasExtras += (parseFloat(PesosMaletasExtras[i])-PesoMaximoMaleta) * TarifaSobrepeso;
+                }
+            }
+        }
+        ValorMaletasExtras *= -1;
+    } else {
+        var CantidadMaletasExtras = document.getElementById('CantidadMaletas');
+        for (var i = 1; i <= parseInt(CantidadMaletasExtras.value); i++){
+            var MaletaExtra = document.getElementById('MaletaExtra' + i);
+            if (MaletaExtra.value != ''){
+                MaletasExtras += MaletaExtra.value + ' ';
+                ValorMaletasExtras += TarifaMaletaExtra;
+                if (parseFloat(MaletaExtra.value) > PesoMaximoMaleta){
+                    ValorMaletasExtras += (parseFloat(MaletaExtra.value)-PesoMaximoMaleta) * TarifaSobrepeso;
+                }
+            }
+            MaletaExtra.value = '';
+        }
+    }
+    tarifa += ValorMaletasExtras;
+    UpdateSpan(document.getElementById('TotalTarifaMaletasExtras'), ValorMaletasExtras);
+
+    if (CantidadMascotas != ''){
+        var ValorMascotas = parseFloat(CantidadMascotas) * parseFloat(document.getElementById('TarifaMascotas').value);
+        tarifa += ValorMascotas;
+        if (substraer){
+            ValorMascotas *= -1;
+        }
+        UpdateSpan(document.getElementById('TotalTarifaMascotas'), ValorMascotas);
+    }
+
+    var DescuentosTable = document.getElementById('DescuentosTable');
+    var rows = DescuentosTable.rows;
+    var ValorDescuentos = 0.0;
+    for (var i = 1; i < rows.length; i++) {
+        if (rows[i].cells[0].innerHTML === descuento) {
+            ValorDescuentos += -1*((parseFloat(rows[i].cells[1].innerHTML) * tarifa) / 100);
+            ValorDescuentos += -1*(parseFloat(rows[i].cells[2].innerHTML));
+            break;
+        }
+    }
+    tarifa += ValorDescuentos;
+    if (substraer){
+        ValorDescuentos *= -1;
+    }
+    UpdateSpan(document.getElementById('TotalDescuentos'), ValorDescuentos);
+
+    if (substraer){
+        tarifa *= -1;
+    }
+    UpdateSpan(document.getElementById('total'), tarifa);
+
+    return [MaletasExtras, tarifa];
 }
 
 function RegistrarReservaciones(){
@@ -219,66 +378,12 @@ function RegistrarReservaciones(){
         }
 
         var vuelo = document.getElementById('vuelo');
-
-        var tarifa = 0.0;
-        var TarifaSobrepeso = parseFloat(document.getElementById('TarifaSobrepeso'));
-        var PesoMaximoMaleta = parseFloat(document.getElementById('PesoMaximoMaleta'));
-
-        var VuelosTable = document.getElementById('VuelosTable');
-        var rows = VuelosTable.rows;
-        var ValorVuelos = 0.0;
-        for (var i = 1; i < rows.length; i++) {
-            if (rows[i].cells[0].innerHTML === vuelo.value) {
-                ValorVuelos += parseFloat(rows[i].cells[1].innerHTML);
-                break;
-            }
-        }
-        tarifa += ValorVuelos;
-        UpdateSpan(document.getElementById('TotalTarifaVuelo'), ValorVuelos);
-
-        var ValorMaleta = 0.0;
-        if (maleta.value != ''){
-            ValorMaleta += parseFloat(document.getElementById('TarifaMaleta').value);
-            if (parseFloat(maleta.value) > PesoMaximoMaleta){
-                ValorMaleta += (parseFloat(maleta.value)-PesoMaximoMaleta) * TarifaSobrepeso;
-            }
-        }
-        tarifa += ValorMaleta;
-        UpdateSpan(document.getElementById('TotalTarifaMaleta'), ValorMaleta);
-
-        if (MaletaMano.value != ''){
-            var ValorMaletaMano = parseFloat(document.getElementById('TarifaMaletaMano').value);
-            tarifa += ValorMaletaMano;
-            UpdateSpan(document.getElementById('TotalTarifaMaletaMano'), ValorMaletaMano);
-        }
-
-        var ValorGeneral = parseFloat(document.getElementById('TarifaGeneral').value);
-        tarifa += ValorGeneral;
-        UpdateSpan(document.getElementById('TotalTarifaGeneral'), ValorGeneral);
-
-        var CantidadMaletasExtras = document.getElementById('CantidadMaletas');
-        var MaletasExtras = "";
-        var ValorMaletasExtras = 0.0;
-        for (var i = 1; i <= parseInt(CantidadMaletasExtras.value); i++){
-            var MaletaExtra = document.getElementById('MaletaExtra' + i);
-            if (MaletaExtra.value != ''){
-                MaletasExtras += MaletaExtra.value + ' ';
-                ValorMaletasExtras += parseFloat(document.getElementById('TarifaMaletaExtra').value);
-                if (parseFloat(MaletaExtra.value) > PesoMaximoMaleta){
-                    ValorMaletasExtras += (parseFloat(MaletaExtra.value)-PesoMaximoMaleta) * TarifaSobrepeso;
-                }
-            }
-            MaletaExtra.value = '';
-        }
-        tarifa += ValorMaletasExtras;
-        UpdateSpan(document.getElementById('TotalTarifaMaletasExtras'), ValorMaletasExtras);
-
+        var descuento = document.getElementById('DescuentosSelect');
         var mascotas = document.getElementById('mascotas');
-        var ValorMascotas = parseFloat(mascotas.value) * parseFloat(document.getElementById('TarifaMascotas').value);
-        tarifa += ValorMascotas;
-        UpdateSpan(document.getElementById('TotalTarifaMascotas'), ValorMascotas);
 
-        UpdateSpan(document.getElementById('total'), tarifa);
+        totales = MontosTotales(maleta.value, MaletaMano.value, '', vuelo.value, mascotas.value, descuento.value);
+        var MaletasExtras = totales[0];
+        var tarifa = totales[1];
 
         var row = ReservacionesTable.insertRow(-1);
         var cell0 = row.insertCell(0);
@@ -297,6 +402,7 @@ function RegistrarReservaciones(){
         var cell13 = row.insertCell(13);
         var cell14 = row.insertCell(14);
         var cell15 = row.insertCell(15);
+        var cell16 = row.insertCell(16);
         cell0.innerHTML = ID.value;
         cell1.innerHTML = pasaporte.value;
         cell2.innerHTML = cedula.value;
@@ -312,7 +418,8 @@ function RegistrarReservaciones(){
         cell12.innerHTML = tarifa.toString();
         cell13.innerHTML = asiento.value;
         cell14.innerHTML = mascotas.value;
-        cell15.innerHTML = '<button class="CancelarReservacion" idcancelacion="'+ID.value+'">Cancelar</button>';
+        cell15.innerHTML = descuento.value;
+        cell16.innerHTML = '<button class="CancelarReservacion" idcancelacion="'+ID.value+'">Cancelar</button>';
         ID.value = '';
         pasaporte.value = '';
         cedula.value = '';
@@ -332,67 +439,12 @@ function RegistrarReservaciones(){
 
 function InitSelectVuelo(){
     var SelectVuelo = document.getElementById('vuelo');
-    LoadSelectVuelo(SelectVuelo);
+    LoadSelect(SelectVuelo, document.getElementById('VuelosTable'));
     SelectVuelo.addEventListener('change', AsOcupado);
 }
 
 function SubstraerTotales(row){
-    var tarifa = 0.0;
-    var TarifaSobrepeso = parseFloat(document.getElementById('TarifaSobrepeso'));
-    var PesoMaximoMaleta = parseFloat(document.getElementById('PesoMaximoMaleta'));
-
-    var VuelosTable = document.getElementById('VuelosTable');
-    var rows = VuelosTable.rows;
-    var ValorVuelos = 0.0;
-    for (var i = 1; i < rows.length; i++) {
-        if (rows[i].cells[0].innerHTML === row[11].innerHTML) {
-            ValorVuelos += parseFloat(rows[i].cells[1].innerHTML);
-            break;
-        }
-    }
-    tarifa += ValorVuelos;
-    UpdateSpan(document.getElementById('TotalTarifaVuelo'), -1*ValorVuelos);
-
-    var ValorMaleta = 0.0;
-    if (row[8].innerHTML != ''){
-        ValorMaleta += parseFloat(document.getElementById('TarifaMaleta').value);
-        if (parseFloat(row[8].innerHTML) > PesoMaximoMaleta){
-            ValorMaleta += (parseFloat(row[8].innerHTML)-PesoMaximoMaleta) * TarifaSobrepeso;
-        }
-    }
-    tarifa += ValorMaleta;
-    UpdateSpan(document.getElementById('TotalTarifaMaleta'), -1*ValorMaleta);
-
-    if (row[9].innerHTML != ''){
-        var ValorMaletaMano = parseFloat(document.getElementById('TarifaMaletaMano').value);
-        tarifa += ValorMaletaMano;
-        UpdateSpan(document.getElementById('TotalTarifaMaletaMano'), -1*ValorMaletaMano);
-    }
-
-    var ValorGeneral = parseFloat(document.getElementById('TarifaGeneral').value);
-    tarifa += ValorGeneral;
-    UpdateSpan(document.getElementById('TotalTarifaGeneral'), -1*ValorGeneral);
-
-    var PesosMaletasExtras = (row[10].innerHTML).split(' ');
-    var MaletasExtras = "";
-    var ValorMaletasExtras = 0.0;
-    for (var i = 0; i < PesosMaletasExtras.length; i++){
-        if (PesosMaletasExtras[i] != ''){
-            MaletasExtras += PesosMaletasExtras[i] + ' ';
-            ValorMaletasExtras += parseFloat(document.getElementById('TarifaMaletaExtra').value);
-            if (parseFloat(PesosMaletasExtras[i]) > PesoMaximoMaleta){
-                ValorMaletasExtras += (parseFloat(PesosMaletasExtras[i])-PesoMaximoMaleta) * TarifaSobrepeso;
-            }
-        }
-    }
-    tarifa += ValorMaletasExtras;
-    UpdateSpan(document.getElementById('TotalTarifaMaletasExtras'), -1*ValorMaletasExtras);
-
-    var ValorMascotas = parseFloat(row[14].innerHTML) * parseFloat(document.getElementById('TarifaMascotas').value);
-    tarifa += ValorMascotas;
-    UpdateSpan(document.getElementById('TotalTarifaMascotas'), -1*ValorMascotas);
-
-    UpdateSpan(document.getElementById('total'), -1*tarifa);
+    MontosTotales(row[8].innerHTML, row[9].innerHTML, row[10].innerHTML, row[11].innerHTML, row[14].innerHTML, row[15].innerHTML, true);
 }
 
 function CancelarReservacion(){
@@ -419,12 +471,14 @@ function main() {
     InitModal('Parametros');
     InitModal('Reservaciones');
     InitModal('VuelosModal');
+    InitModal('Descuentos');
     InitMaletasExtras();
     SelectAsiento();
     RegistrarVuelos();
     InitSelectVuelo();
     RegistrarReservaciones();
     CancelarReservacion();
+    RegistrarDescuentos();
 }
 
 main();

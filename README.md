@@ -39,6 +39,7 @@
 ## Validaciones ##
 - No pueden haber mas de un vuelo con el mismo ID y el ID es requerido
 - No puede haber mas de una reservación con el mismo ID y el ID es requerido
+- No puede haber mas de un descuento con el mismo ID y el ID es requerido
 - Se debe validar que el asiento este disponible y el asiento es un input requerido
 - Verificar que la maleta de mano no sobrepase el peso maximo establecido en los parametros generales
 - La tarifa del vuelo es requerida

@@ -69,12 +69,17 @@
                     <input type="text" id="asiento">
                 </div>
                 <div>
+                    <label for="DescuentosSelect">Selecciona el descuento (si posee)</label>
+                    <select id="DescuentosSelect"></select>
+                </div>
+                <div>
                     <button id="RegistrarButton">Registrar</button>
                     <button class="ReservacionesButton">Reservaciones</button>
+                    <button class="VuelosModalButton">Vuelos</button>
                 </div>
                 <div>
                     <button class="ParametrosButton">Parametros generales</button>
-                    <button class="VuelosModalButton">Vuelos</button>
+                    <button class="DescuentosButton">Descuentos</button>
                 </div>
             </div>
             <div id="asientos">
@@ -321,6 +326,7 @@
                     <th>Monto total</th>
                     <th>Asiento</th>
                     <th>Mascotas</th>
+                    <th>Descuento</th>
                 </tr>
             </table>
             <br>
@@ -334,6 +340,7 @@
                     <li>Tarifa por maletas extras: <span id="TotalTarifaMaletasExtras">0</span></li>
                     <li>Tarifa por sobrepeso de maletas: <span id="TotalTarifaSobrepesoMaletas">0</span></li>
                     <li>Tarifa por mascotas: <span id="TotalTarifaMascotas">0</span></li>
+                    <li>Monto por descuentos: <span id="TotalDescuentos">0</span></li>
                     <li>Total: <span id="total">0</span></li>
                 </ul>
             </div>
@@ -383,6 +390,42 @@
                       <td>Albania</td>
                       <td>Polonia</td>
                       <td>2024-07-01T12:30</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="Descuentos" class="modal-backdrop">
+        <div class="modal-content" id="DescuentosContent">
+            <div id="CrearDescuentos">
+                <div>
+                    <label for="IdDescuento">ID</label>
+                    <input type="text" id="IdDescuento">
+                </div>
+                <div>
+                    <label for="PorcentajeDescuento">Porcentaje de descuento</label>
+                    <input type="number" id="PorcentajeDescuento" min="0" value="0">
+                </div>
+                <div>
+                    <label for="ValorDescuento">Valor del descuento</label>
+                    <input type="number" id="ValorDescuento" min="0" value="0">
+                </div>
+                <div>
+                    <label for="DescripcionDescuento">Descripcion del descuento</label>
+                    <input type="text" id="DescripcionDescuento">
+                </div>
+                <div>
+                    <button id="RegistrarDescuentoButton">Registrar</button>
+                    <button class="DescuentosButton">Cerrar</button>
+                </div>
+            </div>
+            <div id="VerDescuentos">
+                <table id="DescuentosTable">
+                    <tr>
+                      <th>ID</th>
+                      <th>Porcentaje</th>
+                      <th>Valor</th>
+                      <th>Descripción</th>
                     </tr>
                 </table>
             </div>
