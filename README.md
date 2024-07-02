@@ -1,4 +1,4 @@
-### Objetivos de la aplicación ###
+# Objetivos de la aplicación #
 - Reservaciones de un vuelo
 - Index de las reservaciones
 - Creacion de diferentes vuelos con diferentes asientos
