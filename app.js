@@ -29,12 +29,17 @@ function SelectAsiento(){
     var asientos = document.getElementsByClassName("asiento");
     for (var i = 0; i < asientos.length; i++) {
         asientos[i].addEventListener('click', function() {
-            ToggleAsiento();
             var asiento = document.getElementById("asiento");
+            if (asiento.value.includes(this.id)) {
+                this.classList.remove('seleccionado');
+                this.classList.add('disponible');
+                asiento.value = asiento.value.replace(this.id+" ", '');
+                return;
+            }
             if (!this.classList.contains('ocupado')){
                 this.classList.add('seleccionado');
                 this.classList.remove('disponible');
-                asiento.value = this.id;
+                asiento.value += this.id + " ";
             }
         });
     }
@@ -289,11 +294,14 @@ function AsOcupado(){
         asientos[i].classList.remove('disponible');
         var ocupado = false;
         for (var t = 1; t < rows.length; t++) {
-            if (rows[t].cells[6].innerHTML == asientos[i].id && rows[t].cells[4].innerHTML == vuelo.value) {
-                asientos[i].classList.add('ocupado');
-                asientos[i].setAttribute('disabled', 'disabled');
-                ocupado = true;
-                break;
+            var AsientosTable = rows[t].cells[6].innerHTML.split(' ');
+            for (let p = 0; p < asientos.length; p++) {
+                if (AsientosTable[p] == asientos[i].id && rows[t].cells[4].innerHTML == vuelo.value && AsientosTable[p] != '') {
+                    asientos[i].classList.add('ocupado');
+                    asientos[i].setAttribute('disabled', 'disabled');
+                    ocupado = true;
+                    break;
+                }
             }
         }
         if (ocupado == false) {
@@ -529,23 +537,44 @@ function RegistrarReservaciones(){
             return;
         }
         
-        var asiento = document.getElementById('asiento');
-        if (!VerifyAsientoExistente(asiento.value)){
-            alert('Asiento no existente');
-            return;
-        }
-        if (!VerifyDisponible(asiento.value)){
-            alert('Asiento no disponible');
-            return;
+        var asientos = document.getElementById('asiento')
+        var AsientosTemp = asientos.value.split(' ');
+        var CountAsientos = 0;
+        for (var i = 0; i < AsientosTemp.length; i++) {
+            if (AsientosTemp[i] == ''){
+                continue;
+            }
+            if (!VerifyAsientoExistente(AsientosTemp[i])){
+                alert('Asiento no existente');
+                return;
+            }
+            if (!VerifyDisponible(AsientosTemp[i])){
+                alert('Asiento no disponible');
+                return;
+            }
+            CountAsientos++;
         }
 
         var vuelo = document.getElementById('vuelo');
         var descuento = document.getElementById('DescuentosSelect');
         var mascotas = document.getElementById('mascotas');
-        var cliente = document.getElementById('ClientesSelect');
+        var clientes = document.getElementById('ClientesSelect');
         
-        if(!VerifyVisa(cliente.value, vuelo.value)){
-            alert('El vuelo requiere de que el cliente tenga visa');
+        var ClientesFinal = "";
+        var CountClientes = 0;
+        for (let i = 0; i < clientes.options.length; i++) {
+            if (!clientes.options[i].selected){
+                ClientesFinal += clientes.options[i].value + ' ';
+                if(!VerifyVisa(clientes.options[i].value, vuelo.value)){
+                    alert('El vuelo requiere de que el cliente tenga visa');
+                    return;
+                }
+                CountClientes++;
+            }
+        }
+
+        if (CountAsientos != CountClientes){
+            alert('La cantidad de asientos no coincide con la cantidad de clientes');
             return;
         }
 
@@ -590,16 +619,16 @@ function RegistrarReservaciones(){
         cell3.innerHTML = MaletasExtras;
         cell4.innerHTML = vuelo.value;
         cell5.innerHTML = tarifa.toString();
-        cell6.innerHTML = asiento.value;
+        cell6.innerHTML = asientos.value;
         cell7.innerHTML = mascotas.value;
         cell8.innerHTML = DescuentoTable;
-        cell9.innerHTML = cliente.value;
+        cell9.innerHTML = ClientesFinal;
         cell10.innerHTML = ServiciosTable;
         cell11.innerHTML = '<button class="CancelarReservacion" idcancelacion="'+ID.value+'">Cancelar</button>';
         ID.value = '';
         maleta.value = '';
         MaletaMano.value = '';
-        asiento.value = '';
+        asientos.value = '';
         mascotas.value = '0';
         AsOcupado();
         CancelarReservacion();

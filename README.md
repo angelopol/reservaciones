@@ -12,6 +12,7 @@
 - Añadir, eliminar, modificar clientes
 - Modificación de parametros generales de las reservaciones
 - Posibilidad de ver el monto total del costo de las reservaciones desglosado por tarifas
+- Posibilidad de reservar para varios pasajeros con varios asientos
 
 ## Cosas a tener en cuenta ##
 - Cuando se añade una resevación el asiento seleccionado comienza a estar no disponible
@@ -32,10 +33,11 @@
     * Cliente
     * Cada reservación tendra en cuenta el identicador del vuelo
     * Descuentos, Se pueden escoger varios descuentos por reservación
-    * Servicio medico (Si/No)
-    * Ayuda con el equipaje (Si/No)
-    * Traductor (Si/No)
-    * Wifi (Si/No)
+    * Servicios, Se pueden escoger varios servicios por reservación
+    * Servicio medico (Si/No) *
+    * Ayuda con el equipaje (Si/No) *
+    * Traductor (Si/No) *
+    * Wifi (Si/No) *
 - Datos del vuelo:
     * ID
     * Tarifa del vuelo
@@ -49,8 +51,8 @@
     * Porcentaje
     * Valor
     * Descripcion
-    * Rango de edad (inicio-final)
-    * Nacionalidad
+    * Rango de edad (inicio-final) *
+    * Nacionalidad *
 - Datos del servicio:
     * ID
     * tarifa
@@ -67,7 +69,7 @@
 - La tarifa del vuelo es requerida
 - La tarifa del servicio es requerida
 - Si el vuelo requiere visa se debe validar que el cliente posea visa
-- Validar asientos por edad de personas (niños no pueden estar cerca de las salidas de emergencias)
+- Validar asientos por edad de personas (niños no pueden estar cerca de las salidas de emergencias) *
 
 ## Parametros generales ##
 - Tarifa sin maleta (general)
@@ -79,16 +81,13 @@
 - Cantidad de maletas extras posibles
 - Tarifa por sobrepeso de la maleta
 - Tarifa por mascota
-- Tarifa por servicio medico
-- Tarifa por servicio de ayuda con el equipaje
-- Tarifa por servicio de traductores
-- Tarifa por servicio de wifi
+- Tarifa por servicio medico *
+- Tarifa por servicio de ayuda con el equipaje *
+- Tarifa por servicio de traductores *
+- Tarifa por servicio de wifi *
 
 ## Posibles nuevas funcionalidades ##
-- Modulo para servicios personalizados, y poder agregar varios servicios personalizados a una reservación
-- Investigar INAC
-- Reservacion para varios pasajeros un asiento por pasajero
-- Reservaciones de ida y vuelta
-- Pedir datos de pago para la reservacion
-- Seleccionar area del telefono
-- Tarifa por objetos valiosos dentro del equipaje con porcentajes (Servicio Declaracion Expresa de Valor)
+- Reservaciones de ida y vuelta *
+- Pedir datos de pago para la reservacion *
+- Seleccionar area del telefono *
+- Tarifa por objetos valiosos dentro del equipaje con porcentajes (Servicio Declaracion Expresa de Valor) *
