@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="OthersStyles.css">
-    <script src="app.js" defer></script>
+    <script type="text/javascript" src="countries.js"></script>
+    <script type="text/javascript" src="asientos.js"></script>
+    <script type="text/javascript" src="app.js" defer></script>
     <title>Simulación de reservación de vuelos</title>
 </head>
 <body>
@@ -43,7 +45,7 @@
                 <div id="MaletasExtras"></div>
                 <div>
                     <label for="asiento">Asiento</label>
-                    <input type="text" id="asiento">
+                    <textarea id="asiento" disabled></textarea>
                 </div>
                 <div>
                     <label for="DescuentosSelect">Selecciona el descuento (si posee)</label>
@@ -69,181 +71,6 @@
                 <div>
                     <label for="vuelo">Selecciona el vuelo</label>
                     <select id="vuelo"></select>
-                </div>
-                <div class="fila">
-                    30
-                    <button id="C30" class="asiento disponible">C</button>
-                    <button id="D30" class="asiento disponible">D</button>
-                    <button id="E30" class="asiento disponible">E</button>
-                    <button id="F30" class="asiento disponible">F</button>
-                    <button id="G30" class="asiento disponible">G</button>
-                </div>
-                <div class="fila">
-                    31
-                    <button id="A31" class="asiento disponible">A</button>
-                    <button id="B31" class="asiento disponible">B</button>
-                    <button id="C31" class="asiento disponible">C</button>
-                    <button id="D31" class="asiento disponible">D</button>
-                    <button id="E31" class="asiento disponible">E</button>
-                    <button id="F31" class="asiento disponible">F</button>
-                    <button id="G31" class="asiento disponible">G</button>
-                    <button id="H31" class="asiento disponible">H</button>
-                    <button id="J31" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    32
-                    <button id="A32" class="asiento disponible">A</button>
-                    <button id="B32" class="asiento disponible">B</button>
-                    <button id="C32" class="asiento disponible">C</button>
-                    <button id="D32" class="asiento disponible">D</button>
-                    <button id="E32" class="asiento disponible">E</button>
-                    <button id="F32" class="asiento disponible">F</button>
-                    <button id="G32" class="asiento disponible">G</button>
-                    <button id="H32" class="asiento disponible">H</button>
-                    <button id="J32" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    33
-                    <button id="A33" class="asiento disponible">A</button>
-                    <button id="B33" class="asiento disponible">B</button>
-                    <button id="C33" class="asiento disponible">C</button>
-                    <button id="D33" class="asiento disponible">D</button>
-                    <button id="E33" class="asiento disponible">E</button>
-                    <button id="F33" class="asiento disponible">F</button>
-                    <button id="G33" class="asiento disponible">G</button>
-                    <button id="H33" class="asiento disponible">H</button>
-                    <button id="J33" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    34
-                    <button id="A34" class="asiento disponible">A</button>
-                    <button id="B34" class="asiento disponible">B</button>
-                    <button id="C34" class="asiento disponible">C</button>
-                    <button id="D34" class="asiento disponible">D</button>
-                    <button id="E34" class="asiento disponible">E</button>
-                    <button id="F34" class="asiento disponible">F</button>
-                    <button id="G34" class="asiento disponible">G</button>
-                    <button id="H34" class="asiento disponible">H</button>
-                    <button id="J34" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    35
-                    <button id="A35" class="asiento disponible">A</button>
-                    <button id="B35" class="asiento disponible">B</button>
-                    <button id="C35" class="asiento disponible">C</button>
-                    <button id="D35" class="asiento disponible">D</button>
-                    <button id="E35" class="asiento disponible">E</button>
-                    <button id="F35" class="asiento disponible">F</button>
-                    <button id="G35" class="asiento disponible">G</button>
-                    <button id="H35" class="asiento disponible">H</button>
-                    <button id="J35" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    36
-                    <button id="A36" class="asiento disponible">A</button>
-                    <button id="B36" class="asiento disponible">B</button>
-                    <button id="C36" class="asiento disponible">C</button>
-                    <button id="D36" class="asiento disponible">D</button>
-                    <button id="E36" class="asiento disponible">E</button>
-                    <button id="F36" class="asiento disponible">F</button>
-                    <button id="G36" class="asiento disponible">G</button>
-                    <button id="H36" class="asiento disponible">H</button>
-                    <button id="J36" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    37
-                    <button id="A37" class="asiento disponible">A</button>
-                    <button id="B37" class="asiento disponible">B</button>
-                    <button id="C37" class="asiento disponible">C</button>
-                    <button id="D37" class="asiento disponible">D</button>
-                    <button id="E37" class="asiento disponible">E</button>
-                    <button id="F37" class="asiento disponible">F</button>
-                    <button id="G37" class="asiento disponible">G</button>
-                    <button id="H37" class="asiento disponible">H</button>
-                    <button id="J37" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    38
-                    <button id="A38" class="asiento disponible">A</button>
-                    <button id="B38" class="asiento disponible">B</button>
-                    <button id="C38" class="asiento disponible">C</button>
-                    <button id="D38" class="asiento disponible">D</button>
-                    <button id="E38" class="asiento disponible">E</button>
-                    <button id="F38" class="asiento disponible">F</button>
-                    <button id="G38" class="asiento disponible">G</button>
-                    <button id="H38" class="asiento disponible">H</button>
-                    <button id="J38" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    39
-                    <button id="A39" class="asiento disponible">A</button>
-                    <button id="B39" class="asiento disponible">B</button>
-                    <button id="C39" class="asiento disponible">C</button>
-                    <button id="D39" class="asiento disponible">D</button>
-                    <button id="E39" class="asiento disponible">E</button>
-                    <button id="F39" class="asiento disponible">F</button>
-                    <button id="G39" class="asiento disponible">G</button>
-                    <button id="H39" class="asiento disponible">H</button>
-                    <button id="J39" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    40
-                    <button id="A40" class="asiento disponible">A</button>
-                    <button id="B40" class="asiento disponible">B</button>
-                    <button id="C40" class="asiento disponible">C</button>
-                    <button id="D40" class="asiento disponible">D</button>
-                    <button id="E40" class="asiento disponible">E</button>
-                    <button id="F40" class="asiento disponible">F</button>
-                    <button id="G40" class="asiento disponible">G</button>
-                    <button id="H40" class="asiento disponible">H</button>
-                    <button id="J40" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    41
-                    <button id="A41" class="asiento disponible">A</button>
-                    <button id="B41" class="asiento disponible">B</button>
-                    <button id="C41" class="asiento disponible">C</button>
-                    <button id="D41" class="asiento disponible">D</button>
-                    <button id="F41" class="asiento disponible">F</button>
-                    <button id="G41" class="asiento disponible">G</button>
-                    <button id="H41" class="asiento disponible">H</button>
-                    <button id="J41" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    42
-                    <button id="A42" class="asiento disponible">A</button>
-                    <button id="B42" class="asiento disponible">B</button>
-                    <button id="C42" class="asiento disponible">C</button>
-                    <button id="D42" class="asiento disponible">D</button>
-                    <button id="F42" class="asiento disponible">F</button>
-                    <button id="G42" class="asiento disponible">G</button>
-                    <button id="H42" class="asiento disponible">H</button>
-                    <button id="J42" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    43
-                    <button id="A43" class="asiento disponible">A</button>
-                    <button id="B43" class="asiento disponible">B</button>
-                    <button id="C43" class="asiento disponible">C</button>
-                    <button id="D43" class="asiento disponible">D</button>
-                    <button id="F43" class="asiento disponible">F</button>
-                    <button id="G43" class="asiento disponible">G</button>
-                    <button id="H43" class="asiento disponible">H</button>
-                    <button id="J43" class="asiento disponible">J</button>
-                </div>
-                <div class="fila">
-                    44
-                    <button id="C44" class="asiento disponible">C</button>
-                    <button id="D44" class="asiento disponible">D</button>
-                    <button id="F44" class="asiento disponible">F</button>
-                    <button id="G44" class="asiento disponible">G</button>
-                </div>
-                <div class="fila">
-                    45
-                    <button id="C45" class="asiento disponible">C</button>
-                    <button id="D45" class="asiento disponible">D</button>
-                    <button id="F45" class="asiento disponible">F</button>
-                    <button id="G45" class="asiento disponible">G</button>
                 </div>
             </div>
         </div>
@@ -338,11 +165,11 @@
                 </div>
                 <div>
                     <label for="DestinoVuelo">Destino del vuelo</label>
-                    <input type="text" id="DestinoVuelo">
+                    <select id="DestinoVuelo" class="SelectPaises"></select>
                 </div>
                 <div>
                     <label for="OrigenVuelo">Origen del vuelo</label>
-                    <input type="text" id="OrigenVuelo">
+                    <select id="OrigenVuelo" class="SelectPaises"></select>
                 </div>
                 <div>
                     <label for="FechaHoraVuelo">Fecha y hora de salida</label>
@@ -455,16 +282,12 @@
                     <select id="sexo">
                         <option value="Masculino" selected>Masculino</option>
                         <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
                     </select>
                 </div>
                 <div>
-                    <label for="nacionalidad">Nacionalidad</label>
-                    <select id="nacionalidad">
-                        <option value="Venezolano" selected>Venezolano</option>
-                        <option value="Colombiano">Colombiano</option>
-                        <option value="Ecuatoriano">Ecuatoriano</option>
-                        <option value="Panameño">Panameño</option>
-                    </select>
+                    <label for="SelectPaises">Nacionalidad</label>
+                    <select id="nacionalidad" class="SelectPaises"></select>
                 </div>
                 <div>
                     <label for="visa">Visa</label>
@@ -537,6 +360,9 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div id="SilmulacionClientes">
+
     </div>        
 </body>
 </html>

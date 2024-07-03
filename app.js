@@ -1,3 +1,34 @@
+function SelectPaises() {
+    var selects = document.getElementsByClassName('SelectPaises');
+    for (let i = 0; i < selects.length; i++) {
+        ContriesJson.forEach(item => {
+            var paisOption = document.createElement("option");
+            paisOption.value = item.code;
+            paisOption.text = item.name;
+            selects[i].appendChild(paisOption);
+        });
+        
+    }
+}
+
+function InitAsientos(IdDiv) {
+    var div = document.getElementById(IdDiv);
+    AsientosJson.forEach(item => {
+        var fila = document.createElement("div");
+        fila.classList.add('fila');
+        fila.innerHTML = item.fila;
+        item.asientos.forEach(asiento => {
+            var AsientoButton = document.createElement('button');
+            AsientoButton.classList.add('asiento');
+            AsientoButton.classList.add('disponible');
+            AsientoButton.id = asiento+item.fila;
+            AsientoButton.innerHTML = asiento;
+            fila.appendChild(AsientoButton);
+        });
+        div.appendChild(fila);
+    });
+}
+
 function InitModal(ModalName) {
     const buttons = document.getElementsByClassName(ModalName+'Button');
     var modal = document.getElementById(ModalName);
@@ -30,7 +61,8 @@ function SelectAsiento(){
     for (var i = 0; i < asientos.length; i++) {
         asientos[i].addEventListener('click', function() {
             var asiento = document.getElementById("asiento");
-            if (asiento.value.includes(this.id)) {
+            var vuelo = document.getElementById('vuelo');
+            if (asiento.value.includes(this.id+ "-" + vuelo.value)) {
                 this.classList.remove('seleccionado');
                 this.classList.add('disponible');
                 asiento.value = asiento.value.replace(this.id+" ", '');
@@ -39,7 +71,7 @@ function SelectAsiento(){
             if (!this.classList.contains('ocupado')){
                 this.classList.add('seleccionado');
                 this.classList.remove('disponible');
-                asiento.value += this.id + " ";
+                asiento.value += this.id + "-" + vuelo.value + " ";
             }
         });
     }
@@ -287,6 +319,7 @@ function AsOcupado(){
     var ReservacionesTable = document.getElementById('ReservacionesTable');
     var vuelo = document.getElementById('vuelo');
     var rows = ReservacionesTable.rows; 
+    var asiento = document.getElementById('asiento');
     for (var i = 0; i < asientos.length; i++) {
         asientos[i].removeAttribute('disabled');
         asientos[i].classList.remove('seleccionado');
@@ -295,21 +328,24 @@ function AsOcupado(){
         var ocupado = false;
         for (var t = 1; t < rows.length; t++) {
             var AsientosTable = rows[t].cells[6].innerHTML.split(' ');
-            for (let p = 0; p < asientos.length; p++) {
-                if (AsientosTable[p] == asientos[i].id && rows[t].cells[4].innerHTML == vuelo.value && AsientosTable[p] != '') {
+            for (let p = 0; p < AsientosTable.length; p++) {
+                if (AsientosTable[p] == asientos[i].id && rows[t].cells[4].innerHTML.includes(vuelo.value) == true && AsientosTable[p] != '') {
                     asientos[i].classList.add('ocupado');
                     asientos[i].setAttribute('disabled', 'disabled');
                     ocupado = true;
                     break;
                 }
+                
             }
         }
         if (ocupado == false) {
-            asientos[i].classList.add('disponible');
+            if (asiento.value.includes(asientos[i].id+ "-" + vuelo.value)) {
+                asientos[i].classList.add('seleccionado');
+            } else {
+                asientos[i].classList.add('disponible');
+            }
         }
     }
-    var asiento = document.getElementById('asiento');
-    asiento.value = '';
 }
 
 function UpdateSpan(element, suma){
@@ -359,19 +395,21 @@ function CalcDescuentos(descuento, tarifa){
     return ValorDescuentos;
 }
 
-function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelo, CantidadMascotas, descuento, substraer = false, descuentos = null, DescuentosValue = true, tarifa = 0.0){
+function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMascotas, descuento, substraer = false, descuentos = null, DescuentosValue = true, tarifa = 0.0){
     var TarifaSobrepeso = parseFloat(document.getElementById('TarifaSobrepeso').value);
     var PesoMaximoMaleta = parseFloat(document.getElementById('PesoMaximoMaleta').value);
 
     var VuelosTable = document.getElementById('VuelosTable');
     var rows = VuelosTable.rows;
     var ValorVuelos = 0.0;
-    for (var i = 1; i < rows.length; i++) {
-        if (rows[i].cells[0].innerHTML === vuelo) {
-            ValorVuelos += parseFloat(rows[i].cells[1].innerHTML);
-            break;
+    vuelos.forEach(vuelo => {
+        for (var i = 1; i < rows.length; i++) {
+            if (rows[i].cells[0].innerHTML === vuelo) {
+                ValorVuelos += parseFloat(rows[i].cells[1].innerHTML);
+                break;
+            }
         }
-    }
+    });
     tarifa += ValorVuelos;
     if (substraer){
         ValorVuelos *= -1;
@@ -540,38 +578,53 @@ function RegistrarReservaciones(){
         var asientos = document.getElementById('asiento')
         var AsientosTemp = asientos.value.split(' ');
         var CountAsientos = 0;
+        var AsientoTable = "";
+        var vuelos = [];
         for (var i = 0; i < AsientosTemp.length; i++) {
-            if (AsientosTemp[i] == ''){
+            var AsientoText = AsientosTemp[i].split('-')[0];
+            if (AsientoText == ''){
                 continue;
             }
-            if (!VerifyAsientoExistente(AsientosTemp[i])){
+            if (!VerifyAsientoExistente(AsientoText)){
                 alert('Asiento no existente');
                 return;
             }
-            if (!VerifyDisponible(AsientosTemp[i])){
+            if (!VerifyDisponible(AsientoText)){
                 alert('Asiento no disponible');
                 return;
             }
+            vuelos.push(AsientosTemp[i].split('-')[1]);
+            AsientoTable += AsientoText + ' ';
             CountAsientos++;
         }
+        vuelos = vuelos.filter(
+            (vuelo, indice, self) => self.indexOf(vuelo) === indice
+        );
 
-        var vuelo = document.getElementById('vuelo');
+        if (vuelos.length > 2){
+            alert('Solo puede reservar dos vuelos, uno para ida y otro para vuelta');
+        }
         var descuento = document.getElementById('DescuentosSelect');
         var mascotas = document.getElementById('mascotas');
         var clientes = document.getElementById('ClientesSelect');
         
         var ClientesFinal = "";
+        var VuelosTable = "";
         var CountClientes = 0;
-        for (let i = 0; i < clientes.options.length; i++) {
-            if (!clientes.options[i].selected){
-                ClientesFinal += clientes.options[i].value + ' ';
-                if(!VerifyVisa(clientes.options[i].value, vuelo.value)){
-                    alert('El vuelo requiere de que el cliente tenga visa');
-                    return;
+        vuelos.forEach(vuelo => {
+            CountClientes = 0;
+            for (let i = 0; i < clientes.options.length; i++) {
+                if (clientes.options[i].selected){
+                    ClientesFinal += clientes.options[i].value + ' ';
+                    if(!VerifyVisa(clientes.options[i].value, vuelo)){
+                        alert('El vuelo requiere de que el cliente tenga visa');
+                        return;
+                    }
+                    CountClientes++;
                 }
-                CountClientes++;
             }
-        }
+            VuelosTable += vuelo + ' ';
+        });
 
         if (CountAsientos != CountClientes){
             alert('La cantidad de asientos no coincide con la cantidad de clientes');
@@ -595,7 +648,7 @@ function RegistrarReservaciones(){
             }
         }
 
-        totales = MontosTotales(maleta.value, MaletaMano.value, '', vuelo.value, mascotas.value, descuento.value, false, descuento, true, ValorServicios);
+        totales = MontosTotales(maleta.value, MaletaMano.value, '', vuelos, mascotas.value, descuento.value, false, descuento, true, ValorServicios);
         var MaletasExtras = totales[0];
         var tarifa = totales[1];
         var DescuentoTable = totales[2];
@@ -617,9 +670,9 @@ function RegistrarReservaciones(){
         cell1.innerHTML = maleta.value;
         cell2.innerHTML = MaletaMano.value;
         cell3.innerHTML = MaletasExtras;
-        cell4.innerHTML = vuelo.value;
+        cell4.innerHTML = VuelosTable;
         cell5.innerHTML = tarifa.toString();
-        cell6.innerHTML = asientos.value;
+        cell6.innerHTML = AsientoTable;
         cell7.innerHTML = mascotas.value;
         cell8.innerHTML = DescuentoTable;
         cell9.innerHTML = ClientesFinal;
@@ -642,7 +695,7 @@ function InitSelectVuelo(){
 }
 
 function SubstraerTotales(row){
-    MontosTotales(row[1].innerHTML, row[2].innerHTML, row[3].innerHTML, row[4].innerHTML, row[7].innerHTML, row[8].innerHTML, true, row[7].innerHTML.split(" "), false);
+    MontosTotales(row[1].innerHTML, row[2].innerHTML, row[3].innerHTML, row[4].innerHTML.split(' '), row[7].innerHTML, row[8].innerHTML, true, row[7].innerHTML.split(" "), false);
 }
 
 function CancelarReservacion(){
@@ -666,6 +719,7 @@ function CancelarReservacion(){
 function main() {
     const InitButton = document.getElementById("InitButton");
     InitButton.onclick = ChangePage;
+    InitAsientos('asientos');
     InitModal('Parametros');
     InitModal('Reservaciones');
     InitModal('VuelosModal');
@@ -682,6 +736,7 @@ function main() {
     RegistrarClientes();
     InitSelectClientes();
     RegistrarServicios();
+    SelectPaises();
 }
 
 main();

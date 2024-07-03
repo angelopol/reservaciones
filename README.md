@@ -70,6 +70,7 @@
 - La tarifa del servicio es requerida
 - Si el vuelo requiere visa se debe validar que el cliente posea visa
 - Validar asientos por edad de personas (niños no pueden estar cerca de las salidas de emergencias) *
+- El origen y el destino de un vuelo no pueden ser el mismo *
 
 ## Parametros generales ##
 - Tarifa sin maleta (general)
@@ -85,9 +86,29 @@
 - Tarifa por servicio de ayuda con el equipaje *
 - Tarifa por servicio de traductores *
 - Tarifa por servicio de wifi *
+- Tarifa por servicio de abordaje prioritario *
 
 ## Posibles nuevas funcionalidades ##
 - Reservaciones de ida y vuelta *
 - Pedir datos de pago para la reservacion *
 - Seleccionar area del telefono *
 - Tarifa por objetos valiosos dentro del equipaje con porcentajes (Servicio Declaracion Expresa de Valor) *
+
+### Avianca ###
+- Seleccion de cantidad de pasajeros, fechas de vuelo y paises de origen
+- Seleccion de vuelo de ida
+- Seleccion de vuelo de vuelta
+- Registro de clientes
+- Seleccion de cantidad de equipaje y servicios
+- Seleccion de asientos
+- Pago:
+    * Datos de la tarjeta:
+        + Nombre del titular
+        + Numero de tarjeta
+        + Fecha de expiracion
+        + CVV
+    * Datos de facturacion:
+        + Correo electronico
+        + Direccion de residencia
+        + Ciudad
+        + Pais
