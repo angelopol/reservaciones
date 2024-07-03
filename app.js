@@ -100,17 +100,24 @@ function RegistrarVuelos(){
         var origen = document.getElementById('OrigenVuelo');
         var FechaHora = document.getElementById('FechaHoraVuelo');
 
+        var visa = "No";
+        if (document.getElementById('VisaVuelo').checked){
+            visa = "Si";
+        }
+
         var row = VuelosTable.insertRow(-1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
         cell1.innerHTML = id.value;
         cell2.innerHTML = tarifa.value;
         cell3.innerHTML = destino.value;
         cell4.innerHTML = origen.value;
         cell5.innerHTML = FechaHora.value;
+        cell6.innerHTML = visa;
         id.value = '';
         tarifa.value = '';
         destino.value = '';
@@ -163,6 +170,113 @@ function RegistrarDescuentos(){
     });
 }
 
+function RegistrarServicios(){
+    var RegistrarServicioButton = document.getElementById('RegistrarServicioButton');
+    RegistrarServicioButton.addEventListener('click', function() {
+        var id = document.getElementById('IdServicio');
+        var ServiciosTable = document.getElementById('ServiciosTable');
+        if (!VerifyId(id.value, ServiciosTable.rows)){
+            alert('ID ya existente');
+            return;
+        }
+        if (id.value == ''){
+            alert('ID es requerido');
+            return;
+        }
+
+        var TarifaServicio = document.getElementById('TarifaServicio');
+        if (TarifaServicio.value == ''){
+            alert('Tarifa es requerida');
+            return;
+        }
+
+        var DescripcionServicio = document.getElementById('DescripcionServicio');
+
+        var row = ServiciosTable.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        cell1.innerHTML = id.value;
+        cell2.innerHTML = TarifaServicio.value;
+        cell3.innerHTML = DescripcionServicio.value;
+        id.value = '';
+        TarifaServicio.value = '';
+        DescripcionServicio.value = '';
+        LoadSelect(document.getElementById('ServiciosSelect'), ServiciosTable);
+    });
+}
+
+function RegistrarClientes(){
+    var RegistrarClientesButton = document.getElementById('RegistrarClientesButton');
+    RegistrarClientesButton.addEventListener('click', function() {
+        var id = document.getElementById('IdCliente');
+        var pasaporte = document.getElementById('pasaporte');
+        var cedula = document.getElementById('cedula');
+        var nombres = document.getElementById('nombres');
+        var apellidos = document.getElementById('apellidos');
+        var FechaNacimiento = document.getElementById('FechaNacimiento');
+        var telefono = document.getElementById('telefono');
+        var email = document.getElementById('email');
+        var nacionalidad = document.getElementById('nacionalidad');
+        var sexo = document.getElementById('sexo');
+
+        var ClientesTable = document.getElementById('ClientesTable');
+        if (!VerifyId(id.value, ClientesTable.rows)){
+            alert('ID ya existente');
+            return;
+        }
+        if (id.value == ''){
+            alert('ID es requerido');
+            return;
+        }
+
+        var visa = "No";
+        if (document.getElementById('visa').checked){
+            visa = "Si";
+        }
+
+        var row = ClientesTable.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+        var cell8 = row.insertCell(7);
+        var cell9 = row.insertCell(8);
+        var cell10 = row.insertCell(9);
+        var cell11 = row.insertCell(10);
+        cell1.innerHTML = id.value;
+        cell2.innerHTML = pasaporte.value;
+        cell3.innerHTML = cedula.value;
+        cell4.innerHTML = nombres.value;
+        cell5.innerHTML = apellidos.value;
+        cell6.innerHTML = FechaNacimiento.value;
+        cell7.innerHTML = telefono.value;
+        cell8.innerHTML = email.value;
+        cell9.innerHTML = sexo.value;
+        cell10.innerHTML = nacionalidad.value;
+        cell11.innerHTML = visa;
+        id.value = '';
+        pasaporte.value = '';
+        cedula.value = '';
+        nombres.value = '';
+        apellidos.value = '';
+        FechaNacimiento.value = '';
+        telefono.value = '';
+        email.value = '';
+        sexo.value = '';
+        nacionalidad.value = '';
+        LoadSelect(document.getElementById('ClientesSelect'), ClientesTable);
+    });
+}
+
+function InitSelectClientes(){
+    const ClientesTable = document.getElementById('ClientesTable')
+    LoadSelect(document.getElementById('ClientesSelect'), ClientesTable);
+}
+
 function AsOcupado(){
     var asientos = document.getElementsByClassName("asiento");
     var ReservacionesTable = document.getElementById('ReservacionesTable');
@@ -175,7 +289,7 @@ function AsOcupado(){
         asientos[i].classList.remove('disponible');
         var ocupado = false;
         for (var t = 1; t < rows.length; t++) {
-            if (rows[t].cells[13].innerHTML == asientos[i].id && rows[t].cells[11].innerHTML == vuelo.value) {
+            if (rows[t].cells[6].innerHTML == asientos[i].id && rows[t].cells[4].innerHTML == vuelo.value) {
                 asientos[i].classList.add('ocupado');
                 asientos[i].setAttribute('disabled', 'disabled');
                 ocupado = true;
@@ -200,7 +314,7 @@ function VerifyDisponible(id){
     var ReservacionesTable = document.getElementById('ReservacionesTable');
     var rows = ReservacionesTable.rows;
     for (var i = 1; i < rows.length; i++) {
-        if (rows[i].cells[13].innerHTML === id) {
+        if (rows[i].cells[6].innerHTML === id) {
             return false;
         }
     }
@@ -223,8 +337,21 @@ function VerifyId(id, rows){
     return true;
 }
 
-function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelo, CantidadMascotas, descuento, substraer = false){
-    var tarifa = 0.0;
+function CalcDescuentos(descuento, tarifa){
+    var DescuentosTable = document.getElementById('DescuentosTable');
+    var rows = DescuentosTable.rows;
+    var ValorDescuentos = 0.0;
+    for (var i = 1; i < rows.length; i++) {
+        if (rows[i].cells[0].innerHTML === descuento) {
+            ValorDescuentos += -1*((parseFloat(rows[i].cells[1].innerHTML) * tarifa) / 100);
+            ValorDescuentos += -1*(parseFloat(rows[i].cells[2].innerHTML));
+            break;
+        }
+    }
+    return ValorDescuentos;
+}
+
+function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelo, CantidadMascotas, descuento, substraer = false, descuentos = null, DescuentosValue = true, tarifa = 0.0){
     var TarifaSobrepeso = parseFloat(document.getElementById('TarifaSobrepeso').value);
     var PesoMaximoMaleta = parseFloat(document.getElementById('PesoMaximoMaleta').value);
 
@@ -313,15 +440,31 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelo, CantidadMas
         UpdateSpan(document.getElementById('TotalTarifaMascotas'), ValorMascotas);
     }
 
-    var DescuentosTable = document.getElementById('DescuentosTable');
-    var rows = DescuentosTable.rows;
+    var DescuentoTable = "";
     var ValorDescuentos = 0.0;
-    for (var i = 1; i < rows.length; i++) {
-        if (rows[i].cells[0].innerHTML === descuento) {
-            ValorDescuentos += -1*((parseFloat(rows[i].cells[1].innerHTML) * tarifa) / 100);
-            ValorDescuentos += -1*(parseFloat(rows[i].cells[2].innerHTML));
-            break;
+    if (descuentos != null){
+        if (DescuentosValue){
+            var length = descuentos.options.length;
+        } else {
+            var length = descuentos.length;
         }
+        for (let i = 0; i < length; i++) {
+            if (DescuentosValue){
+                var ValDescuento = descuentos.options[i].value;
+                if (!descuentos.options[i].selected){
+                    continue
+                }
+            } else {
+                var ValDescuento = descuentos[i];
+            }
+            if (ValDescuento != ''){
+                DescuentoTable += ValDescuento + ' ';
+                ValorDescuentos += CalcDescuentos(ValDescuento, tarifa);
+            }
+        }
+    } else {
+        DescuentoTable = descuento.value;
+        ValorDescuentos = CalcDescuentos(descuento.value, tarifa);
     }
     tarifa += ValorDescuentos;
     if (substraer){
@@ -334,7 +477,33 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelo, CantidadMas
     }
     UpdateSpan(document.getElementById('total'), tarifa);
 
-    return [MaletasExtras, tarifa];
+    return [MaletasExtras, tarifa, DescuentoTable];
+}
+
+function VerifyVisa(ClienteId, VueloId){
+    var ClientesTable = document.getElementById('ClientesTable');
+    var VuelosTable = document.getElementById('VuelosTable');
+
+    var clienteValido = false;
+    for (var i = 1; i < ClientesTable.rows.length; i++) {
+        if (ClientesTable.rows[i].cells[0].textContent == ClienteId) {
+            clienteValido = ClientesTable.rows[i].cells[10].innerHTML.toLowerCase() === 'si';
+            break;
+        }
+    }
+
+    var vueloValido = false;
+    for (var j = 1; j < VuelosTable.rows.length; j++) {
+        if (VuelosTable.rows[j].cells[0].textContent == VueloId) {
+            vueloValido = VuelosTable.rows[j].cells[5].innerHTML.toLowerCase() === 'si';
+            break;
+        }
+    }
+
+    if (vueloValido == true && clienteValido == false){
+        return false;
+    }
+    return true;
 }
 
 function RegistrarReservaciones(){
@@ -351,13 +520,6 @@ function RegistrarReservaciones(){
             return;
         }
 
-        var pasaporte = document.getElementById('pasaporte');
-        var cedula = document.getElementById('cedula');
-        var nombres = document.getElementById('nombres');
-        var apellidos = document.getElementById('apellidos');
-        var FechaNacimiento = document.getElementById('FechaNacimiento');
-        var telefono = document.getElementById('telefono');
-        var email = document.getElementById('email');
         var maleta = document.getElementById('maleta');
 
         var MaletaMano = document.getElementById('MaletaMano');
@@ -380,10 +542,34 @@ function RegistrarReservaciones(){
         var vuelo = document.getElementById('vuelo');
         var descuento = document.getElementById('DescuentosSelect');
         var mascotas = document.getElementById('mascotas');
+        var cliente = document.getElementById('ClientesSelect');
+        
+        if(!VerifyVisa(cliente.value, vuelo.value)){
+            alert('El vuelo requiere de que el cliente tenga visa');
+            return;
+        }
 
-        totales = MontosTotales(maleta.value, MaletaMano.value, '', vuelo.value, mascotas.value, descuento.value);
+        var ServiciosTable = "";
+        var ValorServicios = 0.0;
+        var SelectServicios = document.getElementById('ServiciosSelect');
+        for (let i = 0; i < SelectServicios.options.length; i++) {
+            if (!SelectServicios.options[i].selected){
+                continue
+            }
+            ServiciosTable += SelectServicios.options[i].value + ' ';
+            var TableServicios = document.getElementById('ServiciosTable');
+            for (var j = 1; j < TableServicios.rows.length; j++) {
+                if (TableServicios.rows[j].cells[0].innerHTML === SelectServicios.options[i].value) {
+                    ValorServicios += parseFloat(TableServicios.rows[j].cells[1].innerHTML);
+                    break;
+                }
+            }
+        }
+
+        totales = MontosTotales(maleta.value, MaletaMano.value, '', vuelo.value, mascotas.value, descuento.value, false, descuento, true, ValorServicios);
         var MaletasExtras = totales[0];
         var tarifa = totales[1];
+        var DescuentoTable = totales[2];
 
         var row = ReservacionesTable.insertRow(-1);
         var cell0 = row.insertCell(0);
@@ -398,36 +584,19 @@ function RegistrarReservaciones(){
         var cell9 = row.insertCell(9);
         var cell10 = row.insertCell(10);
         var cell11 = row.insertCell(11);
-        var cell12 = row.insertCell(12);
-        var cell13 = row.insertCell(13);
-        var cell14 = row.insertCell(14);
-        var cell15 = row.insertCell(15);
-        var cell16 = row.insertCell(16);
         cell0.innerHTML = ID.value;
-        cell1.innerHTML = pasaporte.value;
-        cell2.innerHTML = cedula.value;
-        cell3.innerHTML = nombres.value;
-        cell4.innerHTML = apellidos.value;
-        cell5.innerHTML = FechaNacimiento.value;
-        cell6.innerHTML = telefono.value;
-        cell7.innerHTML = email.value;
-        cell8.innerHTML = maleta.value;
-        cell9.innerHTML = MaletaMano.value;
-        cell10.innerHTML = MaletasExtras;
-        cell11.innerHTML = vuelo.value;
-        cell12.innerHTML = tarifa.toString();
-        cell13.innerHTML = asiento.value;
-        cell14.innerHTML = mascotas.value;
-        cell15.innerHTML = descuento.value;
-        cell16.innerHTML = '<button class="CancelarReservacion" idcancelacion="'+ID.value+'">Cancelar</button>';
+        cell1.innerHTML = maleta.value;
+        cell2.innerHTML = MaletaMano.value;
+        cell3.innerHTML = MaletasExtras;
+        cell4.innerHTML = vuelo.value;
+        cell5.innerHTML = tarifa.toString();
+        cell6.innerHTML = asiento.value;
+        cell7.innerHTML = mascotas.value;
+        cell8.innerHTML = DescuentoTable;
+        cell9.innerHTML = cliente.value;
+        cell10.innerHTML = ServiciosTable;
+        cell11.innerHTML = '<button class="CancelarReservacion" idcancelacion="'+ID.value+'">Cancelar</button>';
         ID.value = '';
-        pasaporte.value = '';
-        cedula.value = '';
-        nombres.value = '';
-        apellidos.value = '';
-        FechaNacimiento.value = '';
-        telefono.value = '';
-        email.value = '';
         maleta.value = '';
         MaletaMano.value = '';
         asiento.value = '';
@@ -444,7 +613,7 @@ function InitSelectVuelo(){
 }
 
 function SubstraerTotales(row){
-    MontosTotales(row[8].innerHTML, row[9].innerHTML, row[10].innerHTML, row[11].innerHTML, row[14].innerHTML, row[15].innerHTML, true);
+    MontosTotales(row[1].innerHTML, row[2].innerHTML, row[3].innerHTML, row[4].innerHTML, row[7].innerHTML, row[8].innerHTML, true, row[7].innerHTML.split(" "), false);
 }
 
 function CancelarReservacion(){
@@ -472,6 +641,8 @@ function main() {
     InitModal('Reservaciones');
     InitModal('VuelosModal');
     InitModal('Descuentos');
+    InitModal('Clientes');
+    InitModal('Servicios');
     InitMaletasExtras();
     SelectAsiento();
     RegistrarVuelos();
@@ -479,6 +650,9 @@ function main() {
     RegistrarReservaciones();
     CancelarReservacion();
     RegistrarDescuentos();
+    RegistrarClientes();
+    InitSelectClientes();
+    RegistrarServicios();
 }
 
 main();

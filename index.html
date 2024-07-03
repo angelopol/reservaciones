@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="OthersStyles.css">
     <script src="app.js" defer></script>
     <title>Simulación de reservación de vuelos</title>
 </head>
@@ -23,32 +24,8 @@
                     <input type="text" id="IdReservacion">
                 </div>
                 <div>
-                    <label for="pasaporte">Pasaporte</label>
-                    <input type="text" id="pasaporte">
-                </div>
-                <div>
-                    <label for="cedula">Cedula</label>
-                    <input type="number" id="cedula">
-                </div>
-                <div>
-                    <label for="nombres">Nombres</label>
-                    <input type="text" id="nombres">
-                </div>
-                <div>
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" id="apellidos">
-                </div>
-                <div>
-                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
-                    <input type="date" id="FechaNacimiento">
-                </div>
-                <div>
-                    <label for="telefono">Telefono</label>
-                    <input type="number" id="telefono">
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email">
+                    <label for="ClientesSelect">Selecciona el cliente</label>
+                    <select id="ClientesSelect"></select>
                 </div>
                 <div>
                     <label for="mascotas">Cantidad de mascotas</label>
@@ -70,16 +47,22 @@
                 </div>
                 <div>
                     <label for="DescuentosSelect">Selecciona el descuento (si posee)</label>
-                    <select id="DescuentosSelect"></select>
+                    <select id="DescuentosSelect" multiple></select>
+                </div>
+                <div>
+                    <label for="ServiciosSelect">Selecciona el servicio extra (si posee)</label>
+                    <select id="ServiciosSelect" multiple></select>
                 </div>
                 <div>
                     <button id="RegistrarButton">Registrar</button>
                     <button class="ReservacionesButton">Reservaciones</button>
                     <button class="VuelosModalButton">Vuelos</button>
+                    <button class="ServiciosButton">Servicios</button>
                 </div>
                 <div>
                     <button class="ParametrosButton">Parametros generales</button>
                     <button class="DescuentosButton">Descuentos</button>
+                    <button class="ClientesButton">Clientes</button>
                 </div>
             </div>
             <div id="asientos">
@@ -265,8 +248,8 @@
             </div>
         </div>
     </div>
-    <div id="Parametros" class="modal-backdrop">
-        <div class="modal-content">
+    <div id="Parametros" class="ModalBackdrop">
+        <div class="ModalContent">
             <div>
                 <label for="TarifaGeneral">Tarifa general</label>
                 <input type="number" id="TarifaGeneral" value="10" min="0">
@@ -307,18 +290,11 @@
             <button class="ParametrosButton">Cerrar</button>
         </div>
     </div>
-    <div id="Reservaciones" class="modal-backdrop">
-        <div class="modal-content">
+    <div id="Reservaciones" class="ModalBackdrop">
+        <div class="ModalContent">
             <table id="ReservacionesTable">
                 <tr>
                     <th>ID</th>
-                    <th>Pasaporte</th>
-                    <th>Cedula</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Fecha de nacimiento</th>
-                    <th>Telefono</th>
-                    <th>Email</th>
                     <th>Peso maleta</th>
                     <th>Peso maleta de mano</th>
                     <th>Peso maletas extras</th>
@@ -327,6 +303,8 @@
                     <th>Asiento</th>
                     <th>Mascotas</th>
                     <th>Descuento</th>
+                    <th>Cliente</th>
+                    <th>Servicios</th>
                 </tr>
             </table>
             <br>
@@ -347,8 +325,8 @@
             <button class="ReservacionesButton">Cerrar</button>
         </div>
     </div> 
-    <div id="VuelosModal" class="modal-backdrop">
-        <div class="modal-content" id="VuelosModalContent">
+    <div id="VuelosModal" class="ModalBackdrop">
+        <div class="ModalContent" id="VuelosModalContent">
             <div id="CrearVuelos">
                 <div>
                     <label for="IdVuelo">ID</label>
@@ -371,6 +349,10 @@
                     <input type="datetime-local" id="FechaHoraVuelo">
                 </div>
                 <div>
+                    <label for="VisaVuelo">Visa</label>
+                    <input type="checkbox" id="VisaVuelo">
+                </div>
+                <div>
                     <button id="RegistrarVueloButton">Registrar</button>
                     <button class="VuelosModalButton">Cerrar</button>
                 </div>
@@ -383,6 +365,7 @@
                       <th>Destino</th>
                       <th>Origen</th>
                       <th>Fecha y hora</th>
+                      <th>Visa</th>
                     </tr>
                     <tr>
                       <td>default</td>
@@ -390,13 +373,14 @@
                       <td>Albania</td>
                       <td>Polonia</td>
                       <td>2024-07-01T12:30</td>
+                      <td>No</td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-    <div id="Descuentos" class="modal-backdrop">
-        <div class="modal-content" id="DescuentosContent">
+    <div id="Descuentos" class="ModalBackdrop">
+        <div class="ModalContent" id="DescuentosContent">
             <div id="CrearDescuentos">
                 <div>
                     <label for="IdDescuento">ID</label>
@@ -425,6 +409,129 @@
                       <th>ID</th>
                       <th>Porcentaje</th>
                       <th>Valor</th>
+                      <th>Descripción</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="Clientes" class="ModalBackdrop">
+        <div class="ModalContent" id="ClientesContent">
+            <div id="CrearClientes">
+                <div>
+                    <label for="IdCliente">ID</label>
+                    <input type="text" id="IdCliente">
+                </div>
+                <div>
+                    <label for="pasaporte">Pasaporte</label>
+                    <input type="text" id="pasaporte">
+                </div>
+                <div>
+                    <label for="cedula">Cedula</label>
+                    <input type="number" id="cedula">
+                </div>
+                <div>
+                    <label for="nombres">Nombres</label>
+                    <input type="text" id="nombres">
+                </div>
+                <div>
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos">
+                </div>
+                <div>
+                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
+                    <input type="date" id="FechaNacimiento">
+                </div>
+                <div>
+                    <label for="telefono">Telefono</label>
+                    <input type="number" id="telefono">
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                </div>
+                <div>
+                    <label for="sexo">Sexo</label>
+                    <select id="sexo">
+                        <option value="Masculino" selected>Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="nacionalidad">Nacionalidad</label>
+                    <select id="nacionalidad">
+                        <option value="Venezolano" selected>Venezolano</option>
+                        <option value="Colombiano">Colombiano</option>
+                        <option value="Ecuatoriano">Ecuatoriano</option>
+                        <option value="Panameño">Panameño</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="visa">Visa</label>
+                    <input type="checkbox" id="visa">
+                </div>
+                <div>
+                    <button id="RegistrarClientesButton">Registrar</button>
+                    <button class="ClientesButton">Cerrar</button>
+                </div>
+            </div>
+            <div id="VerClientes">
+                <table id="ClientesTable">
+                    <tr>
+                        <th>ID</th>
+                        <th>Pasaporte</th>
+                        <th>Cedula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Telefono</th>
+                        <th>Email</th>
+                        <th>Sexo</th>
+                        <th>Nacionalidad</th>
+                        <th>Visa</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>AAA192892</td>
+                        <td>9218391</td>
+                        <td>Juan Andres</td>
+                        <td>Perez Garcia</td>
+                        <td>2001-01-01</td>
+                        <td>04142918322</td>
+                        <td>juan@gmail.com</td>
+                        <td>Masculino</td>
+                        <td>Venezolano</td>
+                        <td>Si</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="Servicios" class="ModalBackdrop">
+        <div class="ModalContent" id="ServiciosContent">
+            <div id="CrearServicios">
+                <div>
+                    <label for="IdServicio">ID</label>
+                    <input type="text" id="IdServicio">
+                </div>
+                <div>
+                    <label for="TarifaServicio">Tarifa</label>
+                    <input type="number" id="TarifaServicio" min="0">
+                </div>
+                <div>
+                    <label for="DescripcionServicio">Descripcion del servicio</label>
+                    <input type="text" id="DescripcionServicio">
+                </div>
+                <div>
+                    <button id="RegistrarServicioButton">Registrar</button>
+                    <button class="ServiciosButton">Cerrar</button>
+                </div>
+            </div>
+            <div id="VerServicios">
+                <table id="ServiciosTable">
+                    <tr>
+                      <th>ID</th>
+                      <th>Tarifa</th>
                       <th>Descripción</th>
                     </tr>
                 </table>

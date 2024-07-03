@@ -8,16 +8,23 @@
     align-items: flex-start; /* Alinea los elementos hijos al inicio de su contenedor en el eje transversal */
 }
 
-#VuelosModalContent, #DescuentosContent {
+#VuelosModalContent, #DescuentosContent, #ClientesContent, #ServiciosContent {
     display: flex;
     justify-content: space-around; /* Ajusta esto según sea necesario */
 }
 
-#registrar, #asientos, #CrearVuelos, #VerVuelos, #CrearDescuentos, #VerDescuentos {
+#DescuentosSelect {
+    width: 100px;
+}
+
+#registrar, #asientos, #CrearVuelos, #VerVuelos,
+#CrearDescuentos, #VerDescuentos,
+#CrearClientes, #VerClientes,
+#CrearServicios, #VerServicios {
     flex: 1; /* Hace que cada elemento hijo ocupe un espacio igual dentro del contenedor */
 }
 
-.modal-backdrop {
+.ModalBackdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -30,7 +37,7 @@
 }
 
 /* Estilo del contenido del modal */
-.modal-content {
+.ModalContent {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
@@ -39,7 +46,7 @@
 }
 
 /* Hacer visible el modal */
-.modal-backdrop.show {
+.ModalBackdrop.show {
     display: flex;
 }
 
