@@ -12,70 +12,103 @@
     <script type="text/javascript" src="asientos.js"></script>
     <script type="text/javascript" src="app.js" defer></script>
     <script type="text/javascript" src="simulacion.js" defer></script>
-    <title>Simulación de reservación de vuelos</title>
+    <title>Reservation simulator</title>
 </head>
 <body>
-    <div id="launcher">
-        <h1>Simulación de reservación de vuelos</h1>
-        <button id="InitButton">Iniciar</button>
-    </div>
-    <div id="app">
-        <div id="message">
-            Simulador de reservación de vuelos
+    <nav class="navbar bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Reservation" width="30" height="30">
+                <span class="align-bottom">Reservation Simulator</span>
+            </a>
+            <button class="btn btn-primary rounded-5" id="EntrarSimulacion">Simulation</button>
         </div>
-        <div id="simulador">
-            <div id="registrar">
-                <div>
-                    <label for="IdReservacion">ID</label>
-                    <input type="text" id="IdReservacion">
-                </div>
-                <div>
-                    <label for="ClientesSelect">Selecciona el cliente</label>
-                    <select id="ClientesSelect" multiple></select>
-                </div>
-                <div>
-                    <label for="mascotas">Cantidad de mascotas</label>
-                    <input type="number" value="0" id="mascotas" min="0">
-                </div>
-                <div>
-                    <label for="maleta">Peso de la maleta (si posee)</label>
-                    <input type="number" id="maleta" min="0">
-                </div>
-                <div>
-                    <label for="MaletaMano">Peso de la maleta de mano (si posee)</label>
-                    <input type="number" id="MaletaMano" min="0">
-                </div>
-                <label for="MaletaExtra1">Peso de maletas extras (si posee)</label>
-                <div id="MaletasExtras"></div>
-                <div>
-                    <label for="asiento">Asiento</label>
-                    <textarea id="asiento" disabled></textarea>
-                </div>
-                <div>
-                    <label for="DescuentosSelect">Selecciona el descuento (si posee)</label>
-                    <select id="DescuentosSelect" multiple></select>
-                </div>
-                <div>
-                    <label for="ServiciosSelect">Selecciona el servicio extra (si posee)</label>
-                    <select id="ServiciosSelect" multiple></select>
-                </div>
-                <div>
-                    <button id="RegistrarButton">Registrar</button>
-                    <button class="ReservacionesButton">Reservaciones</button>
-                    <button class="VuelosModalButton">Vuelos</button>
-                    <button class="ServiciosButton">Servicios</button>
-                </div>
-                <div>
-                    <button class="ParametrosButton">Parametros generales</button>
-                    <button class="DescuentosButton">Descuentos</button>
-                    <button class="ClientesButton">Clientes</button>
-                    <button id="EntrarSimulacion">Simulación</button>
+    </nav>
+    <div id="launcher">
+        <div class="container">
+            <div class="row vh-100 justify-content-center align-items-center">
+                <div class="col-auto bg-light rounded-5">
+                    <div class="p-4">
+                        <h1 class="display-2 text-center">Reservation simulator</h1>
+                        <div class="text-center">
+                            <button class="btn btn-lg btn-primary rounded-5" id="InitButton">Start</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="asientos">
+        </div>
+        <nav class="navbar bg-light fixed-bottom">
+            <div class="container-fluid">
                 <div>
-                    <label for="vuelo">Selecciona el vuelo</label>
-                    <select id="vuelo"></select>
+                    Angelo Polgrossi 31504893<br>
+                    Enrique Gonzalez
+                </div>
+                <div>
+                    Programacion Web<br>
+                    Sección: 105C1
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="app" class="BorderPadding">
+        <div id="simulador" class="container-lg text-center">
+            <div class="row">
+                <div id="registrar" class="col justify-content-center d-flex">
+                    <div class="card rounded-5">
+                        <div class="card-body">
+                            <h5 class="card-title">Fill with your reservation info.</h5>
+                            <div class="input-group mb-3 mt-3">
+                                <span class="input-group-text">ID</span>
+                                <input class="form-control" type="text" id="IdReservacion">
+                                <span class="input-group-text">Mascotas</span>
+                                <input class="form-control" type="number" placeholder="Cantidad de mascotas" value="0" id="mascotas" min="0">
+                            </div>
+                            <div class="mb-3">
+                                <label class="input-label" for="ClientesSelect">Selecciona el cliente:</label>
+                                <select class="form-control" id="ClientesSelect" multiple></select>
+                            </div>
+                            <label class="input-label" for="maleta">Peso de maletas (si posee):</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Equipaje</span>
+                                <input class="form-control" type="number" id="maleta" min="0">
+                                <span class="input-group-text">De mano</span>
+                                <input class="form-control" type="number" id="MaletaMano" min="0">
+                            </div>
+                            <div class="mb-3">
+                                <label class="input-label" for="MaletaExtra1">Peso de maletas extras (si posee)</label>
+                                <div id="MaletasExtras"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="DescuentosSelect">Selecciona el descuento (si posee)</label>
+                                <select class="form-control w-100" id="DescuentosSelect" multiple></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ServiciosSelect">Selecciona el servicio extra (si posee)</label>
+                                <select class="form-control" id="ServiciosSelect" multiple></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col"> 
+                    <div class="justify-content-center d-flex">
+                        <div class="card rounded-5">
+                            <h5 class="card-title mt-3">Search your asiento.</h5>
+                            <div id="asientos" class="card-body">
+                                <div class="text-start mb-3">
+                                    <label class="label-input" for="vuelo">Selecciona el vuelo:</label>
+                                    <select class="form-control" id="vuelo"></select>
+                                </div>
+                            </div>
+                            <div class="mb-3 px-4">
+                                <label class="input-label" for="asiento">Asiento</label>
+                                <textarea class="form-control rounded-5" id="asiento" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group text-center pt-4">
+                        <button class="btn btn-primary rounded-5" id="RegistrarButton">Registrar</button>
+                        <button class="ms-1 btn btn-outline-primary rounded-5 ReservacionesButton">See reservations</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,7 +407,7 @@
             </div>
         </div>
     </div>
-    <div id="SimulacionClientes">
+    <div id="SimulacionClientes" class="BorderPadding">
         <ul class="nav nav-tabs">
             <li class="nav-item">
               <button class="nav-link active" type="button" id="NavBarVuelos">Vuelos</button>
@@ -507,6 +540,15 @@
 
         <button id="SalirSimulacion">Salir</button>
         <input id="VuelosHidden" value="" hidden>
-    </div>        
+    </div>
+    <nav class="navbar bg-light fixed-bottom" id="NavBarApp">
+        <div class="container-fluid">
+            <button class="btn btn-outline-primary rounded-5 VuelosModalButton">Vuelos</button>
+            <button class="btn btn-outline-primary rounded-5 ServiciosButton">Servicios</button>
+            <button class="btn btn-outline-primary ParametrosButton rounded-5">General parameters</button>
+            <button class="btn btn-outline-primary DescuentosButton rounded-5">Descuentos</button>
+            <button class="btn btn-outline-primary ClientesButton rounded-5">Clientes</button>
+        </div>
+    </nav>        
 </body>
 </html>

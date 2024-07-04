@@ -1,11 +1,22 @@
-#app, #SimulacionClientes, #AsientosSimulacion, #PasajerosSimulacion, #ReservacionesSimulacion {
+#app, #SimulacionClientes, #AsientosSimulacion, #PasajerosSimulacion, #ReservacionesSimulacion,
+#EntrarSimulacion, #NavBarApp {
     display: none;
 }
 
-#simulador {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
+body {
+    background-color: #1F2937;
+}
+
+.BorderPadding {
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+#launcher {
+    width: 100%;
+    height: 100vh;
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
 }
 
 #VuelosModalContent, #DescuentosContent, #ClientesContent, #ServiciosContent, #EndSimulacionContent {
@@ -17,7 +28,7 @@
     width: 100px;
 }
 
-#registrar, #asientos, #CrearVuelos, #VerVuelos,
+#CrearVuelos, #VerVuelos,
 #CrearDescuentos, #VerDescuentos,
 #CrearClientes, #VerClientes,
 #CrearServicios, #VerServicios {
@@ -51,14 +62,20 @@
     display: flex; 
 }
 .asiento { 
-    width: 20px; height: 20px; margin: 2px; 
+    width: 3.1rem;
+    height: 3.1rem;
+}
+
+.asiento:hover { 
+    transform: scale(1.1); 
+    transition: all 0.2s ease;
 }
 .disponible { 
-    background-color: grey; 
+    background-color: grey !important; 
 }
 .seleccionado { 
-    background-color: green; 
+    background-color: green !important; 
 }
 .ocupado { 
-    background-color: red; 
+    background-color: red !important; 
 }

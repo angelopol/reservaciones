@@ -14,17 +14,19 @@ function SelectPaises() {
 
 function CreateFila(item, ClassSimulacion = false){
     var fila = document.createElement("div");
-    fila.classList.add('fila');
+    fila.classList.add('fila')
+    fila.classList.add('d-flex', 'justify-content-center', 'align-items-center');
     fila.innerHTML = item.fila;
     item.asientos.forEach(asiento => {
         var AsientoButton = document.createElement('button');
         AsientoButton.classList.add('asiento');
+        AsientoButton.classList.add('btn', 'btn-sm', 'btn-dark','p-3', 'rounded-5', 'm-1');
         AsientoButton.classList.add('disponible');
         if (ClassSimulacion){
             AsientoButton.classList.add('simulacion');
         }
         AsientoButton.id = asiento+item.fila;
-        AsientoButton.innerHTML = asiento;
+        AsientoButton.innerHTML = '<span class="fw-bold">' + asiento + "</span>";
         fila.appendChild(AsientoButton);
     });
     return fila;
@@ -51,6 +53,10 @@ function ChangePage() {
     launcher.style.display = "none";
     const app = document.getElementById("app");
     app.style.display = "block";
+    const EntrarSimulacion = document.getElementById('EntrarSimulacion');
+    EntrarSimulacion.style.display = "block";
+    const NavBarApp = document.getElementById('NavBarApp');
+    NavBarApp.style.display = "block";
 }
 
 function ToggleAsiento() {
@@ -87,6 +93,7 @@ function SelectAsiento(ClassName = "asiento", VueloId = "vuelo", SeleccionadosId
 function MaletaExtra(count, id){
     var maleta = document.createElement('input');
     maleta.setAttribute('type', 'number');
+    maleta.classList.add('form-control', 'mb-1');
     maleta.setAttribute('min', '0');
     maleta.setAttribute('id', id  + count);
     return maleta;
@@ -104,9 +111,6 @@ function InitMaletasExtras(id = 'MaletasExtras'){
     VaciarElemento(MaletasDiv);
     for (var i = 1; i <= parseInt(count.value); i++){
         MaletasDiv.appendChild(MaletaExtra(i, id));
-        if (i < parseInt(count.value)){
-            MaletasDiv.appendChild(document.createElement('br'));
-        }
     }
     count.addEventListener('change', InitMaletasExtras);
 }
