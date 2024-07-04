@@ -82,6 +82,7 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 - Validar que cuando se guarde el vuelo seleccionado en la simulación de clientes no hayan mas de un checkbox seleccionado
 - Validar que un vuelo no posea el caracter **~** en el id *
 - Validad que los id no posean espacios *
+- Validar que el id del vuelo no posea un numero al inicio *
 
 ## Parametros generales ##
 - Tarifa sin maleta (general)
@@ -191,3 +192,7 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
     * Se debe ocultar el div de ReservacionesSimulacion
     * Se debe ocultar el div de PagoSimulacion
     * Ocultar div EndSimulacionContent
+
+## Bugs ##
+    * Modals
+    * Traduccion

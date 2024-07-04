@@ -144,7 +144,7 @@ function AddItemToList(items, listGroup){
     });
 }
 
-function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1, AccordionId = 'AccordionVuelos'){
+function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1, AccordionId = 'AccordionVuelos', select = true){
     var AccordionVuelos = document.getElementById(AccordionId);
     VaciarElemento(AccordionVuelos);
 
@@ -169,13 +169,13 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
         AccordionButton.classList.add('collapsed');
         AccordionButton.type = "button";
         AccordionButton.setAttribute("data-bs-toggle", "collapse");
-        AccordionButton.setAttribute("data-bs-target", "#"+VueloId+"AccordionCollapse");
+        AccordionButton.setAttribute("data-bs-target", "#"+VueloId+"-AccordionCollapse");
         AccordionButton.setAttribute("aria-expanded", "false");
-        AccordionButton.setAttribute("aria-controls", VueloId+"AccordionCollapse");
+        AccordionButton.setAttribute("aria-controls", VueloId+"-AccordionCollapse");
         AccordionButton.innerHTML = VueloId + "&nbsp;<b>" + origen + " -> " + destino + "</b>";
 
         var AccordionCollapse = document.createElement('div');
-        AccordionCollapse.id = VueloId+"AccordionCollapse";
+        AccordionCollapse.id = VueloId+"-AccordionCollapse";
         AccordionCollapse.classList.add('accordion-collapse', 'collapse');
         AccordionCollapse.setAttribute("aria-labelledby", VueloId+"-AccordionHeader");
         AccordionCollapse.setAttribute("data-bs-parent", "#AccordionVuelos");
@@ -188,26 +188,30 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
         var items = ["<b>Tarifa:</b> " + tarifa, "<b>Fecha y hora de salida:</b> " + FechaHora, "<b>Necesitas visa:</b> " + visa];
         AddItemToList(items, listGroup);
 
-        var formCheckDiv = document.createElement('div');
-        formCheckDiv.classList.add('form-check', 'form-switch', 'mt-3');
+        if(select){
+            var formCheckDiv = document.createElement('div');
+            formCheckDiv.classList.add('form-check', 'form-switch', 'mt-3');
 
-        var inputCheckbox = document.createElement('input');
-        inputCheckbox.classList.add('form-check-input', "SeleccionarCheckBox");
-        inputCheckbox.setAttribute('type', 'checkbox');
-        inputCheckbox.setAttribute('VueloId', VueloId);
-        inputCheckbox.setAttribute('role', 'switch');
-        inputCheckbox.id = VueloId+"-Checkbox";
+            var inputCheckbox = document.createElement('input');
+            inputCheckbox.classList.add('form-check-input', "SeleccionarCheckBox");
+            inputCheckbox.setAttribute('type', 'checkbox');
+            inputCheckbox.setAttribute('VueloId', VueloId);
+            inputCheckbox.setAttribute('role', 'switch');
+            inputCheckbox.id = VueloId+"-Checkbox";
 
-        var label = document.createElement('label');
-        label.classList.add('form-check-label');
-        label.setAttribute('for', VueloId+"-Checkbox");
-        label.textContent = 'Seleccionar vuelo';
+            var label = document.createElement('label');
+            label.classList.add('form-check-label');
+            label.setAttribute('for', VueloId+"-Checkbox");
+            label.textContent = 'Seleccionar vuelo';
 
-        formCheckDiv.appendChild(inputCheckbox);
-        formCheckDiv.appendChild(label);
+            formCheckDiv.appendChild(inputCheckbox);
+            formCheckDiv.appendChild(label);
+        }
 
         AccordionBody.appendChild(listGroup);
-        AccordionBody.appendChild(formCheckDiv);
+        if (select){
+            AccordionBody.appendChild(formCheckDiv);
+        }
         AccordionCollapse.appendChild(AccordionBody);
         AccordionHeader.appendChild(AccordionButton);
         AccordionItem.appendChild(AccordionHeader);
@@ -353,11 +357,8 @@ function ConfirmarPagoReservacion(){
         alert('La ciudad no es válida');
         return;
     }
-    var PaisSimulacion = document.getElementById('PaisSimulacion');
-    if (!/^[a-zA-Z\s]{1,50}$/.test(PaisSimulacion.value)) {
-        alert('El país no es válido');
-        return;
-    }
+
+    /*
     var PasajerosCount = document.getElementById('ListaDatosPasajeros').children.length;
     var ClientesFinal = "";
     for (let i = 1; i <= PasajerosCount; i++) {
@@ -402,6 +403,9 @@ function ConfirmarPagoReservacion(){
 
     )
 
+    var SalirSimulacionDos = document.getElementById('SalirSimulacionDos');
+    SalirSimulacionDos.addEventListener('click', SalirSimulacion);
+    */
     var EndSimulacion = document.getElementById('EndSimulacion');
     EndSimulacion.style.display = "block";
 }
@@ -434,7 +438,8 @@ function InitPago(){
             }
         }
     }
-    AddVuelo(VuelosInfo, 0, "VuelosInfoSimulacion");
+    AddVuelo(VuelosInfo, 0, "VuelosInfoSimulacion", false);
+    SelectPaises();
 
     var ValorServicios = GetServicios("ServiciosSelectSimulacion")[1];
     var CountClientes = document.getElementById('ListaDatosPasajeros').children.length;
@@ -449,10 +454,11 @@ function InitPago(){
         "<b>Costo por maleta:</b> " + totales[4], "<b>Costo por maleta de mano:</b> " + totales[5],
         "<b>Costo por maletas extras:</b> " + totales[7], "<b>Costo por mascotas:</b> " + totales[8]
     ];
-    AddItemToList(items, document.getElementById('VuelosInfoSimulacion'));
+    AddItemToList(items, document.getElementById('DetallesPagoSimulacion'));
 
     var TotalPagoSimulacion = document.getElementById('TotalPagoSimulacion');
-    TotalPagoSimulacion.innerHTML = totales[0];
+    console.log(TotalPagoSimulacion);
+    TotalPagoSimulacion.innerHTML = totales[1].toString();
 }
 
 function InitReservaciones(){
@@ -616,6 +622,25 @@ function InitAsientos(){
     ConfirmarAsientos.addEventListener('click', InitPasajeros);
 }
 
+function SalirSimulacion(){
+    /*document.getElementById('VuelosSimulacion').style.display = 'block';
+    document.getElementById('AsientosSimulacion').style.display = 'none';
+    document.getElementById('PasajerosSimulacion').style.display = 'none';
+    document.getElementById('PagoSimulacion').style.display = 'none';
+    document.getElementById('ReservacionesSimulacion').style.display = 'none';
+    document.getElementById('EndSimulacionContent').style.display = 'none';
+    VaciarElemento(document.getElementById('AccordionVuelos'))
+    document.getElementById('VuelosHidden').value = "";
+    document.getElementById('AsientosSeleccionadosSimulacion').value = "";
+    VaciarElemento(document.getElementById('ListaDatosPasajeros'));
+    VaciarElemento(document.getElementById('SelectAsientosSimulacion'));
+    SetNavBar("active", "", "", "", "");*/
+    var SimulacionClientes = document.getElementById('SimulacionClientes');
+    SimulacionClientes.style.display = 'none';
+    var app = document.getElementById('app');
+    app.style.display = 'block';
+}
+
 function InitSimulacionClientes(){
     var entrar = document.getElementById('EntrarSimulacion');
     entrar.addEventListener('click', function() {
@@ -626,24 +651,7 @@ function InitSimulacionClientes(){
         AddVuelo();
     });
     var salir = document.getElementById('SalirSimulacion');
-    salir.addEventListener('click', function() {
-        document.getElementById('VuelosSimulacion').style.display = 'block';
-        document.getElementById('SimulacionAsientos').style.display = 'none';
-        document.getElementById('PagoSimulacion').style.display = 'none';
-        document.getElementById('ReservacionesSimulacion').style.display = 'none';
-        document.getElementById('EndSimulacionContent').style.display = 'none';
-        VaciarElemento(document.getElementById('AccordionVuelos'))
-        document.getElementById('VuelosHidden').value = "";
-        document.getElementById('AsientosSeleccionadosSimulacion').value = "";
-        VaciarElemento(document.getElementById('ListaDatosPasajeros'));
-        VaciarElemento(document.getElementById('SelectVueloSimulacion'));
-        VaciarElemento(document.getElementById('SelectAsientosSimulacion'));
-        SetNavBar("active", "", "", "", "");
-        var SimulacionClientes = document.getElementById('SimulacionClientes');
-        SimulacionClientes.style.display = 'none';
-        var app = document.getElementById('app');
-        app.style.display = 'block';
-    });
+    salir.addEventListener('click', SalirSimulacion);
     var ConfirmarVuelos = document.getElementById('ConfirmarVuelos');
     ConfirmarVuelos.addEventListener('click', InitAsientos)
     var VueloVueltaButton = document.getElementById('VueloVueltaButton');
