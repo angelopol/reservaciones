@@ -1,4 +1,12 @@
-# Objetivos de la aplicación #
+# Objetivo general #
+Con base a la imagen anexa, diseñe una pagina web que permita reservar un vuelo, tomando en consideración los datos solicitados por las aerolíneas, si lleva equipaje de mano y/o de Bodega y la asignación de su asiento. Para todos los servicios hay un costo, de igual manera la del vuelo. La pagina debe mostrar los asientos disponibles y los no disponibles, una vez es asignado un asiento debe marcarlo con no disponible. Por otro lado debe haber una boton que me permita ver al pulsarlo, los pasageros registrados y sus asientos asignados.
+
+Cabe destacar que la información no debe registrarse en ningun archivo, una se vez salga de la página se pierde, lo que se desea es simular el registro de pasajeros. Además deben tomar en cuenta que puede haber cancelación de vuelo y debe colocar el asiento disponible.
+
+La imagen es referencial por lo que el diseño de la presentación de la información lo dejo a su criterio, lo que si deben respetar es las letras de la filas y los numeros de los asientos, Además deben usar transformaciones y transiciones.
+![alt text](xSeatGuru.jpg.pagespeed.ic.cCB-QiPRJ_.jpg)
+
+## Objetivos de la aplicación ##
 - Reservaciones de un vuelo
 - Index de las reservaciones
 - Creacion de diferentes vuelos con diferentes asientos
@@ -13,6 +21,7 @@
 - Modificación de parametros generales de las reservaciones
 - Posibilidad de ver el monto total del costo de las reservaciones desglosado por tarifas
 - Posibilidad de reservar para varios pasajeros con varios asientos
+- Posibilidad de poder elegir dos vuelos en una reservación
 
 ## Cosas a tener en cuenta ##
 - Cuando se añade una resevación el asiento seleccionado comienza a estar no disponible
@@ -38,6 +47,7 @@
     * Ayuda con el equipaje (Si/No) *
     * Traductor (Si/No) *
     * Wifi (Si/No) *
+    * Objeto de valor dentro del equipaje (Si/No) *
 - Datos del vuelo:
     * ID
     * Tarifa del vuelo
@@ -52,7 +62,6 @@
     * Valor
     * Descripcion
     * Rango de edad (inicio-final) *
-    * Nacionalidad *
 - Datos del servicio:
     * ID
     * tarifa
@@ -69,8 +78,10 @@
 - La tarifa del vuelo es requerida
 - La tarifa del servicio es requerida
 - Si el vuelo requiere visa se debe validar que el cliente posea visa
-- Validar asientos por edad de personas (niños no pueden estar cerca de las salidas de emergencias) *
 - El origen y el destino de un vuelo no pueden ser el mismo *
+- Validar que cuando se guarde el vuelo seleccionado en la simulación de clientes no hayan mas de un checkbox seleccionado
+- Validar que un vuelo no posea el caracter **~** en el id *
+- Validad que los id no posean espacios *
 
 ## Parametros generales ##
 - Tarifa sin maleta (general)
@@ -87,28 +98,96 @@
 - Tarifa por servicio de traductores *
 - Tarifa por servicio de wifi *
 - Tarifa por servicio de abordaje prioritario *
-
-## Posibles nuevas funcionalidades ##
-- Reservaciones de ida y vuelta *
-- Pedir datos de pago para la reservacion *
-- Seleccionar area del telefono *
 - Tarifa por objetos valiosos dentro del equipaje con porcentajes (Servicio Declaracion Expresa de Valor) *
 
-### Avianca ###
-- Seleccion de cantidad de pasajeros, fechas de vuelo y paises de origen
-- Seleccion de vuelo de ida
-- Seleccion de vuelo de vuelta
-- Registro de clientes
-- Seleccion de cantidad de equipaje y servicios
-- Seleccion de asientos
-- Pago:
+## Simulación para clientes ##
+- Escoger vuelo de ida
+    * Mostrar info de los vuelos registrados en la simulación general
+- Escoger vuelo de vuelta
+    * El origen debe ser igual al destino del vuelo de ida
+    * Se cambia el boton de Solo vuelo ida a Confirmar
+- Salir de vuelos
+    * Se vacia el acordion de los vuelos
+    * Se muestra el boton VueloVueltaButton
+    * Se cambia el boton de Confirmar a Solo vuelo ida
+    * Se oculta el div de los vuelos
+    * Se muestra el div de los asientos
+    * La navbar en asientos se activa
+- Escoger los asientos
+    * Deben aparecer los asientos ocupados ya por reservaciones registradas
+    * Por cada asiento escogido se debe añadir un acordion para llenar los datos del cliente
+    * Se debe ir modificando un input de los asientos
+- Salir de asientos
+    * Se esconde el div de los asientos se muestra el div de los pasajeros
+    * La navbar en pasajeros se activa
+- Pasajeros
+    * Si hay dos vuelos la cantidad de pasajeros es la cantidad de asientos entre 2, si solo hay uno es la cantidad de asientos
+    * Generar la lista con los inputs para la cantidad de pasajeros escogida
+    * Se deben validar los datos de los clientes
+        + Se debe poder seleccionar el area del telefono
+        + Validar pasaporte (9 numeros venezuela)
+        + Validar cedula (8 numeros venezuela)
+        + Validar telefono
+- Salir de pasajeros
+    * Se esconde el div de pasajeros se muestra el div de reservaciones
+    * Se activa la navbar de reservaciones
+- Reservacion
+    * Se deben dar a escoger todos los datos de la reservación
+    * Se deben dar a escoger los servicios personalizados
+- Salir de reservacion
+    * Se esconde el div de la reservacion se muestra el del pago
+    * Se activa la navbar de pagos
+- Pago
+    * Se debe mostrar un boleto con los datos que se han registrado hasta el momento y el costo de las tarifas
     * Datos de la tarjeta:
         + Nombre del titular
-        + Numero de tarjeta
+        + Numero de tarjeta (16 digitos)
         + Fecha de expiracion
-        + CVV
+        + CVV (3 digitos)
     * Datos de facturacion:
         + Correo electronico
         + Direccion de residencia
         + Ciudad
         + Pais
+    * Al finalizar se debe mostrar un mensaje con pago finalizado y se deben registrar los datos de los clientes en el general
+    * Una vez que el usuario acepte el mensaje se usa la funcion Salir para volver al general
+- Regresar *
+    * Regresar a vuelos
+        + Se oculta el div actual
+        + Se muestra el div de los vuelos
+        + Se generan los vuelos con la funcion AddVuelo()
+        + La navbar en vuelos se activa
+        + Se elimina el valor del input de VuelosHidden
+        + Se elimina el valor del input de AsientosSeleccionadosSimulacion
+        + Se vacia SelectVueloSimulacion
+        + Se vacia SelectAsientosSimulacion
+        + Se vacia ListaDatosPasajeros
+        + Se deshabilitan los acceso a los otros modulos posteriores
+    * Regresar a asientos
+        + Se oculta el div actual
+        + Se muestra el div de los asientos
+        + La navbar en asientos se activa
+        + Se vacia ListaDatosPasajeros
+        + Se deshabilitan los acceso a los otros modulos posteriores
+    * Regresar a pasajeros
+        + Se oculta el div actual
+        + Se muestra el div de los pasajeros
+        + Se deshabilitan los acceso a los otros modulos posteriores (Solo pagos)
+    * Regresar a reservacion
+        + Se oculta el div actual
+        + Se muestra el div de la reservacion
+        + Se deshabilitan el acceso a la parte de pago
+- Salir *
+    * Se debe ocultar el div
+    * Debe borrar todos los valores de los inputs de la simulación
+        + Se elimina VuelosHidden
+        + Se elimina el valor del input de AsientosSeleccionadosSimulacion
+        + Se vacia SelectVueloSimulacion
+        + Se vacia SelectAsientosSimulacion
+        + Se vacia ListaDatosPasajeros
+    + Se deshabilitan los acceso a los modulos excepto vuelos
+    * Se debe mostrar el div de VuelosSimulacion
+    * Se debe ocultar el div de SimulacionAsientos
+    * Se debe ocultar el div de ReservacionesSimulacion
+    * Se debe ocultar el div de PagoSimulacion
+    * Ocultar div EndSimulacionContent

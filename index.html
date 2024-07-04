@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="OthersStyles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="OtherScript.js"></script>
     <script type="text/javascript" src="countries.js"></script>
+    <script type="text/javascript" src="phones.js"></script>
     <script type="text/javascript" src="asientos.js"></script>
     <script type="text/javascript" src="app.js" defer></script>
+    <script type="text/javascript" src="simulacion.js" defer></script>
     <title>Simulación de reservación de vuelos</title>
 </head>
 <body>
@@ -65,6 +69,7 @@
                     <button class="ParametrosButton">Parametros generales</button>
                     <button class="DescuentosButton">Descuentos</button>
                     <button class="ClientesButton">Clientes</button>
+                    <button id="EntrarSimulacion">Simulación</button>
                 </div>
             </div>
             <div id="asientos">
@@ -195,13 +200,21 @@
                       <th>Visa</th>
                     </tr>
                     <tr>
-                      <td>default</td>
+                      <td>Vuelo-1</td>
                       <td>10</td>
                       <td>Albania</td>
-                      <td>Polonia</td>
+                      <td>Afghanistan</td>
                       <td>2024-07-01T12:30</td>
                       <td>No</td>
                     </tr>
+                    <tr>
+                        <td>Vuelo-2</td>
+                        <td>12</td>
+                        <td>Afghanistan</td>
+                        <td>Albania</td>
+                        <td>2024-07-05T12:30</td>
+                        <td>No</td>
+                      </tr>
                 </table>
             </div>
         </div>
@@ -361,8 +374,139 @@
             </div>
         </div>
     </div>
-    <div id="SilmulacionClientes">
+    <div id="SimulacionClientes">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <button class="nav-link active" type="button" id="NavBarVuelos">Vuelos</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link disabled" type="button" id="NavBarAsientos">Asientos</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link disabled" type="button" id="NavBarPasajeros">Pasajeros</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link disabled" type="button" id="NavBarServicios">Servicios</button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link disabled" type="button" id="NavBarPago">Pago</button>
+            </li>
+        </ul>
+        <div id="VuelosSimulacion">
+            Seleccione el vuelo de ida:
+            <div class="accordion" id="AccordionVuelos"></div>
+            <button id="VueloVueltaButton">Vuelo de vuelta</button>
+            <button id="ConfirmarVuelos">Solo vuelo de ida</button>
+        </div>
+        <div id="AsientosSimulacion">
+            Seleccione los asientos necesarios para la cantidad de pasajeros que requiera:
+            <div id="SelectAsientosSimulacion">
+                <div>
+                    <label for="SelectVueloSimulacion">Selecciona el vuelo</label>
+                    <select id="SelectVueloSimulacion"></select>
+                </div>
+            </div>
+            <div>
+                <label for="AsientosSeleccionadosSimulacion">Asientos</label>
+                <textarea id="AsientosSeleccionadosSimulacion" disabled></textarea>
+            </div>
+            <button id="ConfirmarAsientos">Confirmar</button>
+        </div>
+        <div id="PasajerosSimulacion">
+            Rellene los datos de los pasajeros:
+            <ul class="list-group" id="ListaDatosPasajeros"></ul>
+            <button id="ConfirmarPasajeros">Confirmar</button>
+        </div>
+        <div id="ReservacionesSimulacion">
+            Eliga los servicios y rellene los datos sobre su equipaje:
+            <div>
+                <label for="MascotasSimulacion">Cantidad de mascotas</label>
+                <input type="number" value="0" id="MascotasSimulacion" min="0">
+            </div>
+            <div>
+                <label for="MaletaSimulacion">Peso de la maleta (si posee)</label>
+                <input type="number" id="MaletaSimulacion" min="0">
+            </div>
+            <div>
+                <label for="MaletaManoSimulacion">Peso de la maleta de mano (si posee)</label>
+                <input type="number" id="MaletaManoSimulacion" min="0">
+            </div>
+            <div>
+                <label for="MaletaExtrasSimulacion1">Peso de maletas extras (si posee)</label>
+                <div id="MaletasExtrasSimulacion"></div>
+            </div>
+            <div>
+                <label for="ServiciosSelectSimulacion">Selecciona un servicio extra (si lo desea)</label>
+                <select id="ServiciosSelectSimulacion" multiple></select>
+            </div>
+            <button id="ConfirmarReservaciones">Confirmar</button>
+        </div>
 
+        <div id="PagoSimulacion">
+            Paga y confirma tu reservación:
+            <div class="row">
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Datos de la tarjeta</h5>
+                        <div>
+                            <label for="NombreTarjetaSimulacion">Nombre del titular</label>
+                            <input type="text" id="NombreTarjeta">
+                        </div>
+                        <div>
+                            <label for="NumeroTarjetaSimulacion">Número de tarjeta</label>
+                            <input type="number" id="NumeroTarjeta">
+                        </div>
+                        <div>
+                            <label for="FechaVencimientoSimulacion">Fecha de vencimiento</label>
+                            <input type="date" id="FechaVencimiento" value="2024-07-18">
+                        </div>
+                        <div>
+                            <label for="CVVSimulacion">CVV</label>
+                            <input type="number" id="CVVSimulacion">
+                        </div>
+                        <h5>Billing information</h5>
+                        <div>
+                            <label for="EmailFactSimulacion">Email</label>
+                            <input type="text" id="EmailFactSimulacion">
+                        </div>
+                        <div>
+                            <label for="DireccionSimulacion">Dirección de residencia</label>
+                            <input type="text" id="DireccionSimulacion">
+                        </div>
+                        <div>
+                            <label for="CiudadSimulacion">Ciudad</label>
+                            <input type="text" id="CiudadSimulacion">
+                        </div>
+                        <div>
+                            <label for="PaisSimulacion">País</label>
+                            <select id="PaisSimulacion" class="SelectPaises"></select>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Purchase Summary</h5>
+                        <div class="accordion" id="VuelosInfoSimulacion"></div>
+                        <ul class="list-group" id="DetallesPagoSimulacion"></ul>
+                        <h5>Total: <span id="TotalPagoSimulacion"></span></h5>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <button id="ConfirmarPago">Confirmar</button>
+        </div>
+        <div id="EndSimulacion" class="ModalBackdrop">
+            <div class="ModalContent" id="EndSimulacionContent">
+                Reservación confirmada con exito, su recibo de pago fue enviado a su correo electrónico.
+                <button id="SalirSimulacion">Salir</button>
+            </div>
+        </div>
+
+        <button id="SalirSimulacion">Salir</button>
+        <input id="VuelosHidden" value="" hidden>
     </div>        
 </body>
 </html>
