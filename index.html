@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 px-4">
-                                <label class="form-label" for="asiento">seat</label>
+                                <label class="form-label" for="asiento">Seats</label>
                                 <textarea class="form-control rounded-5" id="asiento" disabled></textarea>
                             </div>
                         </div>
@@ -162,35 +162,35 @@
             <table class="table" id="ReservacionesTable">
                 <tr>
                     <th>ID</th>
-                    <th>Peso maleta</th>
-                    <th>Peso maleta de mano</th>
-                    <th>Peso maletas extras</th>
-                    <th>Vuelo</th>
-                    <th>Monto total</th>
-                    <th>Asientos</th>
-                    <th>Mascotas</th>
-                    <th>Descuento</th>
-                    <th>Clientes</th>
-                    <th>Servicios</th>
+                    <th>Suitcase weight</th>
+                    <th>Hand luggage weight</th>
+                    <th>Weight of extra suitcases</th>
+                    <th>Flight</th>
+                    <th>Total amount</th>
+                    <th>Seats</th>
+                    <th>Pets</th>
+                    <th>Discount</th>
+                    <th>Clients</th>
+                    <th>Services</th>
                 </tr>
             </table>
             <br>
             <div>
                 <ul class="list-group">
-                    <li class="list-group-item">Tarifa general: <span id="TotalTarifaGeneral">0</span></li>
-                    <li class="list-group-item">Tarifa del vuelo: <span id="TotalTarifaVuelo">0</span></li>
-                    <li class="list-group-item">Tarifa por maleta: <span id="TotalTarifaMaleta">0</span></li>
-                    <li class="list-group-item">Tarifa por maleta de mano: <span id="TotalTarifaMaletaMano">0</span></li>
-                    <li class="list-group-item">Tarifa por maletas extras: <span id="TotalTarifaMaletasExtras">0</span></li>
-                    <li class="list-group-item">Tarifa por sobrepeso de maletas: <span id="TotalTarifaSobrepesoMaletas">0</span></li>
-                    <li class="list-group-item">Tarifa por mascotas: <span id="TotalTarifaMascotas">0</span></li>
-                    <li class="list-group-item">Monto por descuentos: <span id="TotalDescuentos">0</span></li>
+                    <li class="list-group-item">General Rate: <span id="TotalTarifaGeneral">0</span></li>
+                    <li class="list-group-item">Flight fare: <span id="TotalTarifaVuelo">0</span></li>
+                    <li class="list-group-item">Fee per bag: <span id="TotalTarifaMaleta">0</span></li>
+                    <li class="list-group-item">Hand bag fee: <span id="TotalTarifaMaletaMano">0</span></li>
+                    <li class="list-group-item">Fee for extra bags: <span id="TotalTarifaMaletasExtras">0</span></li>
+                    <li class="list-group-item">Bag overweight fee: <span id="TotalTarifaSobrepesoMaletas">0</span></li>
+                    <li class="list-group-item">Pet Fee: <span id="TotalTarifaMascotas">0</span></li>
+                    <li class="list-group-item">Amount for discounts: <span id="TotalDescuentos">0</span></li>
                     <li class="list-group-item">Total: <span id="total">0</span></li>
                 </ul>
             </div>
             <br>
             <div class="text-end">
-                <button class="ReservacionesButton btn btn-danger rounded-5">Cerrar</button>
+                <button class="ReservacionesButton btn btn-danger rounded-5">Close</button>
             </div>
         </div>
     </div> 
@@ -202,19 +202,19 @@
                     <input class="form-control" type="text" id="IdVuelo">
                 </div>
                 <div class="mb-3">
-                    <label class="label-input" for="TarifaVuelo">Tarifa del vuelo</label>
+                    <label class="label-input" for="TarifaVuelo">Flight fare</label>
                     <input class="form-control" type="number" id="TarifaVuelo" min="0">
                 </div>
                 <div class="mb-3">
-                    <label class="label-input" for="DestinoVuelo">Destino del vuelo</label>
+                    <label class="label-input" for="DestinoVuelo">Flight destination</label>
                     <select class="form-control SelectPaises" id="DestinoVuelo"></select>
                 </div>
                 <div class="mb-3">
-                    <label class="label-input" for="OrigenVuelo">Origen del vuelo</label>
+                    <label class="label-input" for="OrigenVuelo">Origin of the flight</label>
                     <select class="form-control SelectPaises" id="OrigenVuelo"></select>
                 </div>
                 <div class="mb-3">
-                    <label class="label-input" for="FechaHoraVuelo">Fecha y hora de salida</label>
+                    <label class="label-input" for="FechaHoraVuelo">Departure date and time</label>
                     <input class="form-control" type="datetime-local" id="FechaHoraVuelo">
                 </div>
                 <div class="mb-3">
@@ -226,10 +226,10 @@
                 <table class="table" id="VuelosTable">
                     <tr>
                       <th>ID</th>
-                      <th>Tarifa</th>
-                      <th>Destino</th>
-                      <th>Origen</th>
-                      <th>Fecha y hora</th>
+                      <th>Fare</th>
+                      <th>Destiny</th>
+                      <th>Origin</th>
+                      <th>Date and time</th>
                       <th>Visa</th>
                     </tr>
                     <tr>
@@ -250,8 +250,8 @@
                       </tr>
                 </table>
                 <div class="text-end">
-                    <button id="RegistrarVueloButton" class="btn btn-outline-primary rounded-5">Registrar</button>
-                    <button class="ms-1 VuelosModalButton btn btn-danger rounded-5">Cerrar</button>
+                    <button id="RegistrarVueloButton" class="btn btn-outline-primary rounded-5">Register</button>
+                    <button class="ms-1 VuelosModalButton btn btn-danger rounded-5">Close</button>
                 </div>
             </div>
         </div>
@@ -264,15 +264,15 @@
                     <input class="form-control" type="text" id="IdDescuento">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="PorcentajeDescuento">Porcentaje de descuento</label>
+                    <label class="form-label" for="PorcentajeDescuento">Discount Percentage</label>
                     <input class="form-control" type="number" id="PorcentajeDescuento" min="0" value="0">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="ValorDescuento">Valor del descuento</label>
+                    <label class="form-label" for="ValorDescuento">Discount value</label>
                     <input class="form-control" type="number" id="ValorDescuento" min="0" value="0">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="DescripcionDescuento">Descripcion del descuento</label>
+                    <label class="form-label" for="DescripcionDescuento">Discount description</label>
                     <input class="form-control" type="text" id="DescripcionDescuento">
                 </div>
             </div>
@@ -280,9 +280,9 @@
                 <table class="table" id="DescuentosTable">
                     <tr>
                       <th>ID</th>
-                      <th>Porcentaje</th>
-                      <th>Valor</th>
-                      <th>Descripción</th>
+                      <th>Percentage</th>
+                      <th>Value</th>
+                      <th>Description</th>
                     </tr>
                 </table>
                 <div>
