@@ -1,5 +1,5 @@
 #app, #SimulacionClientes, #AsientosSimulacion, #PasajerosSimulacion, #ReservacionesSimulacion,
-#EntrarSimulacion, #NavBarApp {
+#EntrarSimulacion, #NavBarApp, #PagoSimulacion {
     display: none;
 }
 
@@ -19,7 +19,7 @@ body {
     background-size: cover;
 }
 
-#VuelosModalContent, #DescuentosContent, #ClientesContent, #ServiciosContent, #EndSimulacionContent {
+#VuelosModalContent, #DescuentosContent, #ServiciosContent, #EndSimulacionContent {
     display: flex;
     justify-content: space-around;
 }
@@ -30,7 +30,6 @@ body {
 
 #CrearVuelos, #VerVuelos,
 #CrearDescuentos, #VerDescuentos,
-#CrearClientes, #VerClientes,
 #CrearServicios, #VerServicios {
     flex: 1;
 }
@@ -45,13 +44,15 @@ body {
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .ModalContent {
     background-color: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 2rem;
     width: 90%;
+    z-index: 1000;
 }
 
 .ModalBackdrop.show {

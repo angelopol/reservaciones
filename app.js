@@ -463,8 +463,9 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
     }
     UpdateSpan(document.getElementById('TotalTarifaMaleta'), ValorMaleta);
 
+    var ValorMaletaMano = 0.0;
     if (MaletaMano != ''){
-        var ValorMaletaMano = parseFloat(document.getElementById('TarifaMaletaMano').value);
+        ValorMaletaMano = parseFloat(document.getElementById('TarifaMaletaMano').value);
         tarifa += ValorMaletaMano;
         if (substraer){
             ValorMaletaMano *= -1;
@@ -644,7 +645,7 @@ function AddToReservacionesTable(
     cell8.innerHTML = DescuentoTable;
     cell9.innerHTML = ClientesFinal;
     cell10.innerHTML = ServiciosTable;
-    cell11.innerHTML = '<button class="CancelarReservacion" idcancelacion="'+id+'">Cancelar</button>';
+    cell11.innerHTML = '<button class="CancelarReservacion btn btn-sm btn-warning rounded-5" idcancelacion="'+id+'">Cancelar</button>';
     AsOcupado();
     CancelarReservacion();
 }
@@ -762,7 +763,7 @@ function RegistrarReservaciones(){
 function InitSelectVuelo(){
     var SelectVuelo = document.getElementById('vuelo');
     LoadSelect(SelectVuelo, document.getElementById('VuelosTable'));
-    SelectVuelo.addEventListener('change', AsOcupado);
+    SelectVuelo.addEventListener('change', () => AsOcupado());
 }
 
 function SubstraerTotales(row){
@@ -795,7 +796,6 @@ function main() {
     InitModal('Reservaciones');
     InitModal('VuelosModal');
     InitModal('Descuentos');
-    InitModal('Clientes');
     InitModal('Servicios');
     InitMaletasExtras();
     SelectAsiento();

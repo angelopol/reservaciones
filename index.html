@@ -64,10 +64,10 @@
                                 <input class="form-control" type="number" placeholder="Cantidad de mascotas" value="0" id="mascotas" min="0">
                             </div>
                             <div class="mb-3">
-                                <label class="input-label" for="ClientesSelect">Selecciona el cliente:</label>
+                                <label class="form-label" for="ClientesSelect">Selecciona el cliente:</label>
                                 <select class="form-control" id="ClientesSelect" multiple></select>
                             </div>
-                            <label class="input-label" for="maleta">Peso de maletas (si posee):</label>
+                            <label class="form-label" for="maleta">Peso de maletas (si posee):</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Equipaje</span>
                                 <input class="form-control" type="number" id="maleta" min="0">
@@ -75,7 +75,7 @@
                                 <input class="form-control" type="number" id="MaletaMano" min="0">
                             </div>
                             <div class="mb-3">
-                                <label class="input-label" for="MaletaExtra1">Peso de maletas extras (si posee)</label>
+                                <label class="form-label" for="MaletaExtra1">Peso de maletas extras (si posee)</label>
                                 <div id="MaletasExtras"></div>
                             </div>
                             <div class="mb-3">
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="mb-3 px-4">
-                                <label class="input-label" for="asiento">Asiento</label>
+                                <label class="form-label" for="asiento">Asiento</label>
                                 <textarea class="form-control rounded-5" id="asiento" disabled></textarea>
                             </div>
                         </div>
@@ -115,49 +115,46 @@
     </div>
     <div id="Parametros" class="ModalBackdrop">
         <div class="ModalContent">
-            <div>
-                <label for="TarifaGeneral">Tarifa general</label>
-                <input type="number" id="TarifaGeneral" value="10" min="0">
+            <div class="mb-3 input-group">
+                <span class="input-group-text" for="TarifaGeneral">Tarifa general</span>
+                <input class="form-control" type="number" id="TarifaGeneral" value="10" min="0">
+                <span class="input-group-text" for="TarifaMaleta">Tarifa maleta</span>
+                <input class="form-control" type="number" id="TarifaMaleta" value="2" min="0">
             </div>
-            <div>
-                <label for="TarifaMaleta">Tarifa maleta</label>
-                <input type="number" id="TarifaMaleta" value="2" min="0">
+            <div class="mb-3">
+                <label class="form-label" for="PesoMaximoMaleta">Peso máximo de la maleta</label>
+                <input class="form-control" type="number" id="PesoMaximoMaleta" value="23" min="1">
             </div>
-            <div>
-                <label for="PesoMaximoMaleta">Peso máximo de la maleta</label>
-                <input type="number" id="PesoMaximoMaleta" value="23" min="1">
+            <div class="mb-3">
+                <label class="form-label" for="TarifaMaletaMano">Tarifa maleta de mano</label>
+                <input class="form-control" type="number" id="TarifaMaletaMano" value="0" min="0">
             </div>
-            <div>
-                <label for="TarifaMaletaMano">Tarifa maleta de mano</label>
-                <input type="number" id="TarifaMaletaMano" value="0" min="0">
+            <div class="mb-3">
+                <label class="form-label" for="PesoMaximoMaletaMano">Peso máximo de la maleta de mano</label>
+                <input class="form-control" type="number" id="PesoMaximoMaletaMano" value="8" min="1">
             </div>
-            <div>
-                <label for="PesoMaximoMaletaMano">Peso máximo de la maleta de mano</label>
-                <input type="number" id="PesoMaximoMaletaMano" value="8" min="1">
+            <div class="mb-3">
+                <label class="form-label" for="TarifaMaletaExtra">Tarifa por maleta extra</label>
+                <input class="form-control" type="number" id="TarifaMaletaExtra" value="5" min="0">
             </div>
-            <div>
-                <label for="TarifaMaletaExtra">Tarifa por maleta extra</label>
-                <input type="number" id="TarifaMaletaExtra" value="5" min="0">
+            <div class="mb-3">
+                <label class="form-label" for="TarifaSobrepeso">Tarifa por sobrepeso de las maletas (por unidad)</label>
+                <input class="form-control" type="number" id="TarifaSobrepeso" value="1" min="0">
             </div>
-            <div>
-                <label for="TarifaSobrepeso">Tarifa por sobrepeso de las maletas (por unidad)</label>
-                <input type="number" id="TarifaSobrepeso" value="1" min="0">
+            <div class="mb-3 input-group">
+                <span class="input-group-text" for="CantidadMaletas">Cantidad de maletas extras</span>
+                <input class="form-control" type="number" id="CantidadMaletas" value="3" min="1">
+                <span class="input-group-text" for="TarifaMascotas">Tarifa por mascotas</span>
+                <input class="form-control" type="number" id="TarifaMascotas" value="5" min="0">
             </div>
-            <div>
-                <label for="CantidadMaletas">Cantidad de maletas extras</label>
-                <input type="number" id="CantidadMaletas" value="3" min="1">
+            <div class="text-end">
+                <button class="ParametrosButton btn btn-danger rounded-5">Cerrar</button>
             </div>
-            <div>
-                <label for="TarifaMascotas">Tarifa por mascotas</label>
-                <input type="number" id="TarifaMascotas" value="5" min="0">
-            </div>
-            <br>
-            <button class="ParametrosButton">Cerrar</button>
         </div>
     </div>
     <div id="Reservaciones" class="ModalBackdrop">
         <div class="ModalContent">
-            <table id="ReservacionesTable">
+            <table class="table" id="ReservacionesTable">
                 <tr>
                     <th>ID</th>
                     <th>Peso maleta</th>
@@ -174,56 +171,54 @@
             </table>
             <br>
             <div>
-                Totales:
-                <ul>
-                    <li>Tarifa general: <span id="TotalTarifaGeneral">0</span></li>
-                    <li>Tarifa del vuelo: <span id="TotalTarifaVuelo">0</span></li>
-                    <li>Tarifa por maleta: <span id="TotalTarifaMaleta">0</span></li>
-                    <li>Tarifa por maleta de mano: <span id="TotalTarifaMaletaMano">0</span></li>
-                    <li>Tarifa por maletas extras: <span id="TotalTarifaMaletasExtras">0</span></li>
-                    <li>Tarifa por sobrepeso de maletas: <span id="TotalTarifaSobrepesoMaletas">0</span></li>
-                    <li>Tarifa por mascotas: <span id="TotalTarifaMascotas">0</span></li>
-                    <li>Monto por descuentos: <span id="TotalDescuentos">0</span></li>
-                    <li>Total: <span id="total">0</span></li>
+                <ul class="list-group">
+                    <li class="list-group-item">Tarifa general: <span id="TotalTarifaGeneral">0</span></li>
+                    <li class="list-group-item">Tarifa del vuelo: <span id="TotalTarifaVuelo">0</span></li>
+                    <li class="list-group-item">Tarifa por maleta: <span id="TotalTarifaMaleta">0</span></li>
+                    <li class="list-group-item">Tarifa por maleta de mano: <span id="TotalTarifaMaletaMano">0</span></li>
+                    <li class="list-group-item">Tarifa por maletas extras: <span id="TotalTarifaMaletasExtras">0</span></li>
+                    <li class="list-group-item">Tarifa por sobrepeso de maletas: <span id="TotalTarifaSobrepesoMaletas">0</span></li>
+                    <li class="list-group-item">Tarifa por mascotas: <span id="TotalTarifaMascotas">0</span></li>
+                    <li class="list-group-item">Monto por descuentos: <span id="TotalDescuentos">0</span></li>
+                    <li class="list-group-item">Total: <span id="total">0</span></li>
                 </ul>
             </div>
-            <button class="ReservacionesButton">Cerrar</button>
+            <br>
+            <div class="text-end">
+                <button class="ReservacionesButton btn btn-danger rounded-5">Cerrar</button>
+            </div>
         </div>
     </div> 
     <div id="VuelosModal" class="ModalBackdrop">
         <div class="ModalContent" id="VuelosModalContent">
-            <div id="CrearVuelos">
-                <div>
-                    <label for="IdVuelo">ID</label>
-                    <input type="text" id="IdVuelo">
+            <div id="CrearVuelos" class="me-4">
+                <div class="mb-3">
+                    <label class="label-input" for="IdVuelo">ID</label>
+                    <input class="form-control" type="text" id="IdVuelo">
                 </div>
-                <div>
-                    <label for="TarifaVuelo">Tarifa del vuelo</label>
-                    <input type="number" id="TarifaVuelo" min="0">
+                <div class="mb-3">
+                    <label class="label-input" for="TarifaVuelo">Tarifa del vuelo</label>
+                    <input class="form-control" type="number" id="TarifaVuelo" min="0">
                 </div>
-                <div>
-                    <label for="DestinoVuelo">Destino del vuelo</label>
-                    <select id="DestinoVuelo" class="SelectPaises"></select>
+                <div class="mb-3">
+                    <label class="label-input" for="DestinoVuelo">Destino del vuelo</label>
+                    <select class="form-control" id="DestinoVuelo" class="SelectPaises"></select>
                 </div>
-                <div>
-                    <label for="OrigenVuelo">Origen del vuelo</label>
-                    <select id="OrigenVuelo" class="SelectPaises"></select>
+                <div class="mb-3">
+                    <label class="label-input" for="OrigenVuelo">Origen del vuelo</label>
+                    <select class="form-control" id="OrigenVuelo" class="SelectPaises"></select>
                 </div>
-                <div>
-                    <label for="FechaHoraVuelo">Fecha y hora de salida</label>
-                    <input type="datetime-local" id="FechaHoraVuelo">
+                <div class="mb-3">
+                    <label class="label-input" for="FechaHoraVuelo">Fecha y hora de salida</label>
+                    <input class="form-control" type="datetime-local" id="FechaHoraVuelo">
                 </div>
-                <div>
-                    <label for="VisaVuelo">Visa</label>
-                    <input type="checkbox" id="VisaVuelo">
-                </div>
-                <div>
-                    <button id="RegistrarVueloButton">Registrar</button>
-                    <button class="VuelosModalButton">Cerrar</button>
+                <div class="mb-3">
+                    <label class="label-input" for="VisaVuelo">Visa</label>
+                    <input class="form-check-input" type="checkbox" id="VisaVuelo">
                 </div>
             </div>
             <div id="VerVuelos">
-                <table id="VuelosTable">
+                <table class="table" id="VuelosTable">
                     <tr>
                       <th>ID</th>
                       <th>Tarifa</th>
@@ -249,35 +244,35 @@
                         <td>No</td>
                       </tr>
                 </table>
+                <div class="text-end">
+                    <button id="RegistrarVueloButton" class="btn btn-outline-primary rounded-5">Registrar</button>
+                    <button class="ms-1 VuelosModalButton btn btn-danger rounded-5">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
     <div id="Descuentos" class="ModalBackdrop">
         <div class="ModalContent" id="DescuentosContent">
-            <div id="CrearDescuentos">
-                <div>
-                    <label for="IdDescuento">ID</label>
-                    <input type="text" id="IdDescuento">
+            <div id="CrearDescuentos" class="me-4">
+                <div class="mb-3">
+                    <label class="form-label" for="IdDescuento">ID</label>
+                    <input class="form-control" type="text" id="IdDescuento">
                 </div>
-                <div>
-                    <label for="PorcentajeDescuento">Porcentaje de descuento</label>
-                    <input type="number" id="PorcentajeDescuento" min="0" value="0">
+                <div class="mb-3">
+                    <label class="form-label" for="PorcentajeDescuento">Porcentaje de descuento</label>
+                    <input class="form-control" type="number" id="PorcentajeDescuento" min="0" value="0">
                 </div>
-                <div>
-                    <label for="ValorDescuento">Valor del descuento</label>
-                    <input type="number" id="ValorDescuento" min="0" value="0">
+                <div class="mb-3">
+                    <label class="form-label" for="ValorDescuento">Valor del descuento</label>
+                    <input class="form-control" type="number" id="ValorDescuento" min="0" value="0">
                 </div>
-                <div>
-                    <label for="DescripcionDescuento">Descripcion del descuento</label>
-                    <input type="text" id="DescripcionDescuento">
-                </div>
-                <div>
-                    <button id="RegistrarDescuentoButton">Registrar</button>
-                    <button class="DescuentosButton">Cerrar</button>
+                <div class="mb-3">
+                    <label class="form-label" for="DescripcionDescuento">Descripcion del descuento</label>
+                    <input class="form-control" type="text" id="DescripcionDescuento">
                 </div>
             </div>
             <div id="VerDescuentos">
-                <table id="DescuentosTable">
+                <table class="table" id="DescuentosTable">
                     <tr>
                       <th>ID</th>
                       <th>Porcentaje</th>
@@ -285,67 +280,69 @@
                       <th>Descripción</th>
                     </tr>
                 </table>
+                <div>
+                    <button id="RegistrarDescuentoButton" class="btn btn-outline-primary rounded-5">Registrar</button>
+                    <button class="ms-1 btn btn-danger rounded-5 DescuentosButton">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-    <div id="Clientes" class="ModalBackdrop">
-        <div class="ModalContent" id="ClientesContent">
+    <div id="Clientes" class="modal">
+        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+        <div class="modal-body" id="ClientesContent">
             <div id="CrearClientes">
-                <div>
-                    <label for="IdCliente">ID</label>
-                    <input type="text" id="IdCliente">
+                <div class="mb-3">
+                    <label class="form-label" for="IdCliente">ID</label>
+                    <input class="form-control" type="text" id="IdCliente">
                 </div>
-                <div>
-                    <label for="pasaporte">Pasaporte</label>
-                    <input type="text" id="pasaporte">
+                <div class="mb-3">
+                    <label class="form-label" for="pasaporte">Pasaporte</label>
+                    <input class="form-control" type="text" id="pasaporte">
                 </div>
-                <div>
-                    <label for="cedula">Cedula</label>
-                    <input type="number" id="cedula">
+                <div class="mb-3">
+                    <label class="form-label" for="cedula">Cedula</label>
+                    <input class="form-control" type="number" id="cedula">
                 </div>
-                <div>
-                    <label for="nombres">Nombres</label>
-                    <input type="text" id="nombres">
+                <div class="mb-3">
+                    <label class="form-label" for="nombres">Nombres</label>
+                    <input class="form-control" type="text" id="nombres">
                 </div>
-                <div>
-                    <label for="apellidos">Apellidos</label>
-                    <input type="text" id="apellidos">
+                <div class="mb-3">
+                    <label class="form-label" for="apellidos">Apellidos</label>
+                    <input class="form-control" type="text" id="apellidos">
                 </div>
-                <div>
-                    <label for="FechaNacimiento">Fecha de Nacimiento</label>
-                    <input type="date" id="FechaNacimiento">
+                <div class="mb-3">
+                    <label class="form-label" for="FechaNacimiento">Fecha de Nacimiento</label>
+                    <input class="form-control" type="date" id="FechaNacimiento">
                 </div>
-                <div>
-                    <label for="telefono">Telefono</label>
-                    <input type="number" id="telefono">
+                <div class="mb-3">
+                    <label class="form-label" for="telefono">Telefono</label>
+                    <input class="form-control" type="number" id="telefono">
                 </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input type="email" id="email">
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" id="email">
                 </div>
-                <div>
-                    <label for="sexo">Sexo</label>
-                    <select id="sexo">
+                <div class="mb-3">
+                    <label class="form-label" for="sexo">Sexo</label>
+                    <select class="form-control" id="sexo">
                         <option value="Masculino" selected>Masculino</option>
                         <option value="Femenino">Femenino</option>
                         <option value="Otro">Otro</option>
                     </select>
                 </div>
-                <div>
-                    <label for="SelectPaises">Nacionalidad</label>
-                    <select id="nacionalidad" class="SelectPaises"></select>
+                <div class="mb-3">
+                    <label class="form-label" for="SelectPaises">Nacionalidad</label>
+                    <select id="nacionalidad" class="SelectPaises form-control"></select>
                 </div>
-                <div>
-                    <label for="visa">Visa</label>
-                    <input type="checkbox" id="visa">
-                </div>
-                <div>
-                    <button id="RegistrarClientesButton">Registrar</button>
-                    <button class="ClientesButton">Cerrar</button>
+                <div class="mb-3">
+                    <label class="form-label" for="visa">Visa</label>
+                    <input class="form-check-input" type="checkbox" id="visa">
                 </div>
             </div>
             <div id="VerClientes">
-                <table id="ClientesTable">
+                <table class="table" id="ClientesTable">
                     <tr>
                         <th>ID</th>
                         <th>Pasaporte</th>
@@ -373,173 +370,207 @@
                         <td>Si</td>
                     </tr>
                 </table>
+                <div class="text-end">
+                    <button class="btn btn-outline-primary rounded-5" id="RegistrarClientesButton">Registrar</button>
+                    <button class="ms-1 ClientesButton btn btn-danger rounded-5"  data-bs-dismiss="modal">Cerrar</button>
+                </div>
             </div>
+        </div>
+        </div>
         </div>
     </div>
     <div id="Servicios" class="ModalBackdrop">
-        <div class="ModalContent" id="ServiciosContent">
-            <div id="CrearServicios">
-                <div>
-                    <label for="IdServicio">ID</label>
-                    <input type="text" id="IdServicio">
+        <div class="ModalContent" id="ServiciosContent" class="me-4">
+            <div id="CrearServicios" class="me-4">
+                <div class="mb-3">
+                    <label class="form-label" for="IdServicio">ID</label>
+                    <input class="form-control" type="text" id="IdServicio">
                 </div>
-                <div>
-                    <label for="TarifaServicio">Tarifa</label>
-                    <input type="number" id="TarifaServicio" min="0">
+                <div class="mb-3">
+                    <label class="form-label" for="TarifaServicio">Tarifa</label>
+                    <input class="form-control" type="number" id="TarifaServicio" min="0">
                 </div>
-                <div>
-                    <label for="DescripcionServicio">Descripcion del servicio</label>
-                    <input type="text" id="DescripcionServicio">
-                </div>
-                <div>
-                    <button id="RegistrarServicioButton">Registrar</button>
-                    <button class="ServiciosButton">Cerrar</button>
+                <div class="mb-3">
+                    <label class="form-label" for="DescripcionServicio">Descripcion del servicio</label>
+                    <input class="form-control" type="text" id="DescripcionServicio">
                 </div>
             </div>
             <div id="VerServicios">
-                <table id="ServiciosTable">
+                <table class="table table-sm table-responsive" id="ServiciosTable">
                     <tr>
                       <th>ID</th>
                       <th>Tarifa</th>
                       <th>Descripción</th>
                     </tr>
                 </table>
+                <div class="text-end">
+                    <button id="RegistrarServicioButton" class="btn btn-outline-primary rounded-5">Registrar</button>
+                    <button class="ServiciosButton btn btn-danger rounded-5 ms-1">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-    <div id="SimulacionClientes" class="BorderPadding">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <button class="nav-link active" type="button" id="NavBarVuelos">Vuelos</button>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link disabled" type="button" id="NavBarAsientos">Asientos</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link disabled" type="button" id="NavBarPasajeros">Pasajeros</button>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link disabled" type="button" id="NavBarServicios">Servicios</button>
-            </li>
-            <li class="nav-item">
-              <button class="nav-link disabled" type="button" id="NavBarPago">Pago</button>
-            </li>
-        </ul>
-        <div id="VuelosSimulacion">
-            Seleccione el vuelo de ida:
-            <div class="accordion" id="AccordionVuelos"></div>
-            <button id="VueloVueltaButton">Vuelo de vuelta</button>
-            <button id="ConfirmarVuelos">Solo vuelo de ida</button>
-        </div>
-        <div id="AsientosSimulacion">
-            Seleccione los asientos necesarios para la cantidad de pasajeros que requiera:
-            <div id="SelectAsientosSimulacion">
-                <div>
-                    <label for="SelectVueloSimulacion">Selecciona el vuelo</label>
-                    <select id="SelectVueloSimulacion"></select>
+    <div id="SimulacionClientes" class="BorderPadding container-lg">
+        <div class="card rounded-5">
+            <div class="card-header">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                    <button class="nav-link active" type="button" id="NavBarVuelos">Vuelos</button>
+                    </li>
+                    <li class="nav-item">
+                    <button class="nav-link disabled" type="button" id="NavBarAsientos">Asientos</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link disabled" type="button" id="NavBarPasajeros">Pasajeros</button>
+                    </li>
+                    <li class="nav-item">
+                    <button class="nav-link disabled" type="button" id="NavBarServicios">Servicios</button>
+                    </li>
+                    <li class="nav-item">
+                    <button class="nav-link disabled" type="button" id="NavBarPago">Pago</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div id="VuelosSimulacion">
+                    <h5 class="card-title mb-3">Seleccione el vuelo de ida:</h5>
+                    <div class="accordion" id="AccordionVuelos"></div>
+                    <div class="text-end mt-3">
+                        <button class="btn btn-primary rounded-5" id="VueloVueltaButton">Vuelo de vuelta</button>
+                        <button class="ms-1 btn btn-outline-primary rounded-5" id="ConfirmarVuelos">Solo vuelo de ida</button>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <label for="AsientosSeleccionadosSimulacion">Asientos</label>
-                <textarea id="AsientosSeleccionadosSimulacion" disabled></textarea>
-            </div>
-            <button id="ConfirmarAsientos">Confirmar</button>
-        </div>
-        <div id="PasajerosSimulacion">
-            Rellene los datos de los pasajeros:
-            <ul class="list-group" id="ListaDatosPasajeros"></ul>
-            <button id="ConfirmarPasajeros">Confirmar</button>
-        </div>
-        <div id="ReservacionesSimulacion">
-            Eliga los servicios y rellene los datos sobre su equipaje:
-            <div>
-                <label for="MascotasSimulacion">Cantidad de mascotas</label>
-                <input type="number" value="0" id="MascotasSimulacion" min="0">
-            </div>
-            <div>
-                <label for="MaletaSimulacion">Peso de la maleta (si posee)</label>
-                <input type="number" id="MaletaSimulacion" min="0">
-            </div>
-            <div>
-                <label for="MaletaManoSimulacion">Peso de la maleta de mano (si posee)</label>
-                <input type="number" id="MaletaManoSimulacion" min="0">
-            </div>
-            <div>
-                <label for="MaletaExtrasSimulacion1">Peso de maletas extras (si posee)</label>
-                <div id="MaletasExtrasSimulacion"></div>
-            </div>
-            <div>
-                <label for="ServiciosSelectSimulacion">Selecciona un servicio extra (si lo desea)</label>
-                <select id="ServiciosSelectSimulacion" multiple></select>
-            </div>
-            <button id="ConfirmarReservaciones">Confirmar</button>
-        </div>
-
-        <div id="PagoSimulacion">
-            Paga y confirma tu reservación:
-            <div class="row">
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Datos de la tarjeta</h5>
-                        <div>
-                            <label for="NombreTarjetaSimulacion">Nombre del titular</label>
-                            <input type="text" id="NombreTarjeta">
-                        </div>
-                        <div>
-                            <label for="NumeroTarjetaSimulacion">Número de tarjeta</label>
-                            <input type="number" id="NumeroTarjeta">
-                        </div>
-                        <div>
-                            <label for="FechaVencimientoSimulacion">Fecha de vencimiento</label>
-                            <input type="date" id="FechaVencimiento" value="2024-07-18">
-                        </div>
-                        <div>
-                            <label for="CVVSimulacion">CVV</label>
-                            <input type="number" id="CVVSimulacion">
-                        </div>
-                        <h5>Billing information</h5>
-                        <div>
-                            <label for="EmailFactSimulacion">Email</label>
-                            <input type="text" id="EmailFactSimulacion">
-                        </div>
-                        <div>
-                            <label for="DireccionSimulacion">Dirección de residencia</label>
-                            <input type="text" id="DireccionSimulacion">
-                        </div>
-                        <div>
-                            <label for="CiudadSimulacion">Ciudad</label>
-                            <input type="text" id="CiudadSimulacion">
-                        </div>
-                        <div>
-                            <label for="PaisSimulacion">País</label>
-                            <select id="PaisSimulacion" class="SelectPaises"></select>
+                <div id="AsientosSimulacion">
+                    <h5 class="card-title mb-3">
+                        Seleccione los asientos necesarios para la cantidad de pasajeros que requiera:
+                    </h5>
+                    <div id="SelectAsientosSimulacion">
+                        <div class="justify-content-center d-flex">
+                            <div class="mb-3 text-center w-50">
+                                <label class="form-label" for="SelectVueloSimulacion">Selecciona el vuelo</label>
+                                <select class="form-control" id="SelectVueloSimulacion"></select>
+                            </div>
                         </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Purchase Summary</h5>
-                        <div class="accordion" id="VuelosInfoSimulacion"></div>
-                        <ul class="list-group" id="DetallesPagoSimulacion"></ul>
-                        <h5>Total: <span id="TotalPagoSimulacion"></span></h5>
+                    <div class="justify-content-center d-flex">
+                        <div class="mb-3 w-50 text-center">
+                            <label class="form-label" for="AsientosSeleccionadosSimulacion">Asientos</label>
+                            <textarea class="form-control rounded-5" id="AsientosSeleccionadosSimulacion" disabled></textarea>
+                        </div>
                     </div>
-                  </div>
-                </div>
-            </div>
-            <button id="ConfirmarPago">Confirmar</button>
-        </div>
-        <div id="EndSimulacion" class="ModalBackdrop">
-            <div class="ModalContent" id="EndSimulacionContent">
-                Reservación confirmada con exito, su recibo de pago fue enviado a su correo electrónico.
-                <button id="SalirSimulacion">Salir</button>
-            </div>
-        </div>
 
-        <button id="SalirSimulacion">Salir</button>
-        <input id="VuelosHidden" value="" hidden>
+                    <div class="text-end">
+                        <button class="btn btn-primary rounded-5" id="ConfirmarAsientos">Confirmar</button>
+                    </div>
+                </div>
+                <div id="PasajerosSimulacion">
+                    <h5 class="card-title mb-3">Rellene los datos de los pasajeros:</h5>
+                    <ul class="list-group" id="ListaDatosPasajeros"></ul>
+
+                    <div class="text-end mt-3">
+                        <button class="btn btn-primary rounded-5" id="ConfirmarPasajeros">Confirmar</button>
+                    </div>
+                </div>
+                <div id="ReservacionesSimulacion">
+                    <h5 class="card-title mb-3">
+                        Eliga los servicios y rellene los datos sobre su equipaje:
+                    </h5>
+                    <div class="mb-3">
+                        <label class="form-label" for="MascotasSimulacion">Cantidad de mascotas</label>
+                        <input class="form-control" type="number" value="0" id="MascotasSimulacion" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="MaletaSimulacion">Peso de la maleta (si posee)</label>
+                        <input class="form-control" type="number" id="MaletaSimulacion" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="MaletaManoSimulacion">Peso de la maleta de mano (si posee)</label>
+                        <input class="form-control" type="number" id="MaletaManoSimulacion" min="0">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="MaletaExtrasSimulacion1">Peso de maletas extras (si posee)</label>
+                        <div id="MaletasExtrasSimulacion"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="ServiciosSelectSimulacion">Selecciona un servicio extra (si lo desea)</label>
+                        <select class="form-control" id="ServiciosSelectSimulacion" multiple></select>
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-primary rounded-5" id="ConfirmarReservaciones">Confirmar</button>
+                    </div>
+                </div>
+
+                <div id="PagoSimulacion">
+                    <h5 class="card-title mb-3">Paga y confirma tu reservación:</h5>
+                    <div class="row">
+                        <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Datos de la tarjeta</h5>
+                                <div class="mb-3">
+                                    <label class="form-label" for="NombreTarjetaSimulacion">Nombre del titular</label>
+                                    <input class="form-control" type="text" id="NombreTarjeta">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="NumeroTarjetaSimulacion">Número de tarjeta</label>
+                                    <input class="form-control" type="number" id="NumeroTarjeta">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="FechaVencimientoSimulacion">Fecha de vencimiento</label>
+                                    <input class="form-control" type="date" id="FechaVencimiento" value="2024-07-18">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="CVVSimulacion">CVV</label>
+                                    <input class="form-control" type="number" id="CVVSimulacion">
+                                </div>
+                                <h5>Billing information</h5>
+                                <div class="mb-3">
+                                    <label class="form-label" for="EmailFactSimulacion">Email</label>
+                                    <input class="form-control" type="text" id="EmailFactSimulacion">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="DireccionSimulacion">Dirección de residencia</label>
+                                    <input class="form-control" type="text" id="DireccionSimulacion">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="CiudadSimulacion">Ciudad</label>
+                                    <input class="form-control" type="text" id="CiudadSimulacion">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="PaisSimulacion">País</label>
+                                    <select class="form-control" id="PaisSimulacion" class="SelectPaises"></select>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">Purchase Summary</h5>
+                                <div class="accordion mb-3" id="VuelosInfoSimulacion"></div>
+                                <ul class="list-group mb-3" id="DetallesPagoSimulacion"></ul>
+                                <h5>Total: <span id="TotalPagoSimulacion"></span></h5>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button class="btn btn-primary rounded-5" id="ConfirmarPago">Confirmar</button>
+                    </div>
+                </div>
+                <div id="EndSimulacion" class="ModalBackdrop">
+                    <div class="ModalContent" id="EndSimulacionContent">
+                        Reservación confirmada con exito, su recibo de pago fue enviado a su correo electrónico.
+                        <button id="SalirSimulacion">Salir</button>
+                    </div>
+                </div>
+                
+                <div class="text-end mt-3">
+                    <button class="btn btn-danger rounded-5" id="SalirSimulacion">Salir</button>
+                </div>
+                <input id="VuelosHidden" value="" hidden>
+            </div>
+        </div>
     </div>
     <nav class="navbar bg-light fixed-bottom" id="NavBarApp">
         <div class="container-fluid">
@@ -547,7 +578,7 @@
             <button class="btn btn-outline-primary rounded-5 ServiciosButton">Servicios</button>
             <button class="btn btn-outline-primary ParametrosButton rounded-5">General parameters</button>
             <button class="btn btn-outline-primary DescuentosButton rounded-5">Descuentos</button>
-            <button class="btn btn-outline-primary ClientesButton rounded-5">Clientes</button>
+            <button class="btn btn-outline-primary ClientesButton rounded-5" data-bs-toggle="modal" data-bs-target="#Clientes">Clientes</button>
         </div>
     </nav>        
 </body>

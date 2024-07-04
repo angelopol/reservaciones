@@ -14,10 +14,17 @@ function SelectPhoneArea() {
 
 function MakeSimpleInput(id, Label, type="text", value = null){
     var div = document.createElement('div');
+    div.classList.add('mb-3');
     var label = document.createElement('label');
+    label.classList.add('form-label');
     label.setAttribute('for', id);
     label.innerHTML = Label;
     var input = document.createElement('input');
+    if (type === "checkbox"){
+        input.classList.add('form-check-input');
+    }else {
+        input.classList.add('form-control');
+    }
     input.setAttribute('type', type);
     input.id = id;
     if (value != null){
@@ -32,15 +39,17 @@ function MakeTelefono(count){
     var DivTelefono = document.createElement('div');
     var LabelTelefono = document.createElement('label');
     LabelTelefono.setAttribute('for', "AreaSimulacionClientes"+count);
+    LabelTelefono.classList.add('form-label');
     LabelTelefono.textContent = "Telefono móvil";
     var InputGroupTelefono = document.createElement('div');
-    InputGroupTelefono.classList.add("input-group");
+    InputGroupTelefono.classList.add("input-group", "mb-3");
     var SelectArea = document.createElement('select');
-    SelectArea.classList.add("SelectArea");
+    SelectArea.classList.add("SelectArea", "form-control");
     SelectArea.id = "AreaSimulacionClientes"+count;
     var InputTelefono = document.createElement('input');
     InputTelefono.setAttribute('type', 'text');
     InputTelefono.id = "TelefonoSimulacionClientes"+count;
+    InputTelefono.classList.add("form-control");
     InputGroupTelefono.appendChild(SelectArea);
     InputGroupTelefono.appendChild(InputTelefono);
     DivTelefono.appendChild(LabelTelefono);
@@ -50,10 +59,13 @@ function MakeTelefono(count){
 
 function MakeSexo(count){
     var div = document.createElement('div');
+    div.classList.add('mb-3');
     var label = document.createElement('label');
+    label.classList.add('form-label');
     label.setAttribute('for', "SexoSimulacionClientes"+count);
     label.textContent = "Sexo";
     var select = document.createElement('select');
+    select.classList.add('form-select');
     select.id = "SexoSimulacionClientes"+count;
     var masculino = document.createElement('option');
     masculino.value = "Masculino";
@@ -74,12 +86,14 @@ function MakeSexo(count){
 
 function MakeNacionalidad(count){
     var div = document.createElement('div');
+    div.classList.add('mb-3');
     var label = document.createElement('label');
+    label.classList.add('form-label');
     label.setAttribute('for', "NacionalidadSimulacionClientes"+count);
     label.textContent = "Nacionalidad";
     var select = document.createElement('select');
     select.id = "NacionalidadSimulacionClientes"+count;
-    select.classList.add('SelectPaises');
+    select.classList.add('SelectPaises', "form-control");
     div.appendChild(label);
     div.appendChild(select);
     return div;
@@ -175,7 +189,7 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
         AddItemToList(items, listGroup);
 
         var formCheckDiv = document.createElement('div');
-        formCheckDiv.classList.add('form-check', 'form-switch');
+        formCheckDiv.classList.add('form-check', 'form-switch', 'mt-3');
 
         var inputCheckbox = document.createElement('input');
         inputCheckbox.classList.add('form-check-input', "SeleccionarCheckBox");
@@ -187,7 +201,7 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
         var label = document.createElement('label');
         label.classList.add('form-check-label');
         label.setAttribute('for', VueloId+"-Checkbox");
-        label.textContent = 'Seleccionar';
+        label.textContent = 'Seleccionar vuelo';
 
         formCheckDiv.appendChild(inputCheckbox);
         formCheckDiv.appendChild(label);
@@ -426,7 +440,7 @@ function InitPago(){
     var CountClientes = document.getElementById('ListaDatosPasajeros').children.length;
     totales = MontosTotales(
         document.getElementById('MaletaSimulacion').value, document.getElementById('MaletaManoSimulacion').value, '',
-        VuelosHidden, document.getElementById('MascotasSimulacion'), "", false, [], false, ValorServicios,
+        VuelosHidden, document.getElementById('MascotasSimulacion').value, "", false, [], false, ValorServicios,
         CountClientes, "MaletasExtrasSimulacion"
     );
 
@@ -474,7 +488,7 @@ function InitReservaciones(){
             alert('El apellido no es válido');
             return;
         }
-        var vuelos = dcument.getElementById('VuelosHidden').value.split(" ");
+        var vuelos = document.getElementById('VuelosHidden').value.split(" ");
         var visa = document.getElementById('VisaSimulacionClientes'+i.toString());
         if (visa != null) {
             for (let p = 0; p < vuelos.length; p++) {
