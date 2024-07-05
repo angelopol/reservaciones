@@ -760,6 +760,10 @@ function SalirSimulacion(){
     VaciarElemento(document.getElementById('SelectAsientosSimulacion'));
     VaciarElemento(document.getElementById('SelectVueloSimulacion'));
     VaciarElemento(document.getElementById('DetallesPagoSimulacion'));
+    var ButtonSoloIda = document.getElementById('ConfirmarVuelos');
+    ButtonSoloIda.innerHTML = "One-way flight only";
+    var VueloVueltaButton = document.getElementById('VueloVueltaButton');
+    VueloVueltaButton.style.display = "inline-block";
     SetNavBar("active", "", "", "", "");
     var SimulacionClientes = document.getElementById('SimulacionClientes');
     SimulacionClientes.style.display = 'none';
