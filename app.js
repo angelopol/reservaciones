@@ -617,6 +617,9 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
         }
     }
     tarifa += ValorMaletasExtras;
+    if (substraer){
+        ValorMaletasExtras *= -1;
+    }
     if (span) UpdateSpan(document.getElementById('TotalTarifaMaletasExtras'), ValorMaletasExtras);
     console.log(tarifa);
 
