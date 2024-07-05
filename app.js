@@ -22,6 +22,23 @@ function AppButtons(disabled = true){
     }
 }
 
+function IconButton(){
+    var icon = document.getElementById('icon');
+    icon.addEventListener('click', function() {
+        var app = document.getElementById('app');
+        var NavBarApp = document.getElementById('NavBarApp');
+        var launcher = document.getElementById('launcher');
+        var EntrarSimulacion = document.getElementById('EntrarSimulacion');
+        var SimulacionClientes = document.getElementById('SimulacionClientes');
+
+        app.style.display = "none";
+        SimulacionClientes.style.display = "none";
+        NavBarApp.style.display = "none";
+        EntrarSimulacion.style.display = "none";
+        launcher.style.display = "block";
+    });
+}
+
 function SelectPaises() {
     var selects = document.getElementsByClassName('SelectPaises');
     for (let i = 0; i < selects.length; i++) {
@@ -927,6 +944,7 @@ function main() {
     InitSelectClientes();
     RegistrarServicios();
     SelectPaises();
+    IconButton();
 }
 
 main();

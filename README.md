@@ -206,5 +206,3 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 
 ## Funciones adicionales ##
 - Clases (premium, estandar, basico) para los vuelos
-- Cuando se toque en Reservation Simulator de la barra superior, ocultar los divs App, SimulacionClientes y mostrar el div launcher, se oculta el button EntrarSimulacion, se oculta NavBarApp
-- Transformacion del titulo principal al entrar a la página
