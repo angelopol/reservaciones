@@ -12,13 +12,7 @@ function SelectPhoneArea() {
     }
 }
 
-function MakeSimpleInput(id, Label, type="text", value = null){
-    var div = document.createElement('div');
-    div.classList.add('mb-3');
-    var label = document.createElement('label');
-    label.classList.add('form-label');
-    label.setAttribute('for', id);
-    label.innerHTML = Label;
+function MakeSimpleInput(id, Label, type="text", value = null, label = false){
     var input = document.createElement('input');
     if (type === "checkbox"){
         input.classList.add('form-check-input');
@@ -30,9 +24,18 @@ function MakeSimpleInput(id, Label, type="text", value = null){
     if (value != null){
         input.value = value;
     }
-    div.appendChild(label);
-    div.appendChild(input);
-    return div;
+    if (label){
+        var div = document.createElement('div');
+        div.classList.add('mb-3');
+        var label = document.createElement('label');
+        label.classList.add('form-label');
+        label.setAttribute('for', id);
+        label.innerHTML = Label;
+        div.appendChild(label);
+        div.appendChild(input);
+        return div;
+    }
+    return input;
 }
 
 function MakeTelefono(count){
@@ -57,13 +60,7 @@ function MakeTelefono(count){
     return DivTelefono;
 }
 
-function MakeSexo(count){
-    var div = document.createElement('div');
-    div.classList.add('mb-3');
-    var label = document.createElement('label');
-    label.classList.add('form-label');
-    label.setAttribute('for', "SexoSimulacionClientes"+count);
-    label.textContent = "Sex";
+function MakeSexo(count, label = false){
     var select = document.createElement('select');
     select.classList.add('form-select');
     select.id = "SexoSimulacionClientes"+count;
@@ -79,57 +76,143 @@ function MakeSexo(count){
     select.appendChild(masculino);
     select.appendChild(femenino);
     select.appendChild(otro);
-    div.appendChild(label);
-    div.appendChild(select);
-    return div;
+    if (label){
+        var div = document.createElement('div');
+        div.classList.add('mb-3');
+        var label = document.createElement('label');
+        label.classList.add('form-label');
+        label.setAttribute('for', "SexoSimulacionClientes"+count);
+        label.textContent = "Sex";
+        div.appendChild(label);
+        div.appendChild(select);
+        return div;
+    }
+    return select;
 }
 
-function MakeNacionalidad(count){
-    var div = document.createElement('div');
-    div.classList.add('mb-3');
-    var label = document.createElement('label');
-    label.classList.add('form-label');
-    label.setAttribute('for', "NacionalidadSimulacionClientes"+count);
-    label.textContent = "Nationality";
+function MakeNacionalidad(count, label = false){
     var select = document.createElement('select');
     select.id = "NacionalidadSimulacionClientes"+count;
     select.classList.add('SelectPaises', "form-control");
-    div.appendChild(label);
-    div.appendChild(select);
-    return div;
+    if (label){
+        var div = document.createElement('div');
+        div.classList.add('mb-3');
+        var label = document.createElement('label');
+        label.classList.add('form-label');
+        label.setAttribute('for', "NacionalidadSimulacionClientes"+count);
+        label.textContent = "Nationality";
+        div.appendChild(label);
+        div.appendChild(select);
+        return div;
+    }
+    return select;
 }
 
-function AddPasajero(count, visa = false){
+function MakeSpan(text){
+    var span = document.createElement('span');
+    span.classList.add('input-group-text');
+    span.textContent = text;
+    return span;
+}
+
+function MakePasaporteCedula(count){
+    let divInputGroup = document.createElement('div');
+    divInputGroup.className = 'input-group mb-3 mt-3';
+
+    let spanPasaporte = MakeSpan('Passport');
+    var pasaporte = MakeSimpleInput('PasaporteSimulacionClientes'+count, 'Passport'); 
+
+    let spanCedula = MakeSpan('Cedula');
+    var cedula = MakeSimpleInput('CedulaSimulacionClientes'+count, 'Cedula', "number");
+
+    divInputGroup.appendChild(spanPasaporte);
+    divInputGroup.appendChild(pasaporte);
+    divInputGroup.appendChild(spanCedula);
+    divInputGroup.appendChild(cedula);
+    
+    return divInputGroup
+}
+
+function MakeNombresApellidos(count){
+    let divInputGroup = document.createElement('div');
+    divInputGroup.className = 'input-group mb-3';
+
+    let spanNombres = MakeSpan('Names');
+    var nombres = MakeSimpleInput('NombresSimulacionClientes'+count, 'Names');
+
+    let spanApellidos = MakeSpan('Surnames');
+    var apellidos = MakeSimpleInput('ApellidosSimulacionClientes'+count, 'Surnames');
+
+    divInputGroup.appendChild(spanNombres);
+    divInputGroup.appendChild(nombres);
+    divInputGroup.appendChild(spanApellidos);
+    divInputGroup.appendChild(apellidos);
+    
+    return divInputGroup
+}
+
+function MakeNacimientoNacionalidad(count){
+    let divInputGroup = document.createElement('div');
+    divInputGroup.className = 'input-group mb-3';
+
+    let spanNacimiento = MakeSpan('Date of birth');
+    var FechaNacimiento = MakeSimpleInput('FechaNacimientoSimulacionClientes'+count, 'Date of birth', "date", "2005-07-18");
+
+    let spanNacionalidad = MakeSpan('Nacionality');
+    var nacionalidad = MakeNacionalidad(count);
+
+    divInputGroup.appendChild(spanNacimiento);
+    divInputGroup.appendChild(FechaNacimiento);
+    divInputGroup.appendChild(spanNacionalidad);
+    divInputGroup.appendChild(nacionalidad);
+    
+    return divInputGroup
+}
+
+function MakeSexoEmail(count){
+    let divInputGroup = document.createElement('div');
+    divInputGroup.className = 'input-group mb-3';
+
+    let spanSexo = MakeSpan('Sex');
+    var sexo = MakeSexo(count);
+
+    let spanEmail = MakeSpan('Email');
+    var email = MakeSimpleInput('EmailSimulacionClientes'+count, 'Email', "email");
+
+    divInputGroup.appendChild(spanSexo);
+    divInputGroup.appendChild(sexo);
+    divInputGroup.appendChild(spanEmail);
+    divInputGroup.appendChild(email);
+    
+    return divInputGroup
+}
+
+function AddPasajero(count, visa = false, asientos = null){
     var listItem = document.createElement('li');
     listItem.classList.add('list-group-item');
 
-    var pasaporte = MakeSimpleInput('PasaporteSimulacionClientes'+count, 'Passport');  
-    var cedula = MakeSimpleInput('CedulaSimulacionClientes'+count, 'Cedula', "number");
-    var nombres = MakeSimpleInput('NombresSimulacionClientes'+count, 'Names');
-    var apellidos = MakeSimpleInput('ApellidosSimulacionClientes'+count, 'Surnames');
     var telefono = MakeTelefono(count);
-    var email = MakeSimpleInput('EmailSimulacionClientes'+count, 'Email', "email");
-    var sexo = MakeSexo(count);
-    var nacionalidad = MakeNacionalidad(count);
-    var FechaNacimiento = MakeSimpleInput('FechaNacimientoSimulacionClientes'+count, 'Date of birth', "date", "2005-07-18");
 
     var title = document.createElement('h2');
     title.innerHTML = "Passenger " + count;
 
+    var AsientosSpan = document.createElement('span');
+    if (asientos[count-1].length > 1 && Array.isArray(asientos[count])){
+        AsientosSpan.innerHTML = "<b>Seats:</b> " + asientos[count-1][0] + ", " + asientos[count-1][1];
+    } else {
+        AsientosSpan.innerHTML = "<b>Seats:</b> " + asientos[count-1];
+    }
+
     listItem.appendChild(title);
-    listItem.appendChild(pasaporte);
-    listItem.appendChild(cedula);
-    listItem.appendChild(nombres);
-    listItem.appendChild(apellidos);
+    listItem.appendChild(AsientosSpan);
+    listItem.appendChild(MakePasaporteCedula(count));
+    listItem.appendChild(MakeNombresApellidos(count));
+    listItem.appendChild(MakeNacimientoNacionalidad(count));
+    listItem.appendChild(MakeSexoEmail(count));  
     listItem.appendChild(telefono);
-    listItem.appendChild(email);
-    listItem.appendChild(sexo);
-    listItem.appendChild(nacionalidad);  
-    listItem.appendChild(FechaNacimiento);  
 
     if (visa){
-        visa = MakeSimpleInput('VisaSimulacionClientes'+count, 'Visa', "checkbox");
-        listItem.appendChild(visa);
+        listItem.appendChild(MakeSimpleInput('VisaSimulacionClientes'+count, 'Visa', "checkbox", null, true));
     }
 
     return listItem;
@@ -172,7 +255,7 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
         AccordionButton.setAttribute("data-bs-target", "#AccordionCollapse-"+VueloId);
         AccordionButton.setAttribute("aria-expanded", "false");
         AccordionButton.setAttribute("aria-controls", "AccordionCollapse-"+VueloId);
-        AccordionButton.innerHTML = VueloId + "&nbsp;<b>" + origen + " -> " + destino + "</b>";
+        AccordionButton.innerHTML = "<b>" + origen + " -> " + destino + "</b>: " + FechaHora;
 
         var AccordionCollapse = document.createElement('div');
         AccordionCollapse.id = "AccordionCollapse-"+VueloId;
@@ -185,7 +268,7 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
 
         var listGroup = document.createElement('ul');
         listGroup.classList.add('list-group');
-        var items = ["<b>Fare:</b> " + tarifa, "<b>Departure date and time:</b> " + FechaHora, "<b>You need a visa:</b> " + visa];
+        var items = ["<b>Fare:</b> " + tarifa, "<b>You need a visa:</b> " + visa];
         AddItemToList(items, listGroup);
 
         if(select){
@@ -317,7 +400,7 @@ function SetNavBar(ValueVuelos = "active", ValueAsientos = "", ValuePasajeros = 
 function ConfirmarId(table = 'ClientesTable'){
     var Table = document.getElementById(table);
     var rows = Table.rows;
-    var randomId = Math.random().toString(3);
+    var randomId = Math.random().toString().substring(2, 8);
     for (var i = 1; i < rows.length; i++) {
         if (rows[i].cells[0].innerHTML === randomId) {
             return ConfirmarId();
@@ -358,7 +441,6 @@ function ConfirmarPagoReservacion(){
         return;
     }
 
-    /*
     var PasajerosCount = document.getElementById('ListaDatosPasajeros').children.length;
     var ClientesFinal = "";
     for (let i = 1; i <= PasajerosCount; i++) {
@@ -374,7 +456,7 @@ function ConfirmarPagoReservacion(){
             id, "PasaporteSimulacionClientes"+i.toString(),
             "CedulaSimulacionClientes"+i.toString(), "NombresSimulacionClientes"+i.toString(),
             "ApellidosSimulacionClientes"+i.toString(), "FechaNacimientoSimulacionClientes"+i.toString(),
-            "TelefonoSimulacionClientes"+i.toString(), "EmailSimulacionClientes"+i.toString,
+            "TelefonoSimulacionClientes"+i.toString(), "EmailSimulacionClientes"+i.toString(),
             "NacionalidadSimulacionClientes"+i.toString(), "SexoSimulacionClientes"+i.toString(), visa, true
         );
     }
@@ -384,7 +466,7 @@ function ConfirmarPagoReservacion(){
     var CountClientes = document.getElementById('ListaDatosPasajeros').children.length;
     totales = MontosTotales(
         document.getElementById('MaletaSimulacion').value, document.getElementById('MaletaManoSimulacion').value, '',
-        VuelosHidden, document.getElementById('MascotasSimulacion'), "", false, [], false, servicios[1],
+        document.getElementById('VuelosHidden').value.split(" "), document.getElementById('MascotasSimulacion').value, "", false, [], false, servicios[1],
         CountClientes, "MaletasExtrasSimulacion"
     );
     var AsientosTemp = document.getElementById('AsientosSeleccionadosSimulacion').value.split(' ');
@@ -396,15 +478,17 @@ function ConfirmarPagoReservacion(){
         }
         AsientoTable += AsientoText + ' ';
     }
+    var IdReservacion = ConfirmarId('ReservacionesTable');
     AddToReservacionesTable(
-        ReservacionesTable, ConfirmarId('ReservacionesTable'), document.getElementById('MaletasSimulacion').value,
-        document.getElementById('MaletaManoSimulacion').value, totales[0], document.getElementById('VueosHidden').value,
+        ReservacionesTable, IdReservacion, document.getElementById('MaletaSimulacion').value,
+        document.getElementById('MaletaManoSimulacion').value, totales[0], document.getElementById('VuelosHidden').value,
         totales[1].toString(), AsientoTable, document.getElementById('MascotasSimulacion').value, totales[2], ClientesFinal, servicios[0]
 
     )
-    */
-    var SalirSimulacionDos = document.getElementById('SalirSimulacionDos');
-    SalirSimulacionDos.addEventListener('click', SalirSimulacion);
+
+    var IdReservacionSimulacion = document.getElementById('IdReservacionSimulacion');
+    IdReservacionSimulacion.innerHTML = IdReservacion;
+
     var EndSimulacion = document.getElementById('EndSimulacion');
     EndSimulacion.classList.toggle('show');
 }
@@ -445,8 +529,12 @@ function InitPago(){
     totales = MontosTotales(
         document.getElementById('MaletaSimulacion').value, document.getElementById('MaletaManoSimulacion').value, '',
         VuelosHidden, document.getElementById('MascotasSimulacion').value, "", false, [], false, ValorServicios,
-        CountClientes, "MaletasExtrasSimulacion"
+        CountClientes, "MaletasExtrasSimulacion", false
     );
+
+    if(VuelosInfo.length > 1){
+        CountClientes *= 2;
+    }
 
     var items = [
         "<b>General Rate:</b> " + totales[6], "<b>Cost per ticket (x"+CountClientes+"):</b> " + totales[3],
@@ -464,7 +552,7 @@ function InitReservaciones(){
     for (let i = 1; i <= PasajerosCount; i++) {
         var CedulaSimulacionClientes = document.getElementById('CedulaSimulacionClientes'+i.toString());
         if (!/^\d{1,8}$/.test(CedulaSimulacionClientes.value)) {
-            alert('The ID must have between 1 and 8 numeric digits');
+            alert('The Cedula must have between 1 and 8 numeric digits');
             return;
         }
         var TelefonoSimulacionClientes = document.getElementById('TelefonoSimulacionClientes'+i.toString());
@@ -497,13 +585,7 @@ function InitReservaciones(){
         if (visa != null) {
             for (let p = 0; p < vuelos.length; p++) {
                 if (vuelos != "") {
-                    var vueloValido = false;
-                    for (var j = 1; j < VuelosTable.rows.length; j++) {
-                        if (VuelosTable.rows[j].cells[0].textContent == VueloId) {
-                            vueloValido = VuelosTable.rows[j].cells[5].innerHTML.toLowerCase() === 'si';
-                            break;
-                        }
-                    }
+                    var vueloValido = VerifyVisaVuelo(vuelos[p]);
                     if (vueloValido && !visa.checked) {
                         alert('The flight requires the passenger to have a visa');
                         return;
@@ -526,22 +608,54 @@ function InitReservaciones(){
     ConfirmarReservaciones.addEventListener('click', InitPago);
 }
 
+function GetParesAsientos(asientosVuelos) {
+    let agrupadosPorVuelo = {};
+    let resultado = [];
+
+    asientosVuelos.forEach(asientoVuelo => {
+        if (asientoVuelo != '') {
+            let [asiento, vuelo] = asientoVuelo.split('~');
+            if (!agrupadosPorVuelo[vuelo]) {
+                agrupadosPorVuelo[vuelo] = [];
+            }
+            agrupadosPorVuelo[vuelo].push(asiento);
+        }
+    });
+
+    let vuelos = Object.keys(agrupadosPorVuelo);
+    if (vuelos.length === 2) {
+        for (let i = 0; i < agrupadosPorVuelo[vuelos[0]].length; i++) {
+            resultado.push([agrupadosPorVuelo[vuelos[0]][i], agrupadosPorVuelo[vuelos[1]][i]]);
+        }
+    }
+
+    return resultado;
+}
+
 function InitPasajeros(){
+    var NeedVisa = false;
     var AsientosTemp = document.getElementById('AsientosSeleccionadosSimulacion').value.split(' ');
     var vuelos = [];
     var CountAsientos = 0;
+    var AsientosPasageros = [];
     for (var i = 0; i < AsientosTemp.length; i++) {
-        if (AsientosTemp[i].split('~')[0] == ''){
+        var asiento = AsientosTemp[i].split('~')[0];
+        if (asiento == ''){
             continue;
         }
         vuelos.push(AsientosTemp[i].split('~')[1]);
         CountAsientos++;
+        AsientosPasageros.push(asiento);
     }
     var VuelosTemp = vuelos;
     vuelos = vuelos.filter(
         (vuelo, indice, self) => self.indexOf(vuelo) === indice
     );
-
+    if (vuelos.length < document.getElementById('SelectVueloSimulacion').children.length){
+        alert('Please select seats for both flights');
+        return;
+    }
+    NeedVisa = VerifyVisaVuelo(vuelos[0]);
     if (vuelos.length > 1){
         const LenghtVuelos1 = VuelosTemp.filter(vuelo => vuelo === vuelos[0]).length;
         const LenghtVuelos2 = VuelosTemp.filter(vuelo => vuelo === vuelos[1]).length;
@@ -550,15 +664,25 @@ function InitPasajeros(){
             return;
         }
         CountAsientos = CountAsientos / 2;
+        AsientosPasageros = GetParesAsientos(AsientosTemp);
+        if (NeedVisa || VerifyVisaVuelo(vuelos[1])){
+            NeedVisa = true;
+        }
+    }
+
+    if (CountAsientos < 1) {
+        alert('No seats selected');
+        return;
     }
 
     var AsientosSimulacion = document.getElementById('AsientosSimulacion');
     AsientosSimulacion.style.display = "none";
     SetNavBar("", "", "active", "disabled", "disabled");
 
+    console.log(AsientosPasageros);
     var ListaPasajeros = document.getElementById('ListaDatosPasajeros');
     for (let i = 1; i <= CountAsientos; i++) {
-        ListaPasajeros.appendChild(AddPasajero(i));
+        ListaPasajeros.appendChild(AddPasajero(i, NeedVisa, AsientosPasageros));
     }
     SelectPaises();
     SelectPhoneArea();
@@ -585,9 +709,9 @@ function InitAsientos(){
     
     VaciarElemento(document.getElementById('AccordionVuelos'));
     var ButtonSoloIda = document.getElementById('ConfirmarVuelos');
-    ButtonSoloIda.innerHTML = "Confirmar vuelos";
+    ButtonSoloIda.innerHTML = "One-way flight only";
     var VueloVueltaButton = document.getElementById('VueloVueltaButton');
-    VueloVueltaButton.style.display = "block";
+    VueloVueltaButton.style.display = "inline-block";
     var VuelosSimulacion = document.getElementById('VuelosSimulacion');
     VuelosSimulacion.style.display = "none";
 
@@ -602,16 +726,21 @@ function InitAsientos(){
     SelectAsiento('simulacion', "SelectVueloSimulacion", "AsientosSeleccionadosSimulacion");
     SetNavBar("", "active", "disabled", "disabled", "disabled");
 
-    var VuelosHidden = document.getElementById('VuelosHidden').value.split(" ");
-    var select = document.getElementById('SelectVueloSimulacion');
-    for (var i = 0; i < VuelosHidden.length; i++) {
-        if (VuelosHidden[i] != "") {
-            var option = document.createElement('option');
-            option.value = VuelosHidden[i];
-            option.text = VuelosHidden[i];
-            select.appendChild(option);
+    var VuelosInfo = [];
+    var vuelos = document.getElementById('VuelosTable');
+    let VuelosHidden = document.getElementById('VuelosHidden').value.split(" ");
+    var rows = vuelos.rows;
+    for (let p = 0; p < VuelosHidden.length; p++) {
+        for (var i = 1; i < rows.length; i++) {
+            if (rows[i].cells[0].innerHTML === VuelosHidden[p] && VuelosHidden[p] != "") {
+                VuelosInfo.push(rows[i]);
+                break;
+            }
         }
     }
+
+    var select = document.getElementById('SelectVueloSimulacion');
+    LoadSelect(select, VuelosInfo, 0, 3, 2, ' -> ', 4, ': ', VuelosInfo);
 
     AsOcupado('simulacion', "SelectVueloSimulacion", "AsientosSeleccionadosSimulacion");
     select.addEventListener('change', () => AsOcupado('simulacion', "SelectVueloSimulacion", "AsientosSeleccionadosSimulacion"));
@@ -621,21 +750,23 @@ function InitAsientos(){
 }
 
 function SalirSimulacion(){
-    /*document.getElementById('VuelosSimulacion').style.display = 'block';
+    document.getElementById('VuelosSimulacion').style.display = 'block';
     document.getElementById('AsientosSimulacion').style.display = 'none';
     document.getElementById('PasajerosSimulacion').style.display = 'none';
     document.getElementById('PagoSimulacion').style.display = 'none';
     document.getElementById('ReservacionesSimulacion').style.display = 'none';
-    document.getElementById('VuelosHidden').value = "";
     document.getElementById('AsientosSeleccionadosSimulacion').value = "";
     VaciarElemento(document.getElementById('ListaDatosPasajeros'));
     VaciarElemento(document.getElementById('SelectAsientosSimulacion'));
-    SetNavBar("active", "", "", "", "");*/
+    VaciarElemento(document.getElementById('SelectVueloSimulacion'));
+    VaciarElemento(document.getElementById('DetallesPagoSimulacion'));
+    SetNavBar("active", "", "", "", "");
     var SimulacionClientes = document.getElementById('SimulacionClientes');
     SimulacionClientes.style.display = 'none';
     var app = document.getElementById('app');
     app.style.display = 'block';
-    document.getElementById('EndSimulacionContent').style.display = 'none';
+    var EndSimulacion = document.getElementById('EndSimulacion');
+    EndSimulacion.classList.remove('show');
     AppButtons(false);
 }
 
@@ -646,11 +777,14 @@ function InitSimulacionClientes(){
         SimulacionClientes.style.display = 'block';
         var app = document.getElementById('app');
         app.style.display = 'none';
+        document.getElementById('VuelosHidden').setAttribute('value', '');
         AddVuelo();
         AppButtons();
     });
     var salir = document.getElementById('SalirSimulacion');
     salir.addEventListener('click', SalirSimulacion);
+    var salir2 = document.getElementById('SalirSimulacionDos');
+    salir2.addEventListener('click', SalirSimulacion);
     var ConfirmarVuelos = document.getElementById('ConfirmarVuelos');
     ConfirmarVuelos.addEventListener('click', InitAsientos)
     var VueloVueltaButton = document.getElementById('VueloVueltaButton');

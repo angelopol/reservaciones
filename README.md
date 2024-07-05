@@ -184,7 +184,7 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
         + Se oculta el div actual
         + Se muestra el div de la reservacion
         + Se deshabilitan el acceso a la parte de pago
-- Salir *
+- Salir
     * Se debe ocultar el div
     * Debe borrar todos los valores de los inputs de la simulación
         + Se elimina VuelosHidden
@@ -199,14 +199,12 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
     * Se debe ocultar el div de PagoSimulacion
     * Ocultar div EndSimulacionContent
 
-## Bugs ##
-- Confirmar una reservacion en el simulador
-- Salir del simulador
+## Referencias ##
+- Pagina web de Avianca
+- INAC
+- Informacion general encontrada en la web
 
 ## Funciones adicionales ##
-- Asiento escogido para cada pasajero
 - Clases (premium, estandar, basico) para los vuelos
-- Selects mostrar nombre y valor de referencia en vez de id
-- En la confirmacion de la reservacion mostrar el codigo de la reservacion
 - Cuando se toque en Reservation Simulator de la barra superior, ocultar los divs App, SimulacionClientes y mostrar el div launcher, se oculta el button EntrarSimulacion, se oculta NavBarApp
 - Transformacion del titulo principal al entrar a la página
