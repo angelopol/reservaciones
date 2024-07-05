@@ -96,8 +96,8 @@
                 <div class="col"> 
                     <div class="justify-content-center d-flex">
                         <div class="card rounded-5">
-                            <h5 class="card-title mt-3">Search your seat.</h5>
                             <div id="asientos" class="card-body">
+                                <h5 class="card-title">Search your seat.</h5>
                                 <div class="text-center mb-3">
                                     <label class="form-label" for="vuelo">Select your flight:</label>
                                     <select class="form-control" id="vuelo"></select>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="btn-group text-center pt-4">
                         <button class="btn btn-primary rounded-5" id="RegistrarButton">Register</button>
-                        <button class="ms-1 btn btn-outline-light rounded-5 ReservacionesButton">See reservations</button>
+                        <button class="ms-1 btn btn-outline-light rounded-5 ReservacionesButton" data-bs-toggle="modal" data-bs-target="#Reservaciones">See reservations</button>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
         <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
         <div class="modal-body">
-            <h2 class="card-title">General Parameters</h2>
+            <h2 class="card-title mb-3">General Parameters</h2>
             <div class="mb-3 input-group">
                 <span class="input-group-text" for="TarifaGeneral">General Rate</span>
                 <input class="form-control" type="number" id="TarifaGeneral" value="10" min="0">
@@ -157,23 +157,27 @@
         </div>
         </div>
     </div>
-    <div id="Reservaciones" class="ModalBackdrop">
-        <div class="ModalContent">
-            <table class="table" id="ReservacionesTable">
-                <tr>
-                    <th>ID</th>
-                    <th>Suitcase weight</th>
-                    <th>Hand luggage weight</th>
-                    <th>Weight of extra suitcases</th>
-                    <th>Flight</th>
-                    <th>Total amount</th>
-                    <th>Seats</th>
-                    <th>Pets</th>
-                    <th>Discount</th>
-                    <th>Clients</th>
-                    <th>Services</th>
-                </tr>
-            </table>
+    <div id="Reservaciones" class="modal">
+        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+        <div class="modal-body">
+            <div class="table-responsive">
+                <table class="table" id="ReservacionesTable">
+                    <tr>
+                        <th>ID</th>
+                        <th>Suitcase weight</th>
+                        <th>Hand luggage weight</th>
+                        <th>Weight of extra suitcases</th>
+                        <th>Flight</th>
+                        <th>Total amount</th>
+                        <th>Seats</th>
+                        <th>Pets</th>
+                        <th>Discount</th>
+                        <th>Clients</th>
+                        <th>Services</th>
+                    </tr>
+                </table>
+            </div>
             <br>
             <div>
                 <ul class="list-group">
@@ -190,15 +194,17 @@
             </div>
             <br>
             <div class="text-end">
-                <button class="ReservacionesButton btn btn-danger rounded-5">Close</button>
+                <button class="ReservacionesButton btn btn-danger rounded-5" data-bs-dismiss="modal">Close</button>
             </div>
+        </div>
+        </div>
         </div>
     </div> 
     <div id="VuelosModal" class="ModalBackdrop">
         <div class="ModalContent" id="VuelosModalContent">
             <div id="CrearVuelos" class="me-4">
-                <div class="mb-3">
-                    <label class="label-input" for="IdVuelo">ID</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">ID</span>
                     <input class="form-control" type="text" id="IdVuelo">
                 </div>
                 <div class="mb-3">
@@ -223,32 +229,34 @@
                 </div>
             </div>
             <div id="VerVuelos">
-                <table class="table" id="VuelosTable">
-                    <tr>
-                      <th>ID</th>
-                      <th>Fare</th>
-                      <th>Destiny</th>
-                      <th>Origin</th>
-                      <th>Date and time</th>
-                      <th>Visa</th>
-                    </tr>
-                    <tr>
-                      <td>Vuelo-1</td>
-                      <td>10</td>
-                      <td>Albania</td>
-                      <td>Afghanistan</td>
-                      <td>2024-07-01T12:30</td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>Vuelo-2</td>
-                        <td>12</td>
-                        <td>Afghanistan</td>
+                <div class="table-responsive table-scroll">
+                    <table class="table" id="VuelosTable">
+                        <tr>
+                        <th>ID</th>
+                        <th>Fare</th>
+                        <th>Destiny</th>
+                        <th>Origin</th>
+                        <th>Date and time</th>
+                        <th>Visa</th>
+                        </tr>
+                        <tr>
+                        <td>Vuelo-1</td>
+                        <td>10</td>
                         <td>Albania</td>
-                        <td>2024-07-05T12:30</td>
+                        <td>Afghanistan</td>
+                        <td>2024-07-01T12:30</td>
                         <td>No</td>
-                      </tr>
-                </table>
+                        </tr>
+                        <tr>
+                            <td>Vuelo-2</td>
+                            <td>12</td>
+                            <td>Afghanistan</td>
+                            <td>Albania</td>
+                            <td>2024-07-05T12:30</td>
+                            <td>No</td>
+                        </tr>
+                    </table>
+                </div>
                 <div class="text-end">
                     <button id="RegistrarVueloButton" class="btn btn-outline-primary rounded-5">Register</button>
                     <button class="ms-1 VuelosModalButton btn btn-danger rounded-5">Close</button>
@@ -259,8 +267,8 @@
     <div id="Descuentos" class="ModalBackdrop">
         <div class="ModalContent" id="DescuentosContent">
             <div id="CrearDescuentos" class="me-4">
-                <div class="mb-3">
-                    <label class="form-label" for="IdDescuento">ID</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">ID</span>
                     <input class="form-control" type="text" id="IdDescuento">
                 </div>
                 <div class="mb-3">
@@ -277,14 +285,16 @@
                 </div>
             </div>
             <div id="VerDescuentos">
-                <table class="table" id="DescuentosTable">
-                    <tr>
-                      <th>ID</th>
-                      <th>Percentage</th>
-                      <th>Value</th>
-                      <th>Description</th>
-                    </tr>
-                </table>
+                <div class="table-responsive table-scroll">
+                    <table class="table" id="DescuentosTable">
+                        <tr>
+                        <th>ID</th>
+                        <th>Percentage</th>
+                        <th>Value</th>
+                        <th>Description</th>
+                        </tr>
+                    </table>
+                </div>
                 <div class="text-end">
                     <button id="RegistrarDescuentoButton" class="btn btn-outline-primary rounded-5">Register</button>
                     <button class="ms-1 btn btn-danger rounded-5 DescuentosButton">Close</button>
@@ -296,51 +306,41 @@
         <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
         <div class="modal-body" id="ClientesContent">
-            <h2 class="card-title">Clients</h2>
+            <h2 class="card-title mb-3">Clients</h2>
             <div id="CrearClientes">
-                <div class="mb-3">
-                    <label class="form-label" for="IdCliente">ID</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">ID</span>
                     <input class="form-control" type="text" id="IdCliente">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="pasaporte">Passport</label>
-                    <input class="form-control" type="text" id="pasaporte">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="cedula">Cedula</label>
-                    <input class="form-control" type="number" id="cedula">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="nombres">Names</label>
-                    <input class="form-control" type="text" id="nombres">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="apellidos">Surnames</label>
-                    <input class="form-control" type="text" id="apellidos">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="FechaNacimiento">Date of birth</label>
-                    <input class="form-control" type="date" id="FechaNacimiento">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="telefono">Phone</label>
-                    <input class="form-control" type="number" id="telefono">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" type="email" id="email">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="sexo">Sexo</label>
+                    <span class="input-group-text">Sexo</span>
                     <select class="form-control" id="sexo">
                         <option value="Male" selected>Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="SelectPaises">Nacionality</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Passport</span>
+                    <input class="form-control" type="text" id="pasaporte">
+                    <span class="input-group-text">Cedula</span>
+                    <input class="form-control" type="number" id="cedula">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Names</span>
+                    <input class="form-control" type="text" id="nombres">
+                    <span class="input-group-text">Surnames</span>
+                    <input class="form-control" type="text" id="apellidos">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Date of birth</span>
+                    <input class="form-control" type="date" id="FechaNacimiento">
+                    <span class="input-group-text">Nacionality</span>
                     <select id="nacionalidad" class="SelectPaises form-control"></select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Phone</span>
+                    <input class="form-control" type="number" id="telefono">
+                    <span class="input-group-text">Email</span>
+                    <input class="form-control" type="email" id="email">
                 </div>
                 <div class="mb-3">
                     <input class="form-check-input" type="checkbox" id="visa">
@@ -348,34 +348,36 @@
                 </div>
             </div>
             <div id="VerClientes">
-                <table class="table" id="ClientesTable">
-                    <tr>
-                        <th>ID</th>
-                        <th>Passport</th>
-                        <th>Cedula</th>
-                        <th>Names</th>
-                        <th>Surnames</th>
-                        <th>Date of birth</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Sex</th>
-                        <th>Nationality</th>
-                        <th>Visa</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>AAA192892</td>
-                        <td>9218391</td>
-                        <td>Juan Andres</td>
-                        <td>Perez Garcia</td>
-                        <td>2001-01-01</td>
-                        <td>04142918322</td>
-                        <td>juan@gmail.com</td>
-                        <td>Masculino</td>
-                        <td>Venezolano</td>
-                        <td>Si</td>
-                    </tr>
-                </table>
+                <div class="table-responsive">
+                    <table class="table" id="ClientesTable">
+                        <tr>
+                            <th>ID</th>
+                            <th>Passport</th>
+                            <th>Cedula</th>
+                            <th>Names</th>
+                            <th>Surnames</th>
+                            <th>Date of birth</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Sex</th>
+                            <th>Nationality</th>
+                            <th>Visa</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>AAA192892</td>
+                            <td>9218391</td>
+                            <td>Juan Andres</td>
+                            <td>Perez Garcia</td>
+                            <td>2001-01-01</td>
+                            <td>04142918322</td>
+                            <td>juan@gmail.com</td>
+                            <td>Masculino</td>
+                            <td>Venezolano</td>
+                            <td>Si</td>
+                        </tr>
+                    </table>
+                </div>
                 <div class="text-end">
                     <button class="btn btn-outline-primary rounded-5" id="RegistrarClientesButton">Register</button>
                     <button class="ms-1 ClientesButton btn btn-danger rounded-5"  data-bs-dismiss="modal">Close</button>
@@ -388,8 +390,8 @@
     <div id="Servicios" class="ModalBackdrop">
         <div class="ModalContent" id="ServiciosContent" class="me-4">
             <div id="CrearServicios" class="me-4">
-                <div class="mb-3">
-                    <label class="form-label" for="IdServicio">ID</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" for="IdServicio">ID</span>
                     <input class="form-control" type="text" id="IdServicio">
                 </div>
                 <div class="mb-3">
@@ -402,13 +404,15 @@
                 </div>
             </div>
             <div id="VerServicios">
-                <table class="table table-sm table-responsive" id="ServiciosTable">
-                    <tr>
-                      <th>ID</th>
-                      <th>Fare</th>
-                      <th>Description</th>
-                    </tr>
-                </table>
+                <div class="table-responsive table-scroll">
+                    <table class="table" id="ServiciosTable">
+                        <tr>
+                        <th>ID</th>
+                        <th>Fare</th>
+                        <th>Description</th>
+                        </tr>
+                    </table>
+                </div>
                 <div class="text-end">
                     <button id="RegistrarServicioButton" class="btn btn-outline-primary rounded-5">Register</button>
                     <button class="ServiciosButton btn btn-danger rounded-5 ms-1">Close</button>

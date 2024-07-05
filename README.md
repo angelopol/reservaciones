@@ -198,7 +198,6 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 
 ## Bugs ##
 - Modals
-- Traduccion
 - Confirmar una reservacion en el simulador
 - Salir del simulador
 

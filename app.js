@@ -449,8 +449,6 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
         ValorVuelos *= -1;
     }
     UpdateSpan(document.getElementById('TotalTarifaVuelo'), ValorVuelos);
-    
-    console.log(tarifa)
 
     var ValorMaleta = 0.0;
     if (maleta != ''){
@@ -465,8 +463,6 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
     }
     UpdateSpan(document.getElementById('TotalTarifaMaleta'), ValorMaleta);
 
-    console.log(tarifa);
-
     var ValorMaletaMano = 0.0;
     if (MaletaMano != ''){
         ValorMaletaMano = parseFloat(document.getElementById('TarifaMaletaMano').value);
@@ -477,8 +473,6 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
         UpdateSpan(document.getElementById('TotalTarifaMaletaMano'), ValorMaletaMano);
     }
 
-    console.log(tarifa);
-
     var ValorGeneral = parseFloat(document.getElementById('TarifaGeneral').value);
     ValorGeneral *= CountClientes;
     tarifa += ValorGeneral;
@@ -486,8 +480,6 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
         ValorGeneral *= -1;
     }
     UpdateSpan(document.getElementById('TotalTarifaGeneral'), ValorGeneral);
-
-    console.log(tarifa);
 
     var MaletasExtras = "";
     var ValorMaletasExtras = 0.0;
@@ -520,8 +512,6 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
     tarifa += ValorMaletasExtras;
     UpdateSpan(document.getElementById('TotalTarifaMaletasExtras'), ValorMaletasExtras);
 
-    console.log(tarifa);
-
     ValorMascotas = 0.0;
     if (CantidadMascotas != ''){
         ValorMascotas = parseFloat(CantidadMascotas) * parseFloat(document.getElementById('TarifaMascotas').value);
@@ -531,8 +521,6 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
         }
         UpdateSpan(document.getElementById('TotalTarifaMascotas'), ValorMascotas);
     }
-
-    console.log(tarifa);
 
     var DescuentoTable = "";
     var ValorDescuentos = 0.0;
@@ -565,8 +553,6 @@ function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMa
         ValorDescuentos *= -1;
     }
     UpdateSpan(document.getElementById('TotalDescuentos'), ValorDescuentos);
-
-    console.log(tarifa);
 
     if (substraer){
         tarifa *= -1;
@@ -806,7 +792,6 @@ function main() {
     const InitButton = document.getElementById("InitButton");
     InitButton.onclick = ChangePage;
     InitAsientos();
-    InitModal('Reservaciones');
     InitModal('VuelosModal');
     InitModal('Descuentos');
     InitModal('Servicios');

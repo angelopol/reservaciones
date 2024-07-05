@@ -333,7 +333,6 @@ function ConfirmarPagoReservacion(){
         return;
     }
     var NumeroTarjetaSimulacion = document.getElementById('NumeroTarjetaSimulacion');
-    console.log(NumeroTarjetaSimulacion);
     if (!/^\d{16}$/.test(NumeroTarjetaSimulacion.value)) {
         alert('The card number must be 16 numeric digits long');
         return;
@@ -457,7 +456,6 @@ function InitPago(){
     AddItemToList(items, document.getElementById('DetallesPagoSimulacion'));
 
     var TotalPagoSimulacion = document.getElementById('TotalPagoSimulacion');
-    console.log(TotalPagoSimulacion);
     TotalPagoSimulacion.innerHTML = totales[1].toString();
 }
 
@@ -628,7 +626,6 @@ function SalirSimulacion(){
     document.getElementById('PasajerosSimulacion').style.display = 'none';
     document.getElementById('PagoSimulacion').style.display = 'none';
     document.getElementById('ReservacionesSimulacion').style.display = 'none';
-    document.getElementById('EndSimulacionContent').style.display = 'none';
     VaciarElemento(document.getElementById('AccordionVuelos'))
     document.getElementById('VuelosHidden').value = "";
     document.getElementById('AsientosSeleccionadosSimulacion').value = "";
@@ -639,6 +636,7 @@ function SalirSimulacion(){
     SimulacionClientes.style.display = 'none';
     var app = document.getElementById('app');
     app.style.display = 'block';
+    document.getElementById('EndSimulacionContent').style.display = 'none';
 }
 
 function InitSimulacionClientes(){
