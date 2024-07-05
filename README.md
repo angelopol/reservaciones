@@ -204,3 +204,4 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 ## Funciones adicionales ##
 - Asiento escogido para cada pasajero
 - Clases (premium, estandar, basico) para los vuelos
+- Selects mostrar nombre y valor de referencia en vez de id
