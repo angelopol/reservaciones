@@ -14,10 +14,10 @@
     <script type="text/javascript" src="simulacion.js" defer></script>
     <title>Reservation simulator</title>
 </head>
-<body>
+<body class="bg-reservations">
     <nav class="navbar bg-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 <img src="logo.png" alt="Reservation" width="30" height="30">
                 <span class="align-bottom">Reservation Simulator</span>
             </a>
@@ -44,8 +44,8 @@
                     Enrique Gonzalez 31456812
                 </div>
                 <div>
-                    Programacion Web<br>
-                    Sección: 105C1
+                    Web Programming<br>
+                    Section: 105C1
                 </div>
             </div>
         </nav>
@@ -57,6 +57,10 @@
                     <div class="card rounded-5">
                         <div class="card-body">
                             <h5 class="card-title">Fill with your reservation info.</h5>
+                            <div class="mb-3">
+                                <label class="form-label" for="asiento">Seats</label>
+                                <textarea class="form-control rounded-5" id="asiento" disabled></textarea>
+                            </div>
                             <div class="input-group mb-3 mt-3">
                                 <span class="input-group-text">ID</span>
                                 <input class="form-control" type="text" id="IdReservacion">
@@ -94,20 +98,16 @@
                         <div class="card rounded-5">
                             <h5 class="card-title mt-3">Search your seat.</h5>
                             <div id="asientos" class="card-body">
-                                <div class="text-start mb-3">
-                                    <label class="label-input" for="vuelo">Select your flight:</label>
+                                <div class="text-center mb-3">
+                                    <label class="form-label" for="vuelo">Select your flight:</label>
                                     <select class="form-control" id="vuelo"></select>
                                 </div>
-                            </div>
-                            <div class="mb-3 px-4">
-                                <label class="form-label" for="asiento">Seats</label>
-                                <textarea class="form-control rounded-5" id="asiento" disabled></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="btn-group text-center pt-4">
                         <button class="btn btn-primary rounded-5" id="RegistrarButton">Register</button>
-                        <button class="ms-1 btn btn-outline-primary rounded-5 ReservacionesButton">See reservations</button>
+                        <button class="ms-1 btn btn-outline-light rounded-5 ReservacionesButton">See reservations</button>
                     </div>
                 </div>
             </div>
@@ -218,8 +218,8 @@
                     <input class="form-control" type="datetime-local" id="FechaHoraVuelo">
                 </div>
                 <div class="mb-3">
-                    <label class="label-input" for="VisaVuelo">Visa</label>
                     <input class="form-check-input" type="checkbox" id="VisaVuelo">
+                    <label class="label-input" for="VisaVuelo">Visa</label>
                 </div>
             </div>
             <div id="VerVuelos">
@@ -285,7 +285,7 @@
                       <th>Description</th>
                     </tr>
                 </table>
-                <div>
+                <div class="text-end">
                     <button id="RegistrarDescuentoButton" class="btn btn-outline-primary rounded-5">Registrar</button>
                     <button class="ms-1 btn btn-danger rounded-5 DescuentosButton">Cerrar</button>
                 </div>
@@ -343,8 +343,8 @@
                     <select id="nacionalidad" class="SelectPaises form-control"></select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="visa">Visa</label>
                     <input class="form-check-input" type="checkbox" id="visa">
+                    <label class="form-label" for="visa">Visa</label>
                 </div>
             </div>
             <div id="VerClientes">
@@ -519,11 +519,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="NumeroTarjetaSimulacion">Número de tarjeta</label>
-                                    <input class="form-control" type="number" id="NumeroTarjeta">
+                                    <input class="form-control" type="number" id="NumeroTarjetaSimulacion">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="FechaVencimientoSimulacion">Fecha de vencimiento</label>
-                                    <input class="form-control" type="date" id="FechaVencimiento" value="2024-07-18">
+                                    <input class="form-control" type="date" id="FechaVencimientoSimulacion" value="2024-07-18">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="CVVSimulacion">CVV</label>
@@ -564,21 +564,20 @@
                         <button class="btn btn-primary rounded-5" id="ConfirmarPago">Confirm</button>
                     </div>
                 </div>
-                <div id="EndSimulacion" class="ModalBackdrop">
-                    <div class="ModalContent" id="EndSimulacionContent">
-                        <div class="alert alert-success" role="alert">
-                            Reservation confirmed successfully, your payment receipt was sent to your email.
-                        </div>
-                        <div class="text-end">
-                            <button class="btn btn-danger rounded-5" id="SalirSimulacionDos">Exit</button>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="text-end mt-3">
                     <button class="btn btn-danger rounded-5" id="SalirSimulacion">Exit</button>
                 </div>
                 <input id="VuelosHidden" value="" hidden>
+            </div>
+        </div>
+    </div>
+    <div id="EndSimulacion" class="ModalBackdrop">
+        <div class="ModalContent" id="EndSimulacionContent">
+            <div class="alert alert-success rounded-5" role="alert">
+                Reservation confirmed successfully, your payment receipt was sent to your email.
+            </div>
+            <div class="text-end">
+                <button class="btn btn-danger rounded-5" id="SalirSimulacionDos">Exit</button>
             </div>
         </div>
     </div>

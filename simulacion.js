@@ -333,6 +333,7 @@ function ConfirmarPagoReservacion(){
         return;
     }
     var NumeroTarjetaSimulacion = document.getElementById('NumeroTarjetaSimulacion');
+    console.log(NumeroTarjetaSimulacion);
     if (!/^\d{16}$/.test(NumeroTarjetaSimulacion.value)) {
         alert('El número de tarjeta debe tener 16 dígitos numéricos');
         return;
@@ -402,12 +403,11 @@ function ConfirmarPagoReservacion(){
         totales[1].toString(), AsientoTable, document.getElementById('MascotasSimulacion').value, totales[2], ClientesFinal, servicios[0]
 
     )
-
+    */
     var SalirSimulacionDos = document.getElementById('SalirSimulacionDos');
     SalirSimulacionDos.addEventListener('click', SalirSimulacion);
-    */
     var EndSimulacion = document.getElementById('EndSimulacion');
-    EndSimulacion.style.display = "block";
+    EndSimulacion.classList.toggle('show');
 }
 
 function InitPago(){

@@ -83,6 +83,7 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 - Validar que un vuelo no posea el caracter **~** en el id *
 - Validad que los id no posean espacios *
 - Validar que el id del vuelo no posea un numero al inicio *
+- Validar que la fecha de nacimiento no sea mayor a la actual *
 
 ## Parametros generales ##
 - Tarifa sin maleta (general)
@@ -100,6 +101,7 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 - Tarifa por servicio de wifi *
 - Tarifa por servicio de abordaje prioritario *
 - Tarifa por objetos valiosos dentro del equipaje con porcentajes (Servicio Declaracion Expresa de Valor) *
+- Unidad monetaria *
 
 ## Simulación para clientes ##
 - Escoger vuelo de ida
@@ -186,7 +188,7 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
         + Se vacia SelectVueloSimulacion
         + Se vacia SelectAsientosSimulacion
         + Se vacia ListaDatosPasajeros
-    + Se deshabilitan los acceso a los modulos excepto vuelos
+    * Se deshabilitan los acceso a los modulos excepto vuelos
     * Se debe mostrar el div de VuelosSimulacion
     * Se debe ocultar el div de SimulacionAsientos
     * Se debe ocultar el div de ReservacionesSimulacion
@@ -194,5 +196,11 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
     * Ocultar div EndSimulacionContent
 
 ## Bugs ##
-    * Modals
-    * Traduccion
+- Modals
+- Traduccion
+- Confirmar una reservacion en el simulador
+- Salir del simulador
+
+## Funciones adicionales ##
+- Asiento escogido para cada pasajero
+- Clases (premium, estandar, basico) para los vuelos
