@@ -530,7 +530,7 @@ function CalcDescuentos(descuento, tarifa){
 }
 
 function MontosTotales(maleta, MaletaMano, MaletaExtrasTable, vuelos, CantidadMascotas, descuento, substraer = false,
-    descuentos = null, DescuentosValue = true, tarifa = 0.0, CountClientes = 1, IdMaletaExtra = 'MaletasExtras', span = true
+    descuentos = null, DescuentosValue = true, tarifa = 0.0, CountClientes = 1, IdMaletaExtra = 'MaletasExtras', span = false
 ){
     var TarifaSobrepeso = parseFloat(document.getElementById('TarifaSobrepeso').value);
     var PesoMaximoMaleta = parseFloat(document.getElementById('PesoMaximoMaleta').value);
