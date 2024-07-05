@@ -84,6 +84,7 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 - Validad que los id no posean espacios *
 - Validar que el id del vuelo no posea un numero al inicio *
 - Validar que la fecha de nacimiento no sea mayor a la actual *
+- Al entrar a simulation se deben deshabilitar los botones de la navbar de abajo, y al salir se deben habilitar de nuevo *
 
 ## Parametros generales ##
 - Tarifa sin maleta (general)
@@ -205,3 +206,4 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 - Asiento escogido para cada pasajero
 - Clases (premium, estandar, basico) para los vuelos
 - Selects mostrar nombre y valor de referencia en vez de id
+- En la confirmacion de la reservacion mostrar el codigo de la reservacion

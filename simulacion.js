@@ -40,7 +40,7 @@ function MakeTelefono(count){
     var LabelTelefono = document.createElement('label');
     LabelTelefono.setAttribute('for', "AreaSimulacionClientes"+count);
     LabelTelefono.classList.add('form-label');
-    LabelTelefono.textContent = "Telefono móvil";
+    LabelTelefono.textContent = "Mobile phone";
     var InputGroupTelefono = document.createElement('div');
     InputGroupTelefono.classList.add("input-group", "mb-3");
     var SelectArea = document.createElement('select');
@@ -63,19 +63,19 @@ function MakeSexo(count){
     var label = document.createElement('label');
     label.classList.add('form-label');
     label.setAttribute('for', "SexoSimulacionClientes"+count);
-    label.textContent = "Sexo";
+    label.textContent = "Sex";
     var select = document.createElement('select');
     select.classList.add('form-select');
     select.id = "SexoSimulacionClientes"+count;
     var masculino = document.createElement('option');
-    masculino.value = "Masculino";
-    masculino.innerHTML = "Masculino";
+    masculino.value = "Male";
+    masculino.innerHTML = "Male";
     var femenino = document.createElement('option');
-    femenino.value = "Femenino";
-    femenino.innerHTML = "Femenino";
+    femenino.value = "Female";
+    femenino.innerHTML = "Female";
     var otro = document.createElement('option');
-    otro.value = "Otro";
-    otro.innerHTML = "Otro";
+    otro.value = "Other";
+    otro.innerHTML = "Other";
     select.appendChild(masculino);
     select.appendChild(femenino);
     select.appendChild(otro);
@@ -90,7 +90,7 @@ function MakeNacionalidad(count){
     var label = document.createElement('label');
     label.classList.add('form-label');
     label.setAttribute('for', "NacionalidadSimulacionClientes"+count);
-    label.textContent = "Nacionalidad";
+    label.textContent = "Nationality";
     var select = document.createElement('select');
     select.id = "NacionalidadSimulacionClientes"+count;
     select.classList.add('SelectPaises', "form-control");
@@ -103,18 +103,18 @@ function AddPasajero(count, visa = false){
     var listItem = document.createElement('li');
     listItem.classList.add('list-group-item');
 
-    var pasaporte = MakeSimpleInput('PasaporteSimulacionClientes'+count, 'Pasaporte');  
+    var pasaporte = MakeSimpleInput('PasaporteSimulacionClientes'+count, 'Passport');  
     var cedula = MakeSimpleInput('CedulaSimulacionClientes'+count, 'Cedula', "number");
-    var nombres = MakeSimpleInput('NombresSimulacionClientes'+count, 'Nombres');
-    var apellidos = MakeSimpleInput('ApellidosSimulacionClientes'+count, 'Apellidos');
+    var nombres = MakeSimpleInput('NombresSimulacionClientes'+count, 'Names');
+    var apellidos = MakeSimpleInput('ApellidosSimulacionClientes'+count, 'Surnames');
     var telefono = MakeTelefono(count);
     var email = MakeSimpleInput('EmailSimulacionClientes'+count, 'Email', "email");
     var sexo = MakeSexo(count);
     var nacionalidad = MakeNacionalidad(count);
-    var FechaNacimiento = MakeSimpleInput('FechaNacimientoSimulacionClientes'+count, 'Fecha de nacimiento', "date", "2005-07-18");
+    var FechaNacimiento = MakeSimpleInput('FechaNacimientoSimulacionClientes'+count, 'Date of birth', "date", "2005-07-18");
 
     var title = document.createElement('h2');
-    title.innerHTML = "Pasajero " + count;
+    title.innerHTML = "Passenger " + count;
 
     listItem.appendChild(title);
     listItem.appendChild(pasaporte);
@@ -185,7 +185,7 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
 
         var listGroup = document.createElement('ul');
         listGroup.classList.add('list-group');
-        var items = ["<b>Tarifa:</b> " + tarifa, "<b>Fecha y hora de salida:</b> " + FechaHora, "<b>Necesitas visa:</b> " + visa];
+        var items = ["<b>Fare:</b> " + tarifa, "<b>Departure date and time:</b> " + FechaHora, "<b>You need a visa:</b> " + visa];
         AddItemToList(items, listGroup);
 
         if(select){
@@ -202,7 +202,7 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
             var label = document.createElement('label');
             label.classList.add('form-check-label');
             label.setAttribute('for', VueloId+"-Checkbox");
-            label.textContent = 'Seleccionar vuelo';
+            label.textContent = 'Select flight';
 
             formCheckDiv.appendChild(inputCheckbox);
             formCheckDiv.appendChild(label);
@@ -250,10 +250,10 @@ function VuelosVuelta(){
     const VueloId = ConfirmarVuelosEscogidos();
     switch (VueloId) {
         case "0":
-            alert('Hay más de un vuelo seleccionado.');
+            alert('There is more than one flight selected.');
             return;
         case "1":
-            alert('No hay ningún vuelo seleccionado.');
+            alert('No flight selected.');
             return;
         default:
             break;
@@ -276,7 +276,7 @@ function VuelosVuelta(){
     };
     AddVuelo(VuelosDestino, 0);
     var ButtonSoloIda = document.getElementById('ConfirmarVuelos');
-    ButtonSoloIda.innerHTML = "Confirmar vuelos";
+    ButtonSoloIda.innerHTML = "Confirm flights";
 }
 
 function SetNavBar(ValueVuelos = "active", ValueAsientos = "", ValuePasajeros = "", ValueServicios = "", ValuePago = ""){
@@ -329,33 +329,33 @@ function ConfirmarId(table = 'ClientesTable'){
 function ConfirmarPagoReservacion(){
     var NombreTarjetaSimulacion = document.getElementById('NombreTarjetaSimulacion');
     if (!/^[a-zA-Z\s]{1,50}$/.test(NombreTarjetaSimulacion.value)) {
-        alert('El nombre no es válido');
+        alert('Name is invalid');
         return;
     }
     var NumeroTarjetaSimulacion = document.getElementById('NumeroTarjetaSimulacion');
     console.log(NumeroTarjetaSimulacion);
     if (!/^\d{16}$/.test(NumeroTarjetaSimulacion.value)) {
-        alert('El número de tarjeta debe tener 16 dígitos numéricos');
+        alert('The card number must be 16 numeric digits long');
         return;
     }
     var CVVSimulacion = document.getElementById('CVVSimulacion');
     if (!/^\d{3}$/.test(CVVSimulacion.value)) {
-        alert('El CVV debe tener 3 dígitos numéricos');
+        alert('The CVV must have 3 numeric digits');
         return;
     }
     var EmailFactSimulacion = document.getElementById('EmailFactSimulacion');
     if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(EmailFactSimulacion.value)) {
-        alert('El email no es válido');
+        alert('The email is invalid');
         return;
     }
     var DireccionSimulacion = document.getElementById('DireccionSimulacion');
     if (!/^[a-zA-Z0-9\s]{1,50}$/.test(DireccionSimulacion.value)) {
-        alert('La dirección no es válida');
+        alert('The direction is invalid');
         return;
     }
     var CiudadSimulacion = document.getElementById('CiudadSimulacion');
     if (!/^[a-zA-Z\s]{1,50}$/.test(CiudadSimulacion.value)) {
-        alert('La ciudad no es válida');
+        alert('The city is invalid');
         return;
     }
 
@@ -412,7 +412,7 @@ function ConfirmarPagoReservacion(){
 
 function InitPago(){
     if (!ValidarMaletaMano('MaletaManoSimulacion')){
-        alert('La maleta de mano excede el peso maximo');
+        alert('Carry-on bag exceeds maximum weight');
         return;
     }
 
@@ -450,9 +450,9 @@ function InitPago(){
     );
 
     var items = [
-        "<b>Tarifa general:</b> " + totales[6], "<b>Costo por pasajes (x"+CountClientes+"):</b> " + totales[3],
-        "<b>Costo por maleta:</b> " + totales[4], "<b>Costo por maleta de mano:</b> " + totales[5],
-        "<b>Costo por maletas extras:</b> " + totales[7], "<b>Costo por mascotas:</b> " + totales[8]
+        "<b>General Rate:</b> " + totales[6], "<b>Cost per ticket (x"+CountClientes+"):</b> " + totales[3],
+        "<b>Cost per bag:</b> " + totales[4], "<b>Cost per carry-on bag:</b> " + totales[5],
+        "<b>Cost for extra bags:</b> " + totales[7], "<b>Cost per pet:</b> " + totales[8]
     ];
     AddItemToList(items, document.getElementById('DetallesPagoSimulacion'));
 
@@ -466,32 +466,32 @@ function InitReservaciones(){
     for (let i = 1; i <= PasajerosCount; i++) {
         var CedulaSimulacionClientes = document.getElementById('CedulaSimulacionClientes'+i.toString());
         if (!/^\d{1,8}$/.test(CedulaSimulacionClientes.value)) {
-            alert('La cédula debe tener entre 1 y 8 dígitos numéricos');
+            alert('The ID must have between 1 and 8 numeric digits');
             return;
         }
         var TelefonoSimulacionClientes = document.getElementById('TelefonoSimulacionClientes'+i.toString());
         if (!/^\d{10}$/.test(TelefonoSimulacionClientes.value)) {
-            alert('El número de teléfono debe tener 10 dígitos numéricos');
+            alert('The phone number must be 10 numeric digits long');
             return;
         }
         var PasaporteSimulacionClientes = document.getElementById('PasaporteSimulacionClientes'+i.toString());
         if (!/^\d{1,9}$/.test(PasaporteSimulacionClientes.value)) {
-            alert('El pasaporte debe tener entre 1 y 9 dígitos numéricos');
+            alert('The passport must have between 1 and 9 numeric digits');
             return;
         }
         var EmailSimulacionClientes = document.getElementById('EmailSimulacionClientes'+i.toString());
         if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(EmailSimulacionClientes.value)) {
-            alert('El email no es válido');
+            alert('The email is invalid');
             return;
         }
         var NombresSimulacionClientes = document.getElementById('NombresSimulacionClientes'+i.toString());
         if (!/^[a-zA-Z\s]{1,50}$/.test(NombresSimulacionClientes.value)) {
-            alert('El nombre no es válido');
+            alert('Name is invalid');
             return;
         }
         var ApellidosSimulacionClientes = document.getElementById('ApellidosSimulacionClientes'+i.toString());
         if (!/^[a-zA-Z\s]{1,50}$/.test(ApellidosSimulacionClientes.value)) {
-            alert('El apellido no es válido');
+            alert('Last name is invalid');
             return;
         }
         var vuelos = document.getElementById('VuelosHidden').value.split(" ");
@@ -507,7 +507,7 @@ function InitReservaciones(){
                         }
                     }
                     if (vueloValido && !visa.checked) {
-                        alert('El vuelo requiere de que el pasajero tenga visa');
+                        alert('The flight requires the passenger to have a visa');
                         return;
                     }
                 }
@@ -548,7 +548,7 @@ function InitPasajeros(){
         const LenghtVuelos1 = VuelosTemp.filter(vuelo => vuelo === vuelos[0]).length;
         const LenghtVuelos2 = VuelosTemp.filter(vuelo => vuelo === vuelos[1]).length;
         if (LenghtVuelos1 != LenghtVuelos2) {
-            alert('La cantidad de asientos de ida y vuelta no coincide');
+            alert('The number of round-trip seats does not match');
             return;
         }
         CountAsientos = CountAsientos / 2;
@@ -576,10 +576,10 @@ function InitAsientos(){
     const VueloId = ConfirmarVuelosEscogidos();
     switch (VueloId) {
         case "0":
-            alert('Hay más de un vuelo seleccionado.');
+            alert('There is more than one flight selected.');
             return;
         case "1":
-            alert('No hay ningún vuelo seleccionado.');
+            alert('No flight selected.');
             return;
         default:
             break;

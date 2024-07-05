@@ -133,17 +133,17 @@ function RegistrarVuelos(){
         var IdValue = id.value.replace(" ", "");
         var VuelosTable = document.getElementById('VuelosTable');
         if (!VerifyId(IdValue, VuelosTable.rows)){
-            alert('ID ya existente');
+            alert('Existing ID');
             return;
         }
         if (IdValue == ''){
-            alert('ID es requerido');
+            alert('ID is required');
             return;
         }
 
         var tarifa = document.getElementById('TarifaVuelo');
         if (tarifa.value == ''){
-            alert('Tarifa es requerida');
+            alert('Fare is required');
             return;
         }
 
@@ -153,7 +153,7 @@ function RegistrarVuelos(){
 
         var visa = "No";
         if (document.getElementById('VisaVuelo').checked){
-            visa = "Si";
+            visa = "Yes";
         }
 
         var row = VuelosTable.insertRow(-1);
@@ -184,11 +184,11 @@ function RegistrarDescuentos(){
         var id = document.getElementById('IdDescuento');
         var DescuentosTable = document.getElementById('DescuentosTable');
         if (!VerifyId(id.value, DescuentosTable.rows)){
-            alert('ID ya existente');
+            alert('Existing ID');
             return;
         }
         if (id.value == ''){
-            alert('ID es requerido');
+            alert('ID is required');
             return;
         }
 
@@ -227,17 +227,17 @@ function RegistrarServicios(){
         var id = document.getElementById('IdServicio');
         var ServiciosTable = document.getElementById('ServiciosTable');
         if (!VerifyId(id.value, ServiciosTable.rows)){
-            alert('ID ya existente');
+            alert('Existing ID');
             return;
         }
         if (id.value == ''){
-            alert('ID es requerido');
+            alert('ID is required');
             return;
         }
 
         var TarifaServicio = document.getElementById('TarifaServicio');
         if (TarifaServicio.value == ''){
-            alert('Tarifa es requerida');
+            alert('Fare is required');
             return;
         }
 
@@ -277,11 +277,11 @@ function SaveCliente(
     if (!IdString){
         var id = document.getElementById(IdId);
         if (!VerifyId(id.value, ClientesTable.rows)){
-            alert('ID ya existente');
+            alert('Existing ID');
             return;
         }
         if (id.value == ''){
-            alert('ID es requerido');
+            alert('ID is required');
             return;
         }
     }
@@ -289,7 +289,7 @@ function SaveCliente(
     var visa = "No";
     if (VisaId != ""){
         if (document.getElementById(VisaId).checked){
-            visa = "Si";
+            visa = "Yes";
         }
     }
 
@@ -659,7 +659,7 @@ function AddToReservacionesTable(
     cell8.innerHTML = DescuentoTable;
     cell9.innerHTML = ClientesFinal;
     cell10.innerHTML = ServiciosTable;
-    cell11.innerHTML = '<button class="CancelarReservacion btn btn-sm btn-warning rounded-5" idcancelacion="'+id+'">Cancelar</button>';
+    cell11.innerHTML = '<button class="CancelarReservacion btn btn-sm btn-warning rounded-5" idcancelacion="'+id+'">Cancel</button>';
     AsOcupado();
     CancelarReservacion();
 }
@@ -670,18 +670,18 @@ function RegistrarReservaciones(){
         var ID = document.getElementById('IdReservacion');
         var ReservacionesTable = document.getElementById('ReservacionesTable');
         if (!VerifyId(ID.value, ReservacionesTable.rows)){
-            alert('ID ya existente');
+            alert('Existing ID');
             return;
         }
         if (ID.value == ''){
-            alert('ID es requerido');
+            alert('ID is required');
             return;
         }
 
         var maleta = document.getElementById('maleta');
         var MaletaMano = ValidarMaletaMano();
         if (!MaletaMano){
-            alert('La maleta de mano excede el peso maximo');
+            alert('Carry-on bag exceeds maximum weight');
             return;
         }
         
@@ -696,11 +696,11 @@ function RegistrarReservaciones(){
                 continue;
             }
             if (!VerifyAsientoExistente(AsientoText)){
-                alert('Asiento no existente');
+                alert('Non-existent seat');
                 return;
             }
             if (!VerifyDisponible(AsientoText)){
-                alert('Asiento no disponible');
+                alert('Seat not available');
                 return;
             }
             vuelos.push(AsientosTemp[i].split('~')[1]);
@@ -713,7 +713,7 @@ function RegistrarReservaciones(){
             (vuelo, indice, self) => self.indexOf(vuelo) === indice
         );
         if (vuelos.length > 2){
-            alert('Solo puede reservar dos vuelos, uno para ida y otro para vuelta');
+            alert('You can only book two flights, one outbound and one return');
             return;
         }
 
@@ -721,7 +721,7 @@ function RegistrarReservaciones(){
             const LenghtVuelos1 = VuelosTemp.filter(vuelo => vuelo === vuelos[0]).length;
             const LenghtVuelos2 = VuelosTemp.filter(vuelo => vuelo === vuelos[1]).length;
             if (LenghtVuelos1 != LenghtVuelos2) {
-                alert('La cantidad de asientos de ida y vuelta no coincide');
+                alert('The number of round-trip seats does not match');
                 return;
             }
         }
@@ -739,7 +739,7 @@ function RegistrarReservaciones(){
                 if (clientes.options[i].selected){
                     ClientesFinal += clientes.options[i].value + ' ';
                     if(!VerifyVisa(clientes.options[i].value, vuelo)){
-                        alert('El vuelo requiere de que el cliente tenga visa');
+                        alert('The flight requires the customer to have a visa');
                         return;
                     }
                     CountClientes++;
@@ -749,7 +749,7 @@ function RegistrarReservaciones(){
         });
 
         if (CountAsientos != CountClientes){
-            alert('La cantidad de asientos no coincide con la cantidad de clientes');
+            alert('The number of seats does not match the number of customers');
             return;
         }
 

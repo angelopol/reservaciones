@@ -286,8 +286,8 @@
                     </tr>
                 </table>
                 <div class="text-end">
-                    <button id="RegistrarDescuentoButton" class="btn btn-outline-primary rounded-5">Registrar</button>
-                    <button class="ms-1 btn btn-danger rounded-5 DescuentosButton">Cerrar</button>
+                    <button id="RegistrarDescuentoButton" class="btn btn-outline-primary rounded-5">Register</button>
+                    <button class="ms-1 btn btn-danger rounded-5 DescuentosButton">Close</button>
                 </div>
             </div>
         </div>
@@ -296,14 +296,14 @@
         <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
         <div class="modal-body" id="ClientesContent">
-            <h2 class="card-title">Clientes</h2>
+            <h2 class="card-title">Clients</h2>
             <div id="CrearClientes">
                 <div class="mb-3">
                     <label class="form-label" for="IdCliente">ID</label>
                     <input class="form-control" type="text" id="IdCliente">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="pasaporte">Pasaporte</label>
+                    <label class="form-label" for="pasaporte">Passport</label>
                     <input class="form-control" type="text" id="pasaporte">
                 </div>
                 <div class="mb-3">
@@ -311,19 +311,19 @@
                     <input class="form-control" type="number" id="cedula">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="nombres">Nombres</label>
+                    <label class="form-label" for="nombres">Names</label>
                     <input class="form-control" type="text" id="nombres">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="apellidos">Apellidos</label>
+                    <label class="form-label" for="apellidos">Surnames</label>
                     <input class="form-control" type="text" id="apellidos">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="FechaNacimiento">Fecha de Nacimiento</label>
+                    <label class="form-label" for="FechaNacimiento">Date of birth</label>
                     <input class="form-control" type="date" id="FechaNacimiento">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="telefono">Telefono</label>
+                    <label class="form-label" for="telefono">Phone</label>
                     <input class="form-control" type="number" id="telefono">
                 </div>
                 <div class="mb-3">
@@ -333,13 +333,13 @@
                 <div class="mb-3">
                     <label class="form-label" for="sexo">Sexo</label>
                     <select class="form-control" id="sexo">
-                        <option value="Masculino" selected>Masculino</option>
-                        <option value="Femenino">Femenino</option>
-                        <option value="Otro">Otro</option>
+                        <option value="Male" selected>Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="SelectPaises">Nacionalidad</label>
+                    <label class="form-label" for="SelectPaises">Nacionality</label>
                     <select id="nacionalidad" class="SelectPaises form-control"></select>
                 </div>
                 <div class="mb-3">
@@ -351,15 +351,15 @@
                 <table class="table" id="ClientesTable">
                     <tr>
                         <th>ID</th>
-                        <th>Pasaporte</th>
+                        <th>Passport</th>
                         <th>Cedula</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Fecha de nacimiento</th>
-                        <th>Telefono</th>
+                        <th>Names</th>
+                        <th>Surnames</th>
+                        <th>Date of birth</th>
+                        <th>Phone</th>
                         <th>Email</th>
-                        <th>Sexo</th>
-                        <th>Nacionalidad</th>
+                        <th>Sex</th>
+                        <th>Nationality</th>
                         <th>Visa</th>
                     </tr>
                     <tr>
@@ -377,8 +377,8 @@
                     </tr>
                 </table>
                 <div class="text-end">
-                    <button class="btn btn-outline-primary rounded-5" id="RegistrarClientesButton">Registrar</button>
-                    <button class="ms-1 ClientesButton btn btn-danger rounded-5"  data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-outline-primary rounded-5" id="RegistrarClientesButton">Register</button>
+                    <button class="ms-1 ClientesButton btn btn-danger rounded-5"  data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -393,11 +393,11 @@
                     <input class="form-control" type="text" id="IdServicio">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="TarifaServicio">Tarifa</label>
+                    <label class="form-label" for="TarifaServicio">Fare</label>
                     <input class="form-control" type="number" id="TarifaServicio" min="0">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label" for="DescripcionServicio">Descripcion del servicio</label>
+                    <label class="form-label" for="DescripcionServicio">Service description</label>
                     <input class="form-control" type="text" id="DescripcionServicio">
                 </div>
             </div>
@@ -405,13 +405,13 @@
                 <table class="table table-sm table-responsive" id="ServiciosTable">
                     <tr>
                       <th>ID</th>
-                      <th>Tarifa</th>
-                      <th>Descripción</th>
+                      <th>Fare</th>
+                      <th>Description</th>
                     </tr>
                 </table>
                 <div class="text-end">
-                    <button id="RegistrarServicioButton" class="btn btn-outline-primary rounded-5">Registrar</button>
-                    <button class="ServiciosButton btn btn-danger rounded-5 ms-1">Cerrar</button>
+                    <button id="RegistrarServicioButton" class="btn btn-outline-primary rounded-5">Register</button>
+                    <button class="ServiciosButton btn btn-danger rounded-5 ms-1">Close</button>
                 </div>
             </div>
         </div>
@@ -486,19 +486,19 @@
                         <input class="form-control" type="number" value="0" id="MascotasSimulacion" min="0">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="MaletaSimulacion">Peso de la maleta (si posee)</label>
+                        <label class="form-label" for="MaletaSimulacion">Weight of the bag (if any)</label>
                         <input class="form-control" type="number" id="MaletaSimulacion" min="0">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="MaletaManoSimulacion">Peso de la maleta de mano (si posee)</label>
+                        <label class="form-label" for="MaletaManoSimulacion">Weight of carry-on bag (if owned)</label>
                         <input class="form-control" type="number" id="MaletaManoSimulacion" min="0">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="MaletaExtrasSimulacion1">Peso de maletas extras (si posee)</label>
+                        <label class="form-label" for="MaletaExtrasSimulacion1">Weight of extra bags (if any)</label>
                         <div id="MaletasExtrasSimulacion"></div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="ServiciosSelectSimulacion">Selecciona un servicio extra (si lo desea)</label>
+                        <label class="form-label" for="ServiciosSelectSimulacion">Select an extra service (if desired)</label>
                         <select class="form-control" id="ServiciosSelectSimulacion" multiple></select>
                     </div>
                     <div class="text-end">
@@ -514,15 +514,15 @@
                             <div class="card-body">
                                 <h5 class="card-title">Payment details</h5>
                                 <div class="mb-3">
-                                    <label class="form-label" for="NombreTarjetaSimulacion">Nombre del titular</label>
+                                    <label class="form-label" for="NombreTarjetaSimulacion">Name of the card holder</label>
                                     <input class="form-control" type="text" id="NombreTarjetaSimulacion">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="NumeroTarjetaSimulacion">Número de tarjeta</label>
+                                    <label class="form-label" for="NumeroTarjetaSimulacion">Card number</label>
                                     <input class="form-control" type="number" id="NumeroTarjetaSimulacion">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="FechaVencimientoSimulacion">Fecha de vencimiento</label>
+                                    <label class="form-label" for="FechaVencimientoSimulacion">Expiration Date</label>
                                     <input class="form-control" type="date" id="FechaVencimientoSimulacion" value="2024-07-18">
                                 </div>
                                 <div class="mb-3">
@@ -535,15 +535,15 @@
                                     <input class="form-control" type="text" id="EmailFactSimulacion">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="DireccionSimulacion">Dirección de residencia</label>
+                                    <label class="form-label" for="DireccionSimulacion">Residence Address</label>
                                     <input class="form-control" type="text" id="DireccionSimulacion">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="CiudadSimulacion">Ciudad</label>
+                                    <label class="form-label" for="CiudadSimulacion">City</label>
                                     <input class="form-control" type="text" id="CiudadSimulacion">
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label" for="PaisSimulacion">País</label>
+                                    <label class="form-label" for="PaisSimulacion">Country</label>
                                     <select class="form-control SelectPaises" id="PaisSimulacion"></select>
                                 </div>
                             </div>
