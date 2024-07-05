@@ -158,26 +158,26 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
 
         var AccordionItem = document.createElement('div');
         AccordionItem.classList.add('accordion-item');
-        AccordionItem.id = VueloId+"-AccordionItem";
+        AccordionItem.id = "AccordionItem-"+VueloId;
 
         var AccordionHeader = document.createElement('h2');
         AccordionHeader.classList.add('accordion-header');
-        AccordionHeader.id = VueloId+"-AccordionHeader";
+        AccordionHeader.id = "AccordionHeader"+VueloId;
 
         var AccordionButton = document.createElement('button');
         AccordionButton.classList.add('accordion-button');
         AccordionButton.classList.add('collapsed');
         AccordionButton.type = "button";
         AccordionButton.setAttribute("data-bs-toggle", "collapse");
-        AccordionButton.setAttribute("data-bs-target", "#"+VueloId+"-AccordionCollapse");
+        AccordionButton.setAttribute("data-bs-target", "#AccordionCollapse-"+VueloId);
         AccordionButton.setAttribute("aria-expanded", "false");
-        AccordionButton.setAttribute("aria-controls", VueloId+"-AccordionCollapse");
+        AccordionButton.setAttribute("aria-controls", "AccordionCollapse-"+VueloId);
         AccordionButton.innerHTML = VueloId + "&nbsp;<b>" + origen + " -> " + destino + "</b>";
 
         var AccordionCollapse = document.createElement('div');
-        AccordionCollapse.id = VueloId+"-AccordionCollapse";
+        AccordionCollapse.id = "AccordionCollapse-"+VueloId;
         AccordionCollapse.classList.add('accordion-collapse', 'collapse');
-        AccordionCollapse.setAttribute("aria-labelledby", VueloId+"-AccordionHeader");
+        AccordionCollapse.setAttribute("aria-labelledby", "AccordionHeader-"+VueloId);
         AccordionCollapse.setAttribute("data-bs-parent", "#AccordionVuelos");
 
         var AccordionBody = document.createElement('div');
@@ -197,11 +197,11 @@ function AddVuelo(vuelos = document.getElementById('VuelosTable').rows, init = 1
             inputCheckbox.setAttribute('type', 'checkbox');
             inputCheckbox.setAttribute('VueloId', VueloId);
             inputCheckbox.setAttribute('role', 'switch');
-            inputCheckbox.id = VueloId+"-Checkbox";
+            inputCheckbox.id = "Checkbox-"+VueloId;
 
             var label = document.createElement('label');
             label.classList.add('form-check-label');
-            label.setAttribute('for', VueloId+"-Checkbox");
+            label.setAttribute('for', "Checkbox-"+VueloId);
             label.textContent = 'Select flight';
 
             formCheckDiv.appendChild(inputCheckbox);
@@ -451,7 +451,7 @@ function InitPago(){
     var items = [
         "<b>General Rate:</b> " + totales[6], "<b>Cost per ticket (x"+CountClientes+"):</b> " + totales[3],
         "<b>Cost per bag:</b> " + totales[4], "<b>Cost per carry-on bag:</b> " + totales[5],
-        "<b>Cost for extra bags:</b> " + totales[7], "<b>Cost per pet:</b> " + totales[8]
+        "<b>Cost for extra bags:</b> " + totales[7], "<b>Cost per pet:</b> " + totales[8], "<b>Cost per extra services:</b> " + ValorServicios.toString()
     ];
     AddItemToList(items, document.getElementById('DetallesPagoSimulacion'));
 
@@ -520,7 +520,7 @@ function InitReservaciones(){
     ReservacionesSimulacion.style.display = "block";
 
     InitMaletasExtras("MaletasExtrasSimulacion");
-    LoadSelect(document.getElementById('ServiciosSelectSimulacion'), document.getElementById('ServiciosTable'));
+    LoadSelect(document.getElementById('ServiciosSelectSimulacion'), document.getElementById('ServiciosTable'), 0, 2);
 
     var ConfirmarReservaciones = document.getElementById('ConfirmarReservaciones');
     ConfirmarReservaciones.addEventListener('click', InitPago);
@@ -626,7 +626,6 @@ function SalirSimulacion(){
     document.getElementById('PasajerosSimulacion').style.display = 'none';
     document.getElementById('PagoSimulacion').style.display = 'none';
     document.getElementById('ReservacionesSimulacion').style.display = 'none';
-    VaciarElemento(document.getElementById('AccordionVuelos'))
     document.getElementById('VuelosHidden').value = "";
     document.getElementById('AsientosSeleccionadosSimulacion').value = "";
     VaciarElemento(document.getElementById('ListaDatosPasajeros'));
@@ -637,6 +636,7 @@ function SalirSimulacion(){
     var app = document.getElementById('app');
     app.style.display = 'block';
     document.getElementById('EndSimulacionContent').style.display = 'none';
+    AppButtons(false);
 }
 
 function InitSimulacionClientes(){
@@ -647,6 +647,7 @@ function InitSimulacionClientes(){
         var app = document.getElementById('app');
         app.style.display = 'none';
         AddVuelo();
+        AppButtons();
     });
     var salir = document.getElementById('SalirSimulacion');
     salir.addEventListener('click', SalirSimulacion);

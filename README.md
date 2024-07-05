@@ -78,13 +78,16 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 - La tarifa del vuelo es requerida
 - La tarifa del servicio es requerida
 - Si el vuelo requiere visa se debe validar que el cliente posea visa
-- El origen y el destino de un vuelo no pueden ser el mismo *
+- El origen y el destino de un vuelo no pueden ser el mismo
 - Validar que cuando se guarde el vuelo seleccionado en la simulación de clientes no hayan mas de un checkbox seleccionado
-- Validar que un vuelo no posea el caracter **~** en el id *
-- Validad que los id no posean espacios *
-- Validar que el id del vuelo no posea un numero al inicio *
-- Validar que la fecha de nacimiento no sea mayor a la actual *
-- Al entrar a simulation se deben deshabilitar los botones de la navbar de abajo, y al salir se deben habilitar de nuevo *
+- Validar que un vuelo no posea el caracter **~** en el id
+- Validad que los id no posean espacios
+- Validar que la fecha de nacimiento no sea mayor a la actual
+- Al entrar a simulation se deben deshabilitar los botones de la navbar de abajo, y al salir se deben habilitar de nuevo
+- La descripcion de un servicio es requerida
+- La fecha de salida de un vuelo es requerida
+- La descripcion de un descuento es requerida
+- La cedula, nombres, apellidos de un cliente son requeridos
 
 ## Parametros generales ##
 - Tarifa sin maleta (general)
@@ -197,7 +200,6 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
     * Ocultar div EndSimulacionContent
 
 ## Bugs ##
-- Modals
 - Confirmar una reservacion en el simulador
 - Salir del simulador
 
@@ -206,3 +208,5 @@ La imagen es referencial por lo que el diseño de la presentación de la informa
 - Clases (premium, estandar, basico) para los vuelos
 - Selects mostrar nombre y valor de referencia en vez de id
 - En la confirmacion de la reservacion mostrar el codigo de la reservacion
+- Cuando se toque en Reservation Simulator de la barra superior, ocultar los divs App, SimulacionClientes y mostrar el div launcher, se oculta el button EntrarSimulacion, se oculta NavBarApp
+- Transformacion del titulo principal al entrar a la página

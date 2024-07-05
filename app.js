@@ -1,3 +1,24 @@
+function AppButtons(disabled = true){
+    var FlightsModuleButton = document.getElementById('FlightsModuleButton');
+    var DiscountsModuleButton = document.getElementById('DiscountsModuleButton');
+    var ServicesModuleButton = document.getElementById('ServicesModuleButton');
+    var ClientsModuleButton = document.getElementById('ClientsModuleButton');
+    var ParametersModuleButton = document.getElementById('ParametersModuleButton');
+    if (disabled){
+        FlightsModuleButton.disabled = true;
+        DiscountsModuleButton.disabled = true;
+        ServicesModuleButton.disabled = true;
+        ClientsModuleButton.disabled = true;
+        ParametersModuleButton.disabled = true;
+    } else {
+        FlightsModuleButton.disabled = false;
+        DiscountsModuleButton.disabled = false;
+        ServicesModuleButton.disabled = false;
+        ClientsModuleButton.disabled = false;
+        ParametersModuleButton.disabled = false;
+    }
+}
+
 function SelectPaises() {
     var selects = document.getElementsByClassName('SelectPaises');
     for (let i = 0; i < selects.length; i++) {
@@ -115,13 +136,21 @@ function InitMaletasExtras(id = 'MaletasExtras'){
     count.addEventListener('change', InitMaletasExtras);
 }
 
-function LoadSelect(select, table){
+function LoadSelect(select, table, ValueCell = 0, TextCell = 0, TextCell2 = null, conector = ' ', TextCell3 = null, conector2 = ' '){
     VaciarElemento(select);
     var rows = table.rows;
     for (var i = 1; i < rows.length; i++) {
         var option = document.createElement('option');
-        option.value = rows[i].cells[0].innerHTML;
-        option.text = rows[i].cells[0].innerHTML;
+        option.value = rows[i].cells[ValueCell].innerHTML;
+        if (TextCell2 != null){
+            if (TextCell3 != null){
+                option.text = rows[i].cells[TextCell].innerHTML + conector + rows[i].cells[TextCell2].innerHTML + conector2 + rows[i].cells[TextCell3].innerHTML;
+            } else {
+                option.text = rows[i].cells[TextCell].innerHTML + conector + rows[i].cells[TextCell2].innerHTML;
+            }
+        } else {
+            option.text = rows[i].cells[TextCell].innerHTML;
+        }
         select.appendChild(option);
     }
 }
@@ -140,6 +169,14 @@ function RegistrarVuelos(){
             alert('ID is required');
             return;
         }
+        if (IdValue.includes('~')){
+            alert('The ID cannot contain the character ~');
+            return;
+        }
+        if (IdValue.includes(' ')){
+            alert('The ID cannot contain spaces');
+            return;
+        }
 
         var tarifa = document.getElementById('TarifaVuelo');
         if (tarifa.value == ''){
@@ -149,6 +186,11 @@ function RegistrarVuelos(){
 
         var destino = document.getElementById('DestinoVuelo');
         var origen = document.getElementById('OrigenVuelo');
+        if (destino.value == origen.value){
+            alert('The destination and origin cannot be the same');
+            return;
+        }
+
         var FechaHora = document.getElementById('FechaHoraVuelo');
 
         var visa = "No";
@@ -174,7 +216,7 @@ function RegistrarVuelos(){
         destino.value = '';
         origen.value = '';
         FechaHora.value = '';
-        LoadSelect(document.getElementById('vuelo'), VuelosTable);
+        LoadSelect(document.getElementById('vuelo'), VuelosTable, 0, 3, 2, ' -> ', 4, ': ');
     });
 }
 
@@ -191,6 +233,10 @@ function RegistrarDescuentos(){
             alert('ID is required');
             return;
         }
+        if (id.value.includes(' ')){
+            alert('The ID cannot contain spaces');
+            return;
+        }
 
         var PorcentajeDescuento = document.getElementById('PorcentajeDescuento');
         if (PorcentajeDescuento.value == ''){
@@ -203,6 +249,10 @@ function RegistrarDescuentos(){
         }
 
         var DescripcionDescuento = document.getElementById('DescripcionDescuento');
+        if (DescripcionDescuento.value == ''){
+            alert('Description is required');
+            return;
+        }
 
         var row = DescuentosTable.insertRow(-1);
         var cell1 = row.insertCell(0);
@@ -217,7 +267,7 @@ function RegistrarDescuentos(){
         PorcentajeDescuento.value = '0';
         ValorDescuento.value = '0';
         DescripcionDescuento.value = '';
-        LoadSelect(document.getElementById('DescuentosSelect'), DescuentosTable);
+        LoadSelect(document.getElementById('DescuentosSelect'), DescuentosTable, 0, 3);
     });
 }
 
@@ -242,6 +292,10 @@ function RegistrarServicios(){
         }
 
         var DescripcionServicio = document.getElementById('DescripcionServicio');
+        if (DescripcionServicio.value == ''){
+            alert('Description is required');
+            return;
+        }
 
         var row = ServiciosTable.insertRow(-1);
         var cell1 = row.insertCell(0);
@@ -253,7 +307,7 @@ function RegistrarServicios(){
         id.value = '';
         TarifaServicio.value = '';
         DescripcionServicio.value = '';
-        LoadSelect(document.getElementById('ServiciosSelect'), ServiciosTable);
+        LoadSelect(document.getElementById('ServiciosSelect'), ServiciosTable, 0, 2);
     });
 }
 
@@ -263,10 +317,31 @@ function SaveCliente(
     NacionalidadId = 'nacionalidad', SexoId = 'sexo', VisaId = 'visa', IdString = false
 ){
     var pasaporte = document.getElementById(PasaporteId);
+
     var cedula = document.getElementById(CedulaId);
+    if(cedula.value == ''){
+        alert('Cedula is required');
+        return;
+    }
+
     var nombres = document.getElementById(NombresId);
+    if (nombres.value == ''){
+        alert('Names are required');
+        return;
+    }
+
     var apellidos = document.getElementById(ApellidosId);
+    if (apellidos.value == ''){
+        alert('Surnames are required');
+        return;
+    }
+
     var FechaNacimiento = document.getElementById(FechaNacimientoId);
+    if (new Date(FechaNacimiento.value) > new Date()) {
+        alert('The date of birth cannot be greater than the current date');
+        return;
+    }
+
     var telefono = document.getElementById(TelefonoId);
     var email = document.getElementById(EmailId);
     var nacionalidad = document.getElementById(NacionalidadId);
@@ -282,6 +357,10 @@ function SaveCliente(
         }
         if (id.value == ''){
             alert('ID is required');
+            return;
+        }
+        if (id.value.includes(' ')){
+            alert('The ID cannot contain spaces');
             return;
         }
     }
@@ -332,7 +411,7 @@ function SaveCliente(
     email.value = '';
     sexo.value = '';
     nacionalidad.value = '';
-    LoadSelect(document.getElementById('ClientesSelect'), ClientesTable);
+    LoadSelect(document.getElementById('ClientesSelect'), ClientesTable, 0, 2, 3, ': ', 4, ' ');
 }
 
 function RegistrarClientes(){
@@ -341,8 +420,8 @@ function RegistrarClientes(){
 }
 
 function InitSelectClientes(){
-    const ClientesTable = document.getElementById('ClientesTable')
-    LoadSelect(document.getElementById('ClientesSelect'), ClientesTable);
+    var ClientesTable = document.getElementById('ClientesTable')
+    LoadSelect(document.getElementById('ClientesSelect'), ClientesTable, 0, 2, 3, ': ', 4, ' ');
 }
 
 function AsOcupado(ClassName = "asiento", VueloId = "vuelo", AsientoId = "asiento"){
@@ -663,6 +742,10 @@ function RegistrarReservaciones(){
             alert('ID is required');
             return;
         }
+        if (ID.value.includes(' ')){
+            alert('The ID cannot contain spaces');
+            return;
+        }
 
         var maleta = document.getElementById('maleta');
         var MaletaMano = ValidarMaletaMano();
@@ -762,7 +845,7 @@ function RegistrarReservaciones(){
 
 function InitSelectVuelo(){
     var SelectVuelo = document.getElementById('vuelo');
-    LoadSelect(SelectVuelo, document.getElementById('VuelosTable'));
+    LoadSelect(SelectVuelo, document.getElementById('VuelosTable'), 0, 3, 2, ' -> ', 4, ': ');
     SelectVuelo.addEventListener('change', () => AsOcupado());
 }
 
