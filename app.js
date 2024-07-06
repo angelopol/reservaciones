@@ -134,6 +134,7 @@ function SelectAsiento(ClassName = "asiento", VueloId = "vuelo", SeleccionadosId
 function MaletaExtra(count, id){
     var maleta = document.createElement('input');
     maleta.setAttribute('type', 'number');
+    maleta.setAttribute('placeholder', 'Extra bag ' + + count.toString() + ' (kg)');
     maleta.classList.add('form-control', 'mb-1');
     maleta.setAttribute('min', '0');
     maleta.setAttribute('id', id  + count);
