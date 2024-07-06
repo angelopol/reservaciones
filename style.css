@@ -100,13 +100,16 @@ body {
 
 @keyframes zoomAnimated {
     0% {
-    transform: scale(0.5);
+        transform: scale(0.1);
+    }
+    70% {
+        transform: scaleX(1.2);
     }
     100% {
-    transform: scale(1);
+        transform: scale(1);
     }
 }
 
 .title-animated {
-    animation: zoomAnimated 1s;
+    animation: zoomAnimated 0.8s;
 }

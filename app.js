@@ -308,6 +308,10 @@ function RegistrarServicios(){
             alert('ID is required');
             return;
         }
+        if (id.value.includes(' ')){
+            alert('The ID cannot contain spaces');
+            return;
+        }
 
         var TarifaServicio = document.getElementById('TarifaServicio');
         if (TarifaServicio.value == ''){
@@ -832,6 +836,11 @@ function RegistrarReservaciones(){
             CountAsientos++;
         }
         
+        if (CountAsientos == 0){
+            alert('You must select at least one seat');
+            return;
+        }
+
         var VuelosTemp = vuelos;
         vuelos = vuelos.filter(
             (vuelo, indice, self) => self.indexOf(vuelo) === indice
